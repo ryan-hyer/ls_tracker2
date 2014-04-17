@@ -30,7 +30,7 @@ group :development, :test do
   gem 'sqlite3'
 end
 
-gem 'bootstrap-sass', '2.3.2.0'
+gem 'bootstrap-sass', '~> 3.1.1.0'
 gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'sass-rails', '~> 4.0.0'

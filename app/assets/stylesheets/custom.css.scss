@@ -15,6 +15,9 @@
           border-radius: $radius;
 }
 
+@mixin largeshaded {
+}
+
 /* universal */
 
 html {
@@ -22,7 +25,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 80px;
 }
 
 .center {
@@ -34,24 +37,51 @@ body {
 
 /* header */
 
-header {
+.navbar {
 	border-bottom: 1px solid black;
 	background-color: #c5e2f1;
-	padding-bottom: 5px;
 }
 
 #logo {
-  float: left;
-  margin-right: 10px;
+  background: image-url("logo.png");
+  background-repeat: no-repeat;
+  width: 75%;
+  padding-left: 225px;
+  padding-top: 20px;
+  margin-top: 15px;
   font-size: 2.5em;
+  color: #00f;
   text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 10px;
   font-weight: bold;
-  line-height: 1;
-  color: blue;
+  text-shadow: 1px 1px #000;
   &:hover {
+    background: image-url("logoseal.png");
+    background-repeat: no-repeat;
+  }
+}
+
+/* Home page */
+
+.tile {
+  width: 340px;
+  height: 200px;
+  background-color: #e3e3e3;
+  text-align: center;
+  padding: 70px 0px 0px 0px;
+  margin: 25px;
+  border: 1px solid black;
+  @include border-radius(25px);
+  color: #00f;
+  font-size: 3em;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 1px 1px #000;
+  &:hover {
+    text-shadow: 1px 0px 0px #686868, 1px 1px 0px #686868, 0px 1px 0px #686868, 
+        -1px 1px 0px #686868, -1px 0px 0px #686868, -1px -1px 0px #686868, 
+        0px -1px 0px #686868, 1px -1px 0px #686868, 1px 4px 5px #aeaeae;
+    color: #00f;
     text-decoration: none;
-    color: blue;
+    background-color: #ccc;
   }
 }

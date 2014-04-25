@@ -39,6 +39,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder'
+gem 'devise'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

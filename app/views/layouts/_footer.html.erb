@@ -1,0 +1,13 @@
+<footer class="navbar navbar-fixed-bottom" id="footer">
+  <div class="container">
+    <ul class="nav navbar-nav pull-left">
+    	<li><p class="navbar-text">Designed and maintained by <a href="mailto:ryan@tei-test.com" class="navbar-link">Ryan Hyer</a></p></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    	<% if user_signed_in? %>
+    		<li><%= link_to "Manage Users", "#", class: "navbar-link" %></li>
+    	<% end %>
+    	<li><a href="http://www.tei-test.com/" class="navbar-link">Back to TEi public site</a></li>
+    </ul>
+  </div>
+</footer>

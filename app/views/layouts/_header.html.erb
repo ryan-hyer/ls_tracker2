@@ -1,13 +1,28 @@
-<header class="navbar navbar-fixed-top">
+<header class="navbar navbar-fixed-top" id="header" role="navigation">
   <div class="container">
-    <%= link_to "Data Tracker", root_path, id: "logo", class:"navbar-brand" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-      	<% if user_signed_in? %>
-          <li class="navbar-text">Signed in as <%= current_user.email %>.</li>
-          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "navbar-btn btn btn-primary btn-xs" %></li>
-        <% end %>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "", root_path, id: "logo", class:"navbar-brand" %>
+    </div>
+
+    <% if user_signed_in? %>
+    <nav class="navbar-collapse collapse">
+      <ul class="nav nav-pills pull-left">
+        <li><%= link_to "Clients", "#" %></li>
+        <li><%= link_to "Projects", "#" %></li>
+        <li><%= link_to "Invoices", "#" %></li>
+        <li><%= link_to "Standards", "#" %></li>
+      </ul>
+      <ul class="nav nav-pills navbar-right">
+        <li><%= link_to "Log Off", destroy_user_session_path, method: :delete %></li>
       </ul>
     </nav>
+    <% end %>
+
   </div>
 </header>

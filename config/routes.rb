@@ -1,4 +1,6 @@
 LsTracker2::Application.routes.draw do
+  resources :clients
+
   devise_for :users, :path_prefix => 'my'
   resources :users
   root "static_pages#home"

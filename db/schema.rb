@@ -11,7 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423005318) do
+ActiveRecord::Schema.define(version: 20140507234857) do
+
+  create_table "clients", force: true do |t|
+    t.string   "name"
+    t.text     "address"
+    t.string   "phone"
+    t.string   "website"
+    t.string   "poc_name"
+    t.string   "poc_title"
+    t.string   "poc_phone"
+    t.string   "poc_email"
+    t.integer  "invoice_amt"
+    t.string   "invoice_freq"
+    t.string   "invoice_month"
+    t.string   "listing_number"
+    t.date     "effective"
+    t.date     "updated"
+    t.date     "expires"
+    t.boolean  "suspended"
+    t.boolean  "delisted"
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

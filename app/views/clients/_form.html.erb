@@ -1,0 +1,89 @@
+<%= form_for(@client) do |f| %>
+  <% if @client.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
+
+      <ul>
+      <% @client.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_area :address %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :website %><br>
+    <%= f.text_field :website %>
+  </div>
+  <div class="field">
+    <%= f.label :poc_name %><br>
+    <%= f.text_field :poc_name %>
+  </div>
+  <div class="field">
+    <%= f.label :poc_title %><br>
+    <%= f.text_field :poc_title %>
+  </div>
+  <div class="field">
+    <%= f.label :poc_phone %><br>
+    <%= f.text_field :poc_phone %>
+  </div>
+  <div class="field">
+    <%= f.label :poc_email %><br>
+    <%= f.text_field :poc_email %>
+  </div>
+  <div class="field">
+    <%= f.label :invoice_amt %><br>
+    <%= f.number_field :invoice_amt %>
+  </div>
+  <div class="field">
+    <%= f.label :invoice_freq %><br>
+    <%= f.text_field :invoice_freq %>
+  </div>
+  <div class="field">
+    <%= f.label :invoice_month %><br>
+    <%= f.text_field :invoice_month %>
+  </div>
+  <div class="field">
+    <%= f.label :listing_number %><br>
+    <%= f.text_field :listing_number %>
+  </div>
+  <div class="field">
+    <%= f.label :effective %><br>
+    <%= f.date_select :effective %>
+  </div>
+  <div class="field">
+    <%= f.label :updated %><br>
+    <%= f.date_select :updated %>
+  </div>
+  <div class="field">
+    <%= f.label :expires %><br>
+    <%= f.date_select :expires %>
+  </div>
+  <div class="field">
+    <%= f.label :suspended %><br>
+    <%= f.check_box :suspended %>
+  </div>
+  <div class="field">
+    <%= f.label :delisted %><br>
+    <%= f.check_box :delisted %>
+  </div>
+  <div class="field">
+    <%= f.label :comments %><br>
+    <%= f.text_area :comments %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

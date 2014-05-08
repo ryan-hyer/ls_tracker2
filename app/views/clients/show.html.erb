@@ -1,0 +1,94 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @client.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @client.address %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @client.phone %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @client.website %>
+</p>
+
+<p>
+  <strong>Poc name:</strong>
+  <%= @client.poc_name %>
+</p>
+
+<p>
+  <strong>Poc title:</strong>
+  <%= @client.poc_title %>
+</p>
+
+<p>
+  <strong>Poc phone:</strong>
+  <%= @client.poc_phone %>
+</p>
+
+<p>
+  <strong>Poc email:</strong>
+  <%= @client.poc_email %>
+</p>
+
+<p>
+  <strong>Invoice amt:</strong>
+  <%= @client.invoice_amt %>
+</p>
+
+<p>
+  <strong>Invoice freq:</strong>
+  <%= @client.invoice_freq %>
+</p>
+
+<p>
+  <strong>Invoice month:</strong>
+  <%= @client.invoice_month %>
+</p>
+
+<p>
+  <strong>Listing number:</strong>
+  <%= @client.listing_number %>
+</p>
+
+<p>
+  <strong>Effective:</strong>
+  <%= @client.effective %>
+</p>
+
+<p>
+  <strong>Updated:</strong>
+  <%= @client.updated %>
+</p>
+
+<p>
+  <strong>Expires:</strong>
+  <%= @client.expires %>
+</p>
+
+<p>
+  <strong>Suspended:</strong>
+  <%= @client.suspended %>
+</p>
+
+<p>
+  <strong>Delisted:</strong>
+  <%= @client.delisted %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @client.comments %>
+</p>
+
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>

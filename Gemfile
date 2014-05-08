@@ -2,11 +2,8 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 gem 'rails', '4.0.4'
-
-group :production do
-  gem 'pg'
-  gem 'rails_12factor'
-end
+gem 'pg'
+gem 'rails_12factor'
 
 group :test do
   gem 'factory_girl_rails'
@@ -27,7 +24,6 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
-  gem 'sqlite3'
 end
 
 gem 'bootstrap-sass', '~> 3.1.1.0'

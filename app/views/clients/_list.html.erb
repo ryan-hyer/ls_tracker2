@@ -1,0 +1,5 @@
+<ul class="list-links">
+  <% object.each do |client| %>
+    <li><%= link_to raw("<strong>#{client.name}</strong> (#{client.listing_number})"), client %></li>
+  <% end %>
+</ul>

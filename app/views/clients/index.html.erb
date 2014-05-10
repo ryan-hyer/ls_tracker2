@@ -1,29 +1,6 @@
-<h1>Client List</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Listing number</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @clients.each do |client| %>
-      <tr>
-        <td><%= client.name %></td>
-        <td><%= client.listing_number %></td>
-        <td><%= link_to 'Show', client %></td>
-        <td><%= link_to 'Edit', edit_client_path(client) %></td>
-        <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+<h1>Active Clients</h1>
+  <%= render 'list', object: @active_clients %>
+<h1>Delisted Clients</h1>
+  <%= render 'list', object: @delisted_clients %>
+<br />
 <%= link_to 'Add New Client', new_client_path, class: "btn btn-success" %>

@@ -1,6 +1,6 @@
 @import "bootstrap";
 
-/* mixins, variables, etc. */
+/* Mixins, variables, etc. */
 
 @mixin box_sizing {
   -webkit-box-sizing: border-box;
@@ -15,7 +15,7 @@
           border-radius: $radius;
 }
 
-/* universal */
+/* Universal */
 
 html {
   overflow-y: scroll;
@@ -28,22 +28,79 @@ body {
 
 h1 {
   letter-spacing: -1px;
-  background-color: #eee;
   padding: 5px;
+  margin-bottom: 5px;
 }
 
 .center {
   text-align: center;
-  h1 {
-    margin-bottom: 10px;
+}
+
+.list-plain {
+  list-style: none;
+  margin: 10px;
+  padding: 0;
+  li {
+    overflow: auto;
+    padding: 3px 0;
   }
 }
 
-/* header */
+.list-links {
+  @extend .list-plain;
+  a {
+    color: black;
+    display: block;
+    background-color: #eee;
+    padding: 10px;
+    &:hover {
+      color: black;
+      background-color: #ccc;
+      text-decoration: none;
+    }
+  }
+}
+
+.form-container {
+  padding: 15px;
+  margin: 20px auto;
+  border: 3px solid #999;
+  @include border-radius(25px);
+  .form-heading, .checkbox {
+    margin-bottom: 10px;
+  }
+  .checkbox {
+    font-weight: normal;
+    margin-left: 20px;
+  }
+  .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    @include box-sizing;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    &:focus {
+      z-index: 2;
+    }
+  }
+}
+
+/* Header */
 
 #header {
 	border-bottom: 1px solid black;
 	background-color: #c5e2f1;
+  li {
+    padding-left: 5px;
+    padding-top: 20px;
+    a {
+      font-size: 1.2em;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
 }
 
 #logo {
@@ -53,28 +110,13 @@ h1 {
   padding-left: 225px;
   padding-top: 20px;
   margin-top: 15px;
-  //font-size: 2.5em;
-  //color: #00f;
-  //text-transform: uppercase;
-  //font-weight: bold;
-  //text-shadow: 1px 1px #000;
   &:hover {
     background: image-url("logoseal.png");
     background-repeat: no-repeat;
   }
 }
-
-header li {
-  padding-left: 5px;
-  padding-top: 20px;
-  a{
-    font-size: 1.2em;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-}
-
-/* footer */
+  
+/* Footer */
 
 #footer {
   margin-top: 45px;
@@ -113,44 +155,34 @@ header li {
   }
 }
 
-/* Authentication forms */
+/* User authentication forms */
 
 .form-auth {
+  @extend .form-container;
   max-width: 450px;
-  padding: 15px;
-  margin: 20px auto;
   background-color: #ccc;
-  border: 3px solid #999;
-  @include border-radius(25px);
-}
-.form-auth .form-auth-heading,
-.form-auth .checkbox {
-  margin-bottom: 10px;
-}
-.form-auth .checkbox {
-  font-weight: normal;
-  margin-left: 20px;
-}
-.form-auth .form-control {
-  position: relative;
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-  @include box-sizing;
-  margin-bottom: 5px;
-  margin-top: 5px;
-}
-.form-auth .form-control:focus {
-  z-index: 2;
 }
 
-/* Manage Users page */
+/* Client forms */
 
-#userList {
-  list-style: none;
-  margin: 0;
-  li {
-    overflow: auto;
-    padding: 10px 0;
+.form-client {
+  @extend .form-container;
+  label {
+    width: 150px;
+    margin-right: 10px;
+    vertical-align: top;
+  }
+  input, textarea, select {
+    width: 250px;
+    @include box-sizing;
+    &:focus {
+      z-index: 2;
+    }
+  }
+  input[type="checkbox"] {
+    width: auto;
+  }
+  textarea {
+    height: 100px;
   }
 }

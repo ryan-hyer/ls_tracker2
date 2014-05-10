@@ -1,8 +1,7 @@
 <%= form_for(@client) do |f| %>
   <% if @client.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
-
+      <h2>Please correct the following <%= pluralize(@user.errors.count, "error") %>:</h2>
       <ul>
       <% @client.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -11,79 +10,83 @@
     </div>
   <% end %>
 
+<div class="col-md-6">
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name, "Company Name" %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :address %><br>
+    <%= f.label :address %>
     <%= f.text_area :address %>
   </div>
   <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.text_field :phone %>
+    <%= f.label :phone %>
+    <%= f.telephone_field :phone %>
   </div>
   <div class="field">
-    <%= f.label :website %><br>
-    <%= f.text_field :website %>
+    <%= f.label :website %>
+    <%= f.url_field :website %>
   </div>
   <div class="field">
-    <%= f.label :poc_name %><br>
+    <%= f.label :poc_name, "POC Name" %>
     <%= f.text_field :poc_name %>
   </div>
   <div class="field">
-    <%= f.label :poc_title %><br>
+    <%= f.label :poc_title, "POC Title" %>
     <%= f.text_field :poc_title %>
   </div>
   <div class="field">
-    <%= f.label :poc_phone %><br>
-    <%= f.text_field :poc_phone %>
+    <%= f.label :poc_phone, "POC Phone" %>
+    <%= f.telephone_field :poc_phone %>
   </div>
   <div class="field">
-    <%= f.label :poc_email %><br>
-    <%= f.text_field :poc_email %>
+    <%= f.label :poc_email, "POC Email" %>
+    <%= f.email_field :poc_email %>
   </div>
+</div>
+<div class="col-md-6">
   <div class="field">
-    <%= f.label :invoice_amt %><br>
+    <%= f.label :invoice_amt, "Invoice Amt" %>
     <%= f.number_field :invoice_amt %>
   </div>
   <div class="field">
-    <%= f.label :invoice_freq %><br>
-    <%= f.text_field :invoice_freq %>
+    <%= f.label :invoice_freq, "Invoice Freq" %>
+    <%= f.select :invoice_freq, options_for_select(%w[Annual Quarterly Monthly], @client.invoice_freq) %>
+  </div>
+  <div class="field" id="inv_month">
+    <%= f.label :invoice_month, "Invoice Month" %>
+    <%= f.select :invoice_month, options_for_select((0..12).map {|m| [Date::MONTHNAMES[m]]}, @client.invoice_month)  %>
   </div>
   <div class="field">
-    <%= f.label :invoice_month %><br>
-    <%= f.text_field :invoice_month %>
-  </div>
-  <div class="field">
-    <%= f.label :listing_number %><br>
+    <%= f.label :listing_number, "Listing Number" %>
     <%= f.text_field :listing_number %>
   </div>
   <div class="field">
-    <%= f.label :effective %><br>
-    <%= f.date_select :effective %>
+    <%= f.label :effective, "Effective Date" %>
+    <%= f.date_field :effective %>
   </div>
   <div class="field">
-    <%= f.label :updated %><br>
-    <%= f.date_select :updated %>
+    <%= f.label :updated, "Last Updated" %>
+    <%= f.date_field :updated %>
   </div>
   <div class="field">
-    <%= f.label :expires %><br>
-    <%= f.date_select :expires %>
+    <%= f.label :expires, "Expires" %>
+    <%= f.date_field :expires %>
   </div>
   <div class="field">
-    <%= f.label :suspended %><br>
+    <%= f.label :suspended %>
     <%= f.check_box :suspended %>
   </div>
   <div class="field">
-    <%= f.label :delisted %><br>
+    <%= f.label :delisted %>
     <%= f.check_box :delisted %>
   </div>
   <div class="field">
-    <%= f.label :comments %><br>
+    <%= f.label :comments %>
     <%= f.text_area :comments %>
   </div>
+</div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit", class: "btn btn-primary btn-lg" %>
   </div>
 <% end %>

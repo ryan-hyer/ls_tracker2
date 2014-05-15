@@ -27,9 +27,10 @@ body {
 }
 
 h1 {
+  font-size: 1.7em;
   letter-spacing: -1px;
-  padding: 5px;
   margin-bottom: 5px;
+  border-bottom: 3px solid #eee;
 }
 
 .center {
@@ -66,25 +67,15 @@ h1 {
   margin: 20px auto;
   border: 3px solid #999;
   @include border-radius(25px);
-  .form-heading, .checkbox {
+  .form-heading, .checkbox, input[type=submit], button {
     margin-bottom: 10px;
   }
-  .checkbox {
-    font-weight: normal;
-    margin-left: 20px;
-  }
-  .form-control {
-    position: relative;
-    font-size: 16px;
-    height: auto;
-    padding: 10px;
-    @include box-sizing;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    &:focus {
-      z-index: 2;
-    }
-  }
+}
+
+/* Fix for Bootstrap modal scrollbar bug */
+
+.modal, .modal-open {
+  overflow-y: auto;
 }
 
 /* Header */
@@ -161,28 +152,55 @@ h1 {
   @extend .form-container;
   max-width: 450px;
   background-color: #ccc;
+  .checkbox {
+    font-weight: normal;
+    margin-left: 20px;
+  }
+  .form-control {
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
 }
 
 /* Client forms */
 
-.form-client {
+.form-client, .modal-client {
   @extend .form-container;
-  label {
-    width: 150px;
-    margin-right: 10px;
-    vertical-align: top;
-  }
-  input, textarea, select {
-    width: 250px;
-    @include box-sizing;
-    &:focus {
-      z-index: 2;
-    }
-  }
   input[type="checkbox"] {
-    width: auto;
+    margin-left: 10px;
   }
   textarea {
     height: 100px;
   }
+  input:not([type=checkbox]):not([type=submit]), textarea, select {
+    @extend .form-control;
+  }
+}
+
+.form-client-add, .modal-client-add {
+  @extend .form-client;
+  background-color: #c1fdc1;
+}
+
+.form-client-edit, .modal-client-edit {
+  @extend .form-client;
+  background-color: #ffc;
+}
+
+.modal-dialog {
+  width: 80%;
+}
+
+#client-info .row {
+  margin-bottom: 10px;
+}
+
+.delisted {
+  font-weight:bold;
+  color:red;
+  font-size:x-large;
+  text-transform: uppercase;
 }

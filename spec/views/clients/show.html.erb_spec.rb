@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "clients/show" do
+describe "clients/show.html.erb" do
   before(:each) do
     @client = assign(:client, stub_model(Client,
       :name => "Name",
@@ -21,9 +21,9 @@ describe "clients/show" do
     ))
   end
 
-  it "renders attributes in <p>" do
+  it "should render client attributes" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
+
     rendered.should match(/Name/)
     rendered.should match(/MyText/)
     rendered.should match(/Phone/)

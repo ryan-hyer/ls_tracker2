@@ -12,7 +12,7 @@ describe Client do
 		                 poc_phone: "", 
 		                 poc_email: "jim@foo.bar", 
 		                 invoice_amt: 1500, 
-		                 invoice_freq: "Monthly", 
+		                 invoice_freq: "Annual", 
 		                 invoice_month: "July", 
 		                 listing_number: "11K23", 
 		                 effective: "2014-05-08", 

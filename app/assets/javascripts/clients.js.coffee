@@ -14,3 +14,4 @@ $(document).ready ->
   $("select#client_invoice_freq").change ->
   	ToggleMonth()
 	return
+  

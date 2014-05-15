@@ -1,16 +1,8 @@
 require 'spec_helper'
 
-describe "Static pages" do
-
-	subject { page }
-
-	shared_examples_for "all static pages" do
-		it { should have_title("TEi-LS Data Tracker") }
+describe "static_pages/home.html.erb" do
+	it "should have the right title and header" do
+		render
+		expect(rendered).to match /Home Page/
 	end
-
-	describe "Home page" do
-		before { visit root_path }
-		it_should_behave_like "all static pages"
-	end
-
 end

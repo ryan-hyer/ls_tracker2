@@ -5,4 +5,5 @@ class Invoice < ActiveRecord::Base
 					   uniqueness: true
 	validates :client, presence: true
 	validates :date_invoiced, presence: true
+
 end

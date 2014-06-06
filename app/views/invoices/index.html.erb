@@ -1,14 +1,17 @@
-<h1><%= link_to "<span class='glyphicon glyphicon-plus'></span> Add New Invoice".html_safe, "#", class: "btn btn-success pull-right", data: { toggle: "modal", target: "#modalAddInvoice" } %>
-Invoice Log for 2014</h1>
+<h1>
+  <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add New Invoice".html_safe, new_invoice_path, class: "btn btn-success pull-right", title: "Add New Invoice", data: { toggle: "modal", load_remote: new_invoice_path } %>
+  Invoice Log for 
+  <%= select_tag 'year_filter', options_for_select(@years) %>
+</h1>
 
 <table class="table table-striped table-condensed">
   <thead>
     <tr>
       <th>Invoice Number</th>
+      <th>Invoice Date</th>
       <th>Client</th>
       <th>Description</th>
       <th>Amount</th>
-      <th>Date Invoiced</th>
       <th>Date Paid</th>
       <th></th>
       <th></th>
@@ -19,47 +22,16 @@ Invoice Log for 2014</h1>
     <% @invoices.each do |invoice| %>
       <tr>
         <td><%= invoice.number %></td>
+        <td><%= invoice.date_invoiced %></td>
         <td><%= invoice.client.name %></td>
         <td><%= invoice.description %></td>
-        <td><%= invoice.amount %></td>
-        <td><%= invoice.date_invoiced %></td>
+        <td><%= number_to_currency(invoice.amount) %></td>
         <td><%= invoice.date_paid %></td>
-        <td><%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edit".html_safe, "#", class: "btn btn-warning btn-xs", title: "Edit Invoice Information", data: { toggle: "modal", remote_target: "#modalEditInvoice .modal-body", load_remote: edit_invoice_path(invoice) } %></td>
+        <td><%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edit".html_safe, edit_invoice_path(invoice), class: "btn btn-warning btn-xs", title: "Edit Invoice Information", data: { toggle: "modal", load_remote: edit_invoice_path(invoice) } %></td>
         <td><%= link_to "<span class='glyphicon glyphicon-trash'></span> Delete".html_safe, invoice, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Invoice", data: { confirm: 'Are you sure you want to delete this invoice?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<!-- Add New Invoice Modal -->
-<div class="modal fade" id="modalAddInvoice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content modal-add">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Add New Invoice</h4>
-      </div>
-      <div class="modal-body">
-        <%= render 'form' %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Edit Invoice Modal -->
-<div class="modal fade" id="modalEditInvoice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content modal-edit">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Edit Invoice Information</h4>
-      </div>
-      <div class="modal-body">
-      </div>
-    </div>
-  </div>
-</div>
-
-<%= render 'shared/modal', locals: { id: "modalEditInvoice",
-                                     type: "edit",
-                                     title: "Edit Invoice Information" } %>
+<%= render 'shared/modal' %>

@@ -4,18 +4,14 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.all
-    @invoice = Invoice.new
-  end
-
-  # GET /invoices/1
-  # GET /invoices/1.json
-  def show
+    @invoices = Invoice.all.order("date_invoiced DESC")
+    @years = Invoice.uniq.pluck("EXTRACT(YEAR FROM date_invoiced)")
   end
 
   # GET /invoices/new
   def new
     @invoice = Invoice.new
+    render layout: false
   end
 
   # GET /invoices/1/edit

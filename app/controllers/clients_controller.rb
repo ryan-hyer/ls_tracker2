@@ -6,7 +6,6 @@ class ClientsController < ApplicationController
   def index
     @active_clients = Client.where(delisted: false).order("name")
     @delisted_clients = Client.where(delisted: true).order("name")
-    @client = Client.new
   end
 
   # GET /clients/1
@@ -17,10 +16,12 @@ class ClientsController < ApplicationController
   # GET /clients/new
   def new
     @client = Client.new
+    render layout: false
   end
 
   # GET /clients/1/edit
   def edit
+    render layout: false
   end
 
   # POST /clients

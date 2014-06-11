@@ -1,8 +1,18 @@
 <h1>
   <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add New Invoice".html_safe, new_invoice_path, class: "btn btn-success pull-right", title: "Add New Invoice", data: { toggle: "modal", load_remote: new_invoice_path } %>
-  Invoice Log for 
-  <%= select_tag 'year_filter', options_for_select(@years) %>
+  Invoice Log
 </h1>
+  <ul class="nav nav-pills" id="year-filter">
+    <li id="caption">Select year: </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= params[:year] || Time.now.year %> <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <% @years.each do |year| %>
+        <li><%= link_to year, controller: "invoices", year: year %></li>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
 
 <table class="table table-striped table-condensed">
   <thead>

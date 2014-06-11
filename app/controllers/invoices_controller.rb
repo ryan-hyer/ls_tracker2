@@ -4,8 +4,8 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.all.order("date_invoiced DESC")
-    @years = Invoice.uniq.pluck("EXTRACT(YEAR FROM date_invoiced)")
+    @invoices = Invoice.from_year(params[:year] || Time.now.year).order("date_invoiced DESC")
+    @years = Invoice.pluck(:date_invoiced).map{|x| x.year}.uniq.sort_by(&:year).reverse!
   end
 
   # GET /invoices/new

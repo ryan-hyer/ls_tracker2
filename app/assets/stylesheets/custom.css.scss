@@ -179,3 +179,13 @@ h1 {
 #year-filter #caption {
   margin-top: 10px;
 }
+
+#month-tabs a {
+  font-variant: small-caps;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+#month-content {
+  border-bottom: 5px solid #ddd;
+}

@@ -1,7 +1,10 @@
+var obj;
+
 $(document).ready(function() {
 	$('[data-load-remote]').on('click',function(e) {
 	    e.preventDefault();
 	    var $this = $(this);
+	    obj = $this;
 	    var remote = $this.data('load-remote');
 	    if(remote) {
 	        $('#myModal .modal-body').load(remote);
@@ -26,6 +29,25 @@ $(document).ajaxSuccess(function() {
 			$("#inv_month").css("visibility", "visible");
 		}
 	});
-  
-  $('#myModal').modal('show');
+
+	// Extra functionality for the Invoice add modal (auto-fill)
+	if(obj.data('fill-invoice')) {
+		var row = $(obj).closest("tr");
+		$('#invoice_number').val($(row.children("td.next_number")).html());
+		$('#invoice_client_id').val($(row.children("td.client")).attr("ref"));
+		$('#invoice_description').val($(row.children("td.description")).html());
+		var amount = $(row.children("td.amount")).html();
+		amount = amount.replace(/[^\d.]/g,"");
+		$('#invoice_amount').val(amount);
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1;
+		var yyyy = today.getFullYear();
+		if (dd<10) {dd='0'+dd};
+		if (mm<10) {mm='0'+mm};
+		today = yyyy+'-'+mm+'-'+dd;
+		$('#invoice_date_invoiced').val(today);
+	}
+
+	$('#myModal').modal('show');
 });

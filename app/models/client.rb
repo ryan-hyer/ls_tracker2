@@ -9,4 +9,8 @@ class Client < ActiveRecord::Base
   						  allow_blank: true
   	validates :invoice_month, presence: { if: Proc.new { |client| client.invoice_freq == "Annual" },
   							  message: "can't be blank if invoice frequency is 'Annual'" }
+
+  	def self.due_in(month)
+		where("invoice_month = ?", month)
+	end
 end

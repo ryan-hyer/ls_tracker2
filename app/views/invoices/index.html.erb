@@ -1,3 +1,43 @@
+<h1>Invoicing Due in <%= Time.now.year %></h1>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="month-tabs">
+  <% Date::MONTHNAMES.compact.each do |m| %>
+    <li<%= " class='active'".html_safe if @time.strftime("%B") == m %>><a href="#<%= m %>" data-toggle="tab"><%= m %></a></li>
+  <% end %>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content" id="month-content">
+  <% Date::MONTHNAMES.compact.each do |m| %>
+    <div class="tab-pane<%= " active" if @time.strftime("%B") == m %>" id="<%= m %>">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Description</th>
+            <th>Next Invoice Number</th>
+            <th>Invoice Amount</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @clients.due_in(m).each do |client| %>
+            <tr>
+              <td class="client" ref="2"><%= "#{client.name} (#{client.listing_number})" %></td>
+              <td class="description"><%= client.invoice_freq %></td>
+              <td class="next_number">Next Number</td>
+              <td class="amount"><%= number_to_currency(client.invoice_amt) %></td>
+              <td><%= link_to "<span class='glyphicon glyphicon-plus'></span> Add This Invoice".html_safe, new_invoice_path, class: "btn btn-success btn-xs", title: "Add New Invoice", data: { toggle: "modal", load_remote: new_invoice_path, fill_invoice: true } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+<!-- Invoice log -->
 <h1>
   <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add New Invoice".html_safe, new_invoice_path, class: "btn btn-success pull-right", title: "Add New Invoice", data: { toggle: "modal", load_remote: new_invoice_path } %>
   Invoice Log

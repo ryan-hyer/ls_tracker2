@@ -6,6 +6,8 @@ class InvoicesController < ApplicationController
   def index
     @invoices = Invoice.from_year(params[:year] || Time.now.year).order("date_invoiced DESC")
     @years = Invoice.pluck(:date_invoiced).map{|x| x.year}.uniq.sort_by(&:year).reverse!
+    @time = Time.new
+    @clients = Client.all
   end
 
   # GET /invoices/new

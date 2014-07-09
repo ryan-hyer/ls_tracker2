@@ -3,24 +3,7 @@ require 'spec_helper'
 describe Client do
 
   before do
-    @client = Client.new(name: "Test",
-		                 address: "somewhere\r\nover\r\nthe\r\nrainbow", 
-		                 phone: "123-456-7890", 
-		                 website: "www.foo.com",
-		                 poc_name: "Jim", 
-		                 poc_title: "Prez", 
-		                 poc_phone: "", 
-		                 poc_email: "jim@foo.bar", 
-		                 invoice_amt: 1500, 
-		                 invoice_freq: "Annual", 
-		                 invoice_month: "July", 
-		                 listing_number: "11K23", 
-		                 effective: "2014-05-08", 
-		                 updated: "2014-05-08", 
-		                 expires: "2014-05-08", 
-		                 suspended: false, 
-		                 delisted: false, 
-		                 comments: "This is only a test.")
+    let(@client) { FactoryGirl.create(:client) }
   end
 
   subject { @client }

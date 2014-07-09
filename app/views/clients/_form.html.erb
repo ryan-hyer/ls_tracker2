@@ -10,7 +10,7 @@
     </div>
   <% end %>
 
-<div class="col-md-4">
+<div class="col-md-6">
   <div class="field">
     <%= f.label :name, "Company Name" %>
     <%= f.text_field :name, required: true %>
@@ -31,8 +31,6 @@
     <%= f.label :poc_name, "POC Name" %>
     <%= f.text_field :poc_name %>
   </div>
-</div>
-<div class="col-md-4">
   <div class="field">
     <%= f.label :poc_title, "POC Title" %>
     <%= f.text_field :poc_title %>
@@ -45,6 +43,8 @@
     <%= f.label :poc_email, "POC Email" %>
     <%= f.email_field :poc_email %>
   </div>
+</div>
+<div class="col-md-6">
   <div class="field">
     <%= f.label :invoice_amt, "Invoice Amount" %>
     <%= f.number_field :invoice_amt %>
@@ -57,8 +57,6 @@
     <%= f.label :invoice_month, "Invoice Month" %>
     <%= f.select :invoice_month, options_for_select((1..12).map {|m| [Date::MONTHNAMES[m]]}, @client.invoice_month)  %>
   </div>
-</div>
-<div class="col-md-4">
   <div class="field">
     <%= f.label :listing_number, "Listing Number" %>
     <%= f.text_field :listing_number, required: true %>

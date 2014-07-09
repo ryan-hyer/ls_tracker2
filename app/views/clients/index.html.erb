@@ -1,21 +1,13 @@
-<h1>Active Clients</h1>
+<h1><%= link_to "<span class='glyphicon glyphicon-plus'></span> Add New Client".html_safe, new_client_path, class: "btn btn-success pull-right", title: "Add New Client", data: { toggle: "modal", load_remote: new_client_path } %>
+  Active Clients</h1>
   <%= render 'list', object: @active_clients %>
+
 <h1>Delisted Clients</h1>
   <%= render 'list', object: @delisted_clients %>
+<<<<<<< HEAD
 <br />
 <%= link_to 'Add New Client', "#", class: "btn btn-success", data: { toggle: "modal", target: "#myModal" } %>
+=======
+>>>>>>> invoice-model
 
-<!-- Add New Client Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content modal-client-add">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Add New Client</h4>
-      </div>
-      <div class="modal-body">
-        <%= render 'form' %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'shared/modal' %>

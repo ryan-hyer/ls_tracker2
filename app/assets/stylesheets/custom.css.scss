@@ -72,6 +72,28 @@ h1 {
   }
 }
 
+.modal-content {
+  @extend .form-container;
+  input[type="checkbox"] {
+    margin-left: 10px;
+  }
+  textarea {
+    height: 100px;
+  }
+  input:not([type=checkbox]):not([type=submit]), textarea, select {
+    @extend .form-control;
+  }
+}
+
+.modal-add {
+  background-color: #c1fdc1;
+}
+
+.modal-edit {
+  background-color: #ffc;
+}
+
+
 /* Fix for Bootstrap modal scrollbar bug */
 
 .modal, .modal-open {
@@ -120,32 +142,6 @@ h1 {
   }
 }
 
-/* Home page */
-
-.tile {
-  width: 340px;
-  height: 200px;
-  background-color: #e3e3e3;
-  text-align: center;
-  padding: 70px 0px 0px 0px;
-  margin: 25px;
-  border: 1px solid black;
-  @include border-radius(25px);
-  color: #00f;
-  font-size: 3em;
-  text-transform: uppercase;
-  font-weight: bold;
-  text-shadow: 1px 1px #000;
-  &:hover {
-    text-shadow: 1px 0px 0px #686868, 1px 1px 0px #686868, 0px 1px 0px #686868, 
-        -1px 1px 0px #686868, -1px 0px 0px #686868, -1px -1px 0px #686868, 
-        0px -1px 0px #686868, 1px -1px 0px #686868, 1px 4px 5px #aeaeae;
-    color: #00f;
-    text-decoration: none;
-    background-color: #ccc;
-  }
-}
-
 /* User authentication forms */
 
 .form-auth {
@@ -166,6 +162,7 @@ h1 {
 }
 
 /* Client pages */
+<<<<<<< HEAD
 
 .form-client, .modal-client {
   @extend .form-container;
@@ -193,6 +190,8 @@ h1 {
 .modal-dialog {
   width: 80%;
 }
+=======
+>>>>>>> invoice-model
 
 #client-info .row {
   margin-bottom: 10px;
@@ -203,4 +202,20 @@ h1 {
   color:red;
   font-size:x-large;
   text-transform: uppercase;
+}
+
+/* Invoice pages */
+
+#year-filter #caption {
+  margin-top: 10px;
+}
+
+#month-tabs a {
+  font-variant: small-caps;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+#month-content {
+  border-bottom: 5px solid #ddd;
 }

@@ -1,4 +1,6 @@
 LsTracker2::Application.routes.draw do
+  resources :standards
+
   resources :clients
   resources :invoices
 

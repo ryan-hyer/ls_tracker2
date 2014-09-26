@@ -18,7 +18,7 @@ group :development do
   gem 'rails_best_practices'
   gem 'rack-mini-profiler'
   gem 'bullet'
-  gem 'better_errors'
+  gem 'better_errors', '~> 1.1.0'
 end
 
 group :development, :test do
@@ -26,7 +26,7 @@ group :development, :test do
   gem 'pry'
 end
 
-gem 'bootstrap-sass', '~> 3.1.1.0'
+gem 'bootstrap-sass', '>= 3.1.1.0'
 gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'sass-rails', '~> 4.0.0'
@@ -36,6 +36,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'jbuilder'
+gem 'therubyracer', :platforms => :ruby
 gem 'devise'
 
 group :doc do

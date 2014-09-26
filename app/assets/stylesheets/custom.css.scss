@@ -93,6 +93,9 @@ h1 {
   background-color: #ffc;
 }
 
+.modal-info {
+  background-color: #DEFAFC;
+}
 
 /* Fix for Bootstrap modal scrollbar bug */
 
@@ -162,7 +165,6 @@ h1 {
 }
 
 /* Client pages */
-<<<<<<< HEAD
 
 .form-client, .modal-client {
   @extend .form-container;
@@ -190,8 +192,6 @@ h1 {
 .modal-dialog {
   width: 80%;
 }
-=======
->>>>>>> invoice-model
 
 #client-info .row {
   margin-bottom: 10px;

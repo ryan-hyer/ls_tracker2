@@ -11,7 +11,7 @@ $(document).ready(function() {
 	        var modal_title = $this.attr('title');
 	        var modal_class = "modal-" + modal_title.substr(0, modal_title.indexOf(" ")).toLowerCase();
 	        $('#myModal .modal-title').text(modal_title);
-	        $('#myModal .modal-content').removeClass("modal-add modal-edit");
+	        $('#myModal .modal-content').removeClass("modal-add modal-edit modal-info");
 	        $('#myModal .modal-content').addClass(modal_class);
 	    }
 	});

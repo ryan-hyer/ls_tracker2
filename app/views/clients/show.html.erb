@@ -62,16 +62,64 @@
 </div>
 
 <h1>
-  <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, edit_client_path(@client), class: "btn btn-success btn-sm pull-right", title: "Add New Facility" %>
-  Manufacturing Facilities
-</h1>
-
-
-<h1>
   <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, edit_client_path(@client), class: "btn btn-success btn-sm pull-right", title: "Add New Category" %>
   Listing Categories
 </h1>
 
+
+<h1>
+  <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_client_facility_path(@client), class: "btn btn-success btn-sm pull-right", title: "Add New Facility", data: { toggle: "modal", load_remote: new_client_facility_path(@client) } %>
+  Manufacturing Facilities
+</h1>
+<% @client.facilities.each do |facility| %>
+  <div class="row facility-row">
+    <div class="col-md-3">
+      <%= "<div class='delisted'>Inactive</div>".html_safe if facility.inactive %>
+      <%= "<strong>#{facility.name}</strong><br/>".html_safe unless facility.name.blank? %>
+      <%= simple_format(facility.address, {}, wrapper_tag: "div") %>
+      Tel: <%= facility.phone %><br/>
+      <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edit".html_safe, edit_facility_path(facility), class: "btn btn-xs btn-warning", title: "Edit Facility Information", data: { toggle: "modal", load_remote: edit_facility_path(facility) } %>
+    </div>
+    <div class="col-md-3">
+      <strong>Point of Contact</strong><br />
+      <%= facility.poc_name %><%= ", #{facility.poc_phone}".html_safe unless facility.poc_phone.blank? %><%= ", #{mail_to(facility.poc_email)}".html_safe unless facility.poc_email.blank? %><br/><br/>
+      <strong>Comments</strong><br />
+      <%= simple_format(facility.comments, {}, wrapper_tag: "div") %>
+    </div>
+    <div class="col-md-6">
+      <strong>Inspection History</strong>
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>IS #</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3/12/2012</td>
+            <td>IS00315</td>
+            <td>Passed - No issues</td>
+          </tr>
+          <tr>
+            <td>3/12/2011</td>
+            <td>IS00315</td>
+            <td>No posted quality statement
+              Discrepancy letter sent 03/15/2011
+              Reply received 04/02/2011
+              Resolution satisfactory</td>
+          </tr>
+          <tr>
+            <td>3/12/2010</td>
+            <td>IS00315</td>
+            <td>Passed - No issues</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
 
 <h1>
   <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, edit_client_path(@client), class: "btn btn-success btn-sm pull-right", title: "Add New Project" %>

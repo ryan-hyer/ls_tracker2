@@ -1,8 +1,10 @@
 LsTracker2::Application.routes.draw do
-  resources :standards
 
-  resources :clients
-  resources :invoices
+  resources :clients do
+    resources :facilities, shallow: true
+  end
+   
+  resources :invoices, :standards
 
   devise_for :users, :path_prefix => 'my'
   resources :users

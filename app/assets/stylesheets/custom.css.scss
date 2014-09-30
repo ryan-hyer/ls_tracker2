@@ -72,6 +72,10 @@ h1 {
   }
 }
 
+.modal-dialog {
+  width: 80%;
+}
+
 .modal-content {
   @extend .form-container;
   input[type="checkbox"] {
@@ -166,35 +170,14 @@ h1 {
 
 /* Client pages */
 
-.form-client, .modal-client {
-  @extend .form-container;
-  input[type="checkbox"] {
-    margin-left: 10px;
-  }
-  textarea {
-    height: 100px;
-  }
-  input:not([type=checkbox]):not([type=submit]), textarea, select {
-    @extend .form-control;
-  }
-}
-
-.form-client-add, .modal-client-add {
-  @extend .form-client;
-  background-color: #c1fdc1;
-}
-
-.form-client-edit, .modal-client-edit {
-  @extend .form-client;
-  background-color: #ffc;
-}
-
-.modal-dialog {
-  width: 80%;
-}
-
 #client-info .row {
   margin-bottom: 10px;
+}
+
+.facility-row {
+  background-color: #eee;
+  margin: 5px 15px;
+  padding: 5px 0;
 }
 
 .delisted {

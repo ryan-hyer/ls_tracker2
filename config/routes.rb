@@ -1,5 +1,7 @@
 LsTracker2::Application.routes.draw do
 
+  resources :categories
+
   resources :clients do
     resources :facilities, shallow: true
   end

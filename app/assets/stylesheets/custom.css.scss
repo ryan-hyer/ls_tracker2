@@ -121,6 +121,9 @@ h1 {
       font-weight: bold;
       text-transform: uppercase;
     }
+    ul li {
+      padding-top: 0;
+    }
   }
 }
 
@@ -218,4 +221,20 @@ h1 {
 
 #month-content {
   border-bottom: 5px solid #ddd;
+}
+
+/* Category/Standard pages */
+
+#category-list div#header-row {
+  background-color: #eee;
+  font-weight: bold;
+}
+
+#category-list div.row {
+  border-bottom: 1px solid #ccc;
+  margin: 5px;
+  padding: 2px 0;
+  &:nth-child(2n+1) {
+    background-color: #eee;
+  }
 }

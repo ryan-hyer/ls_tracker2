@@ -1,3 +1,4 @@
+@import "bootstrap-sprockets";
 @import "bootstrap";
 
 /* Mixins, variables, etc. */
@@ -170,21 +171,37 @@ h1 {
 
 /* Client pages */
 
-#client-info .row {
-  margin-bottom: 10px;
-}
-
-.facility-row {
-  background-color: #eee;
-  margin: 5px 15px;
-  padding: 5px 0;
-}
-
 .delisted {
   font-weight:bold;
   color:red;
   font-size:x-large;
   text-transform: uppercase;
+}
+
+#client-info .row {
+  margin-bottom: 10px;
+}
+
+#active-facilities .row, #inactive-facilities .row {
+  background-color: #eee;
+  margin: 5px 15px;
+  padding: 5px 0;
+}
+
+.facility-inactive-header {
+  background-color: #fee;
+  margin: 5px 15px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+#inactive-facilities .row {
+  border: 2px solid red;
+}
+
+.inspections {
+  border-left: 1px solid black;
 }
 
 /* Invoice pages */

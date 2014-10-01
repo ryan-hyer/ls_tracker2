@@ -24,6 +24,10 @@
     <%= f.label :phone %>
     <%= f.telephone_field :phone %>
   </div>
+  <div class="field">
+    <%= f.label :inactive %>
+    <%= f.check_box :inactive %>
+  </div>
 </div>
 <div class="col-md-6">
  <div class="field">
@@ -37,10 +41,6 @@
   <div class="field">
     <%= f.label :poc_email, "POC Email" %>
     <%= f.email_field :poc_email %>
-  </div>
-  <div class="field">
-    <%= f.label :inactive %>
-    <%= f.check_box :inactive %>
   </div>
   <div class="field">
     <%= f.label :comments %>

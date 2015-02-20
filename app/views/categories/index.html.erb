@@ -19,6 +19,11 @@
       <strong><%= category.description %></strong>
     </div>
     <div class="col-md-8 standard-list">
+      <% category.standards.each do |standard| %>
+        <%= "<strong>#{standard.number}</strong> (#{standard.revision}) - <em>#{standard.title}</em>".html_safe %>
+        <%= " (#{standard.exceptions})" if standard.exceptions %>
+        <br />
+      <% end %>
     </div>
   </div>
 <% end %>

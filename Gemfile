@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 gem 'rails', '4.0.4'
 gem 'pg'
-gem 'rails_12factor'
 
 group :test do
   gem 'factory_girl_rails'
@@ -38,6 +37,10 @@ gem 'jquery-turbolinks'
 gem 'jbuilder'
 gem 'therubyracer', :platforms => :ruby
 gem 'devise'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

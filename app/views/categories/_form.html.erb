@@ -14,6 +14,18 @@
     <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
+  <div class="field" id="standard-list">
+    <%= label_tag nil,"Standards" %>
+    <ul>
+    <% @category.standards.each do |standard| %>
+      </li>
+        <%= "<strong>#{standard.number}</strong> (#{standard.revision}) - <em>#{standard.title}</em>".html_safe %>
+        <%= " (#{standard.exceptions})" if standard.exceptions %>
+        <%= link_to "Remove" %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
   <div class="actions">
     <%= f.submit "Submit", class: "btn btn-primary" %>
     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>

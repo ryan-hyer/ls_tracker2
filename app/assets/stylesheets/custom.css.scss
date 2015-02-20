@@ -30,8 +30,10 @@ body {
 h1 {
   font-size: 1.7em;
   letter-spacing: -1px;
+  padding: 2px;
   margin-bottom: 5px;
-  border-bottom: 3px solid #eee;
+  border-bottom: 3px solid #ccc;
+  background-color: #ffe9ce;
 }
 
 .center {
@@ -74,7 +76,7 @@ h1 {
 }
 
 .modal-dialog {
-  width: 80%;
+  //width: 80%;
 }
 
 .modal-content {
@@ -213,6 +215,11 @@ h1 {
   margin-top: 10px;
 }
 
+#month-tabs li {
+  width: 8.3%;
+  text-align: center;
+}
+
 #month-tabs a {
   font-variant: small-caps;
   font-size: 120%;
@@ -237,4 +244,8 @@ h1 {
   &:nth-child(2n+1) {
     background-color: #eee;
   }
+}
+
+#category-controls {
+  margin-right: 5px;
 }

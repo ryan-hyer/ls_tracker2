@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001175444) do
+ActiveRecord::Schema.define(version: 20141001174532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,17 +21,6 @@ ActiveRecord::Schema.define(version: 20141001175444) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "category_standards", force: true do |t|
-    t.integer  "category_id"
-    t.integer  "standard_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "category_standards", ["category_id", "standard_id"], name: "index_category_standards_on_category_id_and_standard_id", unique: true, using: :btree
-  add_index "category_standards", ["category_id"], name: "index_category_standards_on_category_id", using: :btree
-  add_index "category_standards", ["standard_id"], name: "index_category_standards_on_standard_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.string   "name"
@@ -70,6 +59,8 @@ ActiveRecord::Schema.define(version: 20141001175444) do
     t.datetime "updated_at"
   end
 
+  add_index "facilities", ["client_id"], name: "index_facilities_on_client_id", using: :btree
+
   create_table "invoices", force: true do |t|
     t.string   "number"
     t.integer  "client_id"
@@ -81,12 +72,15 @@ ActiveRecord::Schema.define(version: 20141001175444) do
     t.datetime "updated_at"
   end
 
+  add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
+
   create_table "standards", force: true do |t|
     t.string   "number"
     t.string   "revision"
+    t.string   "title"
+    t.string   "exceptions"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title"
   end
 
   create_table "users", force: true do |t|

@@ -13,5 +13,6 @@ class CreateFacilities < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :facilities, :client_id
   end
 end

@@ -14,20 +14,31 @@
     <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
-  <div class="field" id="standard-list">
-    <%= label_tag nil,"Standards" %>
-    <ul>
-    <% @category.standards.each do |standard| %>
-      </li>
-        <%= "<strong>#{standard.number}</strong> (#{standard.revision}) - <em>#{standard.title}</em>".html_safe %>
-        <%= " (#{standard.exceptions})" if standard.exceptions %>
-        <%= link_to "Remove" %>
-      </li>
+
+  <%= label_tag nil, "Standards in this Category" %>
+  <div id="standard-list">
+    <%= f.fields_for :category_standards do |ff| %>
+      <div class="field">
+        <%= ff.object.standard.number_with_exceptions %>
+        <%= ff.hidden_field :standard_id %>
+        <%= ff.hidden_field :_destroy %>
+        <%= link_to "<span class='glyphicon glyphicon-remove'></span>".html_safe, "", class: "del-std-btn", title: "Remove standard from category" %>
+      </div>
     <% end %>
-    </ul>
+
+    <div class="hidden" id="std-add-new-template">
+      <div class="field">
+        <%= f.fields_for :category_standards, CategoryStandard.new, child_index: "new_id" do |ff| %>
+          <%= ff.collection_select :standard_id, @standards - @category.standards, :id, :number_with_exceptions, prompt: "Select a standard to add" %>
+        <% end %>
+      </div>
+    </div>
   </div>
+
+  <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add Another".html_safe, "", class: "btn btn-success btn-sm", id: "add-std-btn", title: "Add standard to category" %>
+
   <div class="actions">
-    <%= f.submit "Submit", class: "btn btn-primary" %>
-    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+    <%= f.submit "Save Changes", class: "btn btn-primary" %>
   </div>
+  <%#= link_to "<span class='glyphicon glyphicon-trash'></span> Delete Category".html_safe, @category, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Category", data: { confirm: 'Are you sure you want to delete this category? (The standards will not be deleted. All clients listing to this category will have it removed from their scope!)' } %>
 <% end %>

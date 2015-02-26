@@ -51,11 +51,23 @@ Facility.create!(client_id: 1, name: "And a new one",
 Invoice.create!(number: "Next Number", client_id: 1, description: "Annual Listing Fee 2014",
 	amount: 1500.0, date_invoiced: "2014-07-09")
 
-Category.create!(description: "Test Category")
-Category.create!(description: "RV/M Chemical - Drinking Water System Components - Health Effects")
+Category.create!(description: "Plumbing - Plastic Sinks")
+Category.create!(description: "Plumbing - Plastic Showers/Bathtubs")
+Category.create!(description: "Electrical - Electric Ventilation Fans")
+c = Category.create!(description: "Chemical - Drinking Water System Components - Health Effects")
 
+Standard.create!(number: "IAPMO TS 11", revision: "2011a",
+	title: "Non-Metallic Fixtures")
 Standard.create!(number: "IAPMO Z124 / CSA B45.5", revision: "2011",
 	title: "Plastic Plumbing Fixtures")
-Standard.create!(number: "NSF 61", revision: "2013",
+Standard.create!(number: "CSA C22.2 No. 113", revision: "2010",
+	title: "Fans and Ventilators",
+	exceptions: "except sections 8-10")
+Standard.create!(number: "UL 507", revision: "9th",
+	title: "Electric Fans",
+	exceptions: "except sections 52-55, 65-89, 108-178")
+s = Standard.create!(number: "NSF 61", revision: "2013",
 	title: "Drinking Water System Components – Health Effects",
 	exceptions: "except section 7")
+
+CategoryStandard.create!(category_id: c.id, standard_id: s.id)

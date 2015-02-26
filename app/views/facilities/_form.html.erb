@@ -10,6 +10,7 @@
     </div>
   <% end %>
 
+<div class="row">
 <div class="col-md-6">
   <%= f.hidden_field :client_id %>
   <div class="field">
@@ -47,8 +48,10 @@
     <%= f.text_area :comments %>
   </div>
 </div>
-  <div class="actions">
-    <%= f.submit "Submit", class: "btn btn-primary" %>
-    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-  </div>
+</div>
+
+<div class="actions">
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+</div>
 <% end %>

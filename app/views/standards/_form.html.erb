@@ -2,7 +2,6 @@
   <% if @standard.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@standard.errors.count, "error") %> prohibited this standard from being saved:</h2>
-
       <ul>
       <% @standard.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -16,12 +15,16 @@
     <%= f.text_field :number, required: true %>
   </div>
   <div class="field">
-    <%= f.label :revision, "Current Revision" %><br>
+    <%= f.label :revision, "Revision (usually a year)" %><br>
     <%= f.text_field :revision %>
   </div>
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
+  </div>
+    <div class="field">
+    <%= f.label :exceptions, "Limitations (from A2LA scope)" %><br>
+    <%= f.text_field :exceptions %>
   </div>
   <div class="actions">
     <%= f.submit "Submit", class: "btn btn-primary" %>

@@ -1,5 +1,6 @@
 <h1>
-  <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add New Standard".html_safe, new_standard_path, class: "btn btn-success pull-right", title: "Add New Standard", data: { toggle: "modal", load_remote: new_standard_path } %>
+  <%= link_to "<span class='glyphicon glyphicon-arrow-left'></span> Back to Categories".html_safe, categories_path, class: "btn btn-info btn-sm pull-right" %>
+  <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add New Standard".html_safe, new_standard_path, class: "btn btn-success btn-sm pull-right", title: "Add New Standard", data: { toggle: "modal", load_remote: new_standard_path } %>
   Listing Standards</h1>
 
 <table class="table table-striped table-condensed">
@@ -8,6 +9,7 @@
       <th>Number</th>
       <th>Revision</th>
       <th>Title</th>
+      <th>Limitations</th>
       <th></th>
     </tr>
   </thead>
@@ -18,6 +20,7 @@
         <td><%= standard.number %></td>
         <td><%= standard.revision %></td>
         <td><%= standard.title %></td>        
+        <td><%= standard.exceptions %></td>        
         <td><%= link_to "<span class='glyphicon glyphicon-eye-open'></span> Info".html_safe, standard_path(standard), class: "btn btn-info btn-xs", title: "Info for "+standard.number, data: { toggle: "modal", load_remote: standard_path(standard) } %>
         <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edit".html_safe, edit_standard_path(standard), class: "btn btn-warning btn-xs", title: "Edit Standard Information", data: { toggle: "modal", load_remote: edit_standard_path(standard) } %>
         <%= link_to "<span class='glyphicon glyphicon-trash'></span> Delete".html_safe, standard, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Standard", data: { confirm: 'Are you sure you want to delete this standard?' } %></td>

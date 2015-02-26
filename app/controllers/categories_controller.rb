@@ -15,6 +15,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
+    @standards = Standard.all
     render layout: false
   end
 
@@ -66,6 +67,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:description)
+      params.require(:category).permit(:description, category_standards_attributes: [:id, :standard_id, :_destroy])
     end
 end

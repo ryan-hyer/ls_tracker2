@@ -75,6 +75,8 @@ h1 {
   }
 }
 
+/* Modal dialogs */
+
 .modal-dialog {
   //width: 80%;
 }
@@ -90,6 +92,12 @@ h1 {
   input:not([type=checkbox]):not([type=submit]), textarea, select {
     @extend .form-control;
   }
+}
+
+.actions {
+  padding-top: 5px;
+  margin-top: 5px;
+  border-top: 1px solid #E5E5E5;
 }
 
 .modal-add {
@@ -233,12 +241,12 @@ h1 {
 /* Category/Standard pages */
 
 #category-list div#header-row {
+  border-bottom: 1px solid #ccc;
   background-color: #eee;
   font-weight: bold;
 }
 
 #category-list div.row {
-  border-bottom: 1px solid #ccc;
   margin: 5px;
   padding: 2px 0;
   &:nth-child(2n+1) {
@@ -248,4 +256,8 @@ h1 {
 
 #category-controls {
   margin-right: 5px;
+}
+
+.glyphicon-remove {
+  color: red;
 }

@@ -49,5 +49,19 @@ $(document).ajaxSuccess(function() {
 		$('#invoice_date_invoiced').val(today);
 	}
 
+	// Extra functionality for the category standard list
+	$('#add-std-btn').on('click',function(e) {
+	    e.preventDefault();
+	    var new_id = new Date().getTime();
+	    var regexp = new RegExp("new_id", "g");
+	    $("#standard-list").append($("#std-add-new-template").html().replace(regexp, new_id));
+	})
+
+	$('.del-std-btn').on('click',function(e) {
+	    e.preventDefault();
+	    $(this).prev("input[type=hidden]").val("true");
+	    $(this).closest(".field").hide();
+	})
+
 	$('#myModal').modal('show');
 });

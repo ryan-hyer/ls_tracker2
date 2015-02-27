@@ -8,9 +8,7 @@
 <div class="row" id="client-info">
   <div class="col-md-6">
     <div class="row">
-      <div class="col-md-4">
-        <strong>Company</strong>
-      </div>
+      <div class="col-md-4"><strong>Company</strong></div>
       <div class="col-md-8">
         <strong><%= @client.name %></strong>
         <%= simple_format(@client.address, {}, wrapper_tag: "div") %>
@@ -19,9 +17,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
-        <strong>Listing Number</strong>
-      </div>
+      <div class="col-md-4"><strong>Listing Number</strong></div>
       <div class="col-md-8">
         <strong><%= @client.listing_number %></strong><br />
         Effective Date: <%= @client.effective %><br />
@@ -32,9 +28,7 @@
   </div>
   <div class="col-md-6">
     <div class="row">
-      <div class="col-md-4">
-        <strong>Listing Contact</strong>
-      </div>
+      <div class="col-md-4"><strong>Listing Contact</strong></div>
       <div class="col-md-8">
         <%= @client.poc_name %><br />
         <%= "#{@client.poc_title}<br />".html_safe unless @client.poc_title.blank? %>
@@ -43,17 +37,15 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
-        <strong>Invoicing Schedule</strong>
-      </div>
+      <div class="col-md-4"><strong>Invoicing Schedule</strong></div>
       <div class="col-md-8">
-        $<%= @client.invoice_amt %> <%= @client.invoice_freq.gsub(/Annual/, "Annually") %><%= " (in #{@client.invoice_month})" if @client.invoice_freq == "Annual" %>
+        $<%= @client.invoice_amt %> 
+        <%= @client.invoice_freq.gsub(/Annual/, "Annually") %>
+        <%= " (in #{@client.invoice_month})" if @client.invoice_freq == "Annual" %>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
-        <strong>Comments</strong>
-      </div>
+      <div class="col-md-4"><strong>Comments</strong></div>
       <div class="col-md-8">
         <%= simple_format(@client.comments, {}, wrapper_tag: "div") %>
       </div>
@@ -61,6 +53,7 @@
   </div>
 </div>
 
+<!-- Listing Categories -->
 <h1>
   <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, edit_client_path(@client), class: "btn btn-success btn-sm pull-right", title: "Add New Category" %>
   Listing Categories
@@ -76,7 +69,7 @@
 </div>
 <% unless @client.facilities.inactive.empty? %>
   <div class="facility-inactive-header" data-toggle="collapse" data-target="#inactive-facilities">
-    <%= pluralize(@client.facilities.inactive.count, "inactive facility") + " (click to show)" %>
+    <%= pluralize(@client.facilities.inactive.count, "inactive facility") + " (click to view/hide)" %>
   </div>
   <div id="inactive-facilities" class="collapse">
     <%= render 'facilities', object: @client.facilities.inactive %>

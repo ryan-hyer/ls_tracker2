@@ -1,0 +1,18 @@
+<%= form_for([@facility, @inspection]) do |f| %>
+  <%= f.hidden_field :facility_id %>
+  <div class="field">
+    <%= f.label :inspection_date %>
+    <%= f.date_field :inspection_date %>
+  </div>
+  <div class="field">
+    <%= f.label :number, "IS Number" %>
+    <%= f.text_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :comments %>
+    <%= f.text_area :comments %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

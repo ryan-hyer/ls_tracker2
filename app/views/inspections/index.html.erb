@@ -1,0 +1,31 @@
+<h1>Listing inspections</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Inspection date</th>
+      <th>Comments</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inspections.each do |inspection| %>
+      <tr>
+        <td><%= inspection.number %></td>
+        <td><%= inspection.inspection_date %></td>
+        <td><%= inspection.comments %></td>
+        <td><%= link_to 'Show', inspection %></td>
+        <td><%= link_to 'Edit', edit_inspection_path(inspection) %></td>
+        <td><%= link_to 'Destroy', inspection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Inspection', new_inspection_path %>

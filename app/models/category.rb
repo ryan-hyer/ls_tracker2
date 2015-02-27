@@ -8,4 +8,5 @@ class Category < ActiveRecord::Base
 	validates :scheme, presence: true
 
 	accepts_nested_attributes_for :category_standards, allow_destroy: true, reject_if: proc { |attributes| attributes['standard_id'].blank?}
+
 end

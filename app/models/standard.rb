@@ -4,6 +4,8 @@ class Standard < ActiveRecord::Base
 
 	validates :number, presence: true
 
+	default_scope order("number, revision, exceptions")
+
 	def number_with_exceptions
 		nwe = "#{number}-#{revision}"
 		nwe += " (#{exceptions})" if exceptions.present?

@@ -1,12 +1,6 @@
 class FacilitiesController < ApplicationController
-  before_action :set_facility, only: [:show, :edit, :update, :destroy]
+  before_action :set_facility, only: [:edit, :update, :destroy]
   before_action :set_client, only: [:new, :create]
-
-  # GET /facilities
-  # GET /facilities.json
-  def index
-    @facilities = Facility.all
-  end
 
   # GET /facilities/new
   def new

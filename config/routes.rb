@@ -1,14 +1,15 @@
 LsTracker2::Application.routes.draw do
 
-  resources :schemes
-
-  resources :categories
-
   resources :clients do
-    resources :facilities, shallow: true
+    resources :facilities, shallow: true, except: :show do
+      resources :inspections, shallow: true, except: :show
+    end
   end
-   
-  resources :invoices, :standards
+
+  resources :invoices, except: :show
+  resources :standards
+  resources :categories, except: :show
+  resources :schemes, except: :show
 
   devise_for :users, :path_prefix => 'my'
   resources :users

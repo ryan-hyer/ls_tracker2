@@ -6,7 +6,7 @@ class Standard < ActiveRecord::Base
 
 	def number_with_exceptions
 		nwe = "#{number}-#{revision}"
-		nwe += " (#{exceptions})" unless exceptions.nil?
+		nwe += " (#{exceptions})" if exceptions.present?
 		nwe
 	end
 end

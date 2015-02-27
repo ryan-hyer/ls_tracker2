@@ -51,10 +51,14 @@ Facility.create!(client_id: 1, name: "And a new one",
 Invoice.create!(number: "Next Number", client_id: 1, description: "Annual Listing Fee 2014",
 	amount: 1500.0, date_invoiced: "2014-07-09")
 
-Category.create!(description: "Plumbing - Plastic Sinks")
-Category.create!(description: "Plumbing - Plastic Showers/Bathtubs")
-Category.create!(description: "Electrical - Electric Ventilation Fans")
-c = Category.create!(description: "Chemical - Drinking Water System Components - Health Effects")
+Scheme.create!(name: "RV")
+Scheme.create!(name: "Marine")
+Scheme.create!(name: "General")
+
+Category.create!(description: "Plumbing - Plastic Sinks", scheme_id: 1)
+Category.create!(description: "Plumbing - Plastic Showers/Bathtubs", scheme_id: 1)
+Category.create!(description: "Electrical - Electric Ventilation Fans", scheme_id: 1)
+c = Category.create!(description: "Chemical - Drinking Water System Components - Health Effects", scheme_id: 1)
 
 Standard.create!(number: "IAPMO TS 11", revision: "2011a",
 	title: "Non-Metallic Fixtures")

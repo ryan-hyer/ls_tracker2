@@ -15,6 +15,7 @@ $(document).ready(function() {
 	        $('#myModal .modal-content').addClass(modal_class);
 	    }
 	});
+	$('[data-toggle="tooltip"]').tooltip();
 });
 
 $(document).ajaxSuccess(function() {
@@ -53,7 +54,7 @@ $(document).ajaxSuccess(function() {
 	$('#add-std-btn').on('click',function(e) {
 	    e.preventDefault();
 	    var new_id = new Date().getTime();
-	    var regexp = new RegExp("new_id", "g");
+	    var regexp = new RegExp("-1", "g");
 	    $("#standard-list").append($("#std-add-new-template").html().replace(regexp, new_id));
 	})
 

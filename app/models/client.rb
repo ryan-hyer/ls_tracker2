@@ -11,6 +11,10 @@ class Client < ActiveRecord::Base
   	validates :invoice_month, presence: { if: Proc.new { |client| client.invoice_freq == "Annual" },
   							  message: "can't be blank if invoice frequency is 'Annual'" }
 
+  	default_scope order("name")
+  	scope :delisted, -> { where(delisted: true) }
+  	scope :active, -> { where(delisted: false) }
+
   	def self.due_in(month)
 		where("invoice_month = ?", month)
 	end

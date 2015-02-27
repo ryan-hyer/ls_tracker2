@@ -1,7 +1,7 @@
 class CategoryStandard < ActiveRecord::Base
-	belongs_to :category
+	belongs_to :category, :inverse_of => :category_standards
 	belongs_to :standard
 
-	validates :category_id, presence: true
-	validates :standard_id, presence: true
+	validates :category, presence: true
+	validates :standard, presence: true
 end

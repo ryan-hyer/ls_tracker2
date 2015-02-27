@@ -30,7 +30,7 @@ body {
 h1 {
   font-size: 1.7em;
   letter-spacing: -1px;
-  padding: 2px;
+  padding: 3px;
   margin-bottom: 5px;
   border-bottom: 3px solid #ccc;
   background-color: #ffe9ce;
@@ -38,6 +38,10 @@ h1 {
 
 .center {
   text-align: center;
+}
+
+.pull-right {
+  margin-left: 3px;
 }
 
 .list-plain {
@@ -240,22 +244,10 @@ h1 {
 
 /* Category/Standard pages */
 
-#category-list div#header-row {
-  border-bottom: 1px solid #ccc;
-  background-color: #eee;
-  font-weight: bold;
-}
-
-#category-list div.row {
-  margin: 5px;
-  padding: 2px 0;
-  &:nth-child(2n+1) {
-    background-color: #eee;
-  }
-}
-
-#category-controls {
-  margin-right: 5px;
+.standard-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .glyphicon-remove {

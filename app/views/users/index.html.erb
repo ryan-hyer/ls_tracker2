@@ -1,8 +1,15 @@
-<h1>Manage Users</h1>
+<h1>
+  <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add New User".html_safe, new_user_path, class: "btn btn-success btn-sm pull-right", title: "Add New User", data: { toggle: "modal", load_remote: new_user_path } %>
+	Manage Users
+</h1>
 
-  <ul class="list-plain">
-    <% @users.each do |user| %>
-      <li><%= user.email %> <%= link_to '', user, method: :delete, class: "glyphicon glyphicon-trash", title: "Delete this user", data: { confirm: 'Are you sure you want to delete this user?' } %></li>
-    <% end %>
-    <li><%= link_to 'Add New User', new_user_path, class: "btn btn-success" %></li>
-  </ul>
+<ul class="list-plain">
+  <% @users.each do |user| %>
+    <li>
+    	<%= user.email %>
+    	<%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, user, method: :delete, class: "btn btn-danger btn-xs", title: "Delete User", data: { confirm: 'Are you sure you want to delete this user?' } %>
+		</li>
+  <% end %>
+</ul>
+
+ <%= render 'shared/modal' %>

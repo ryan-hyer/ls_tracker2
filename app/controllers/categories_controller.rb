@@ -10,12 +10,15 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new
+    @standards = Standard.all
+    @schemes = Scheme.all
     render layout: false   
   end
 
   # GET /categories/1/edit
   def edit
     @standards = Standard.all
+    @schemes = Scheme.all
     render layout: false
   end
 
@@ -29,7 +32,10 @@ class CategoriesController < ApplicationController
         format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: categories_path }
       else
-        format.html { render :new }
+        @category.errors.full_messages.each do |msg|
+          @combined_errors = "#{@combined_errors} #{msg}."
+        end
+        format.html { redirect_to categories_path, alert: @combined_errors }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
@@ -67,6 +73,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:description, category_standards_attributes: [:id, :standard_id, :_destroy])
+      params.require(:category).permit(:description, :scheme_id, category_standards_attributes: [:standard_id, :id, :_destroy])
     end
 end

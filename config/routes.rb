@@ -1,5 +1,7 @@
 LsTracker2::Application.routes.draw do
 
+  resources :schemes
+
   resources :categories
 
   resources :clients do

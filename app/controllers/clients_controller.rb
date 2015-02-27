@@ -4,8 +4,8 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @active_clients = Client.where(delisted: false).order("name")
-    @delisted_clients = Client.where(delisted: true).order("name")
+    @active_clients = Client.active
+    @delisted_clients = Client.delisted
   end
 
   # GET /clients/1

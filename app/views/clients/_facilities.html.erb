@@ -10,7 +10,7 @@
       <strong>Point of Contact</strong><br />
       <%= facility.poc_name %><%= ", #{facility.poc_phone}".html_safe unless facility.poc_phone.blank? %><%= ", #{mail_to(facility.poc_email)}".html_safe unless facility.poc_email.blank? %><br/><br/>
       <strong>Comments</strong><br />
-      <%= simple_format(facility.comments, {}, wrapper_tag: "div") %>
+      <%= simple_format(facility.comments, {}, wrapper_tag: "div") %><br />
     </div>
     <div class="col-md-6 inspections">
       <strong>Inspection History</strong>

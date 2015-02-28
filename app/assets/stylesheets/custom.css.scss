@@ -203,15 +203,27 @@ h1 {
   margin-bottom: 10px;
 }
 
-#active-facilities .row, #inactive-facilities .row {
+#client-listings .listing-header {
+  font-weight: bold;
+  font-size: 110%;
+  background-color: #ccc;
+  padding: 5px;
+}
+
+#client-listings td:first-child {
+  font-weight: bold;
+  width: 20%;
+}
+
+#active-facilities .row, #inactive-facilities .row, #client-listings .row {
   background-color: #eee;
-  margin: 5px 15px;
+  margin: 5px 0px;
   padding: 5px 0;
 }
 
 .facility-inactive-header {
   background-color: #fee;
-  margin: 5px 15px;
+  margin: 5px 0px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;

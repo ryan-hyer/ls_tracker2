@@ -1,6 +1,7 @@
 class Client < ActiveRecord::Base
 	has_many :invoices, dependent: :destroy
 	has_many :facilities, dependent: :destroy
+	has_many :listings, dependent: :destroy
 	
 	validates :name, presence: true
 	validates :listing_number, presence: true, 
@@ -11,7 +12,7 @@ class Client < ActiveRecord::Base
   	validates :invoice_month, presence: { if: Proc.new { |client| client.invoice_freq == "Annual" },
   							  message: "can't be blank if invoice frequency is 'Annual'" }
 
-  	default_scope order("name")
+  	default_scope { order("name") }
   	scope :delisted, -> { where(delisted: true) }
   	scope :active, -> { where(delisted: false) }
 

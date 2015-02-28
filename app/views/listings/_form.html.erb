@@ -1,0 +1,27 @@
+<%= form_for([@client,@listing]) do |f| %>
+  <div class="field">
+    <%= f.label :category_id, "Listing Category" %>
+    <%= f.collection_select :category_id, @categories, :id, :with_scheme, prompt: "Select a listing category" %>
+  </div>
+  <div class="field">
+    <%= f.label nil, "Standards" %>
+  </div>
+  <div class="field">
+    <%= f.label :product_description %>
+    <%= f.text_area :product_description %>
+  </div>
+  <div class="field">
+    <%= f.label nil, "Model Numbers" %>
+  </div>
+  <div class="field">
+    <%= f.label :conditions, "Listing Conditions" %>
+    <%= f.text_area :conditions %>
+  </div>
+  <div class="field">
+    <%= f.label :comments %>
+    <%= f.text_area :comments %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

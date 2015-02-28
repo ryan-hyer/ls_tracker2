@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all.includes(:scheme).order("schemes.name, categories.description")
+    @categories = Category.all
   end
 
   # GET /categories/new

@@ -1,9 +1,11 @@
 LsTracker2::Application.routes.draw do
 
+
   resources :clients do
     resources :facilities, shallow: true, except: :show do
       resources :inspections, shallow: true, except: :show
     end
+    resources :listings, shallow: true, except: [:index, :show]
   end
 
   resources :invoices, except: :show

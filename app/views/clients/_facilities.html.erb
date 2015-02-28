@@ -1,10 +1,10 @@
 <% object.each do |facility| %>
   <div class="row">
     <div class="col-md-3">
-      <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edit".html_safe, edit_facility_path(facility), class: "btn btn-xs btn-warning", title: "Edit Facility Information", data: { toggle: "modal", load_remote: edit_facility_path(facility) } %><br/>
       <%= "<strong>#{facility.name}</strong><br/>".html_safe unless facility.name.blank? %>
       <%= simple_format(facility.address, {}, wrapper_tag: "div") %>
-      Tel: <%= facility.phone %>
+      Tel: <%= facility.phone %><br />
+      <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edit".html_safe, edit_facility_path(facility), class: "btn btn-xs btn-warning", title: "Edit Facility Information", data: { toggle: "modal", load_remote: edit_facility_path(facility) } %>
     </div>
     <div class="col-md-3">
       <strong>Point of Contact</strong><br />
@@ -14,14 +14,13 @@
     </div>
     <div class="col-md-6 inspections">
       <strong>Inspection History</strong>
-      <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_facility_inspection_path(facility), class: "btn btn-success btn-xs pull-right", title: "Add Inspection to Facility", data: { toggle: "modal", load_remote: new_facility_inspection_path(facility) } %>
       <table class="table table-striped table-condensed">
         <thead>
           <tr>
             <th>Date</th>
             <th>IS #</th>
             <th>Comments</th>
-            <th></th>
+            <th><%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_facility_inspection_path(facility), class: "btn btn-success btn-xs", title: "Add Inspection to Facility", data: { toggle: "modal", load_remote: new_facility_inspection_path(facility) } %></th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +29,7 @@
             <td><%= inspection.inspection_date %></td>
             <td><%= inspection.number %></td>
             <td><%= simple_format(inspection.comments, {}, wrapper_tag: "div") %></td>
-            <td>
+            <td nowrap>
               <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_inspection_path(inspection), class: "btn btn-warning btn-xs", title: "Edit Inspection Information", data: { toggle: "modal", load_remote: edit_inspection_path(inspection) } %>
               <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, inspection, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Inspection", data: { confirm: 'Are you sure you want to delete this inspection record?' } %>
             </td>

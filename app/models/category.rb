@@ -10,8 +10,6 @@ class Category < ActiveRecord::Base
 
 	accepts_nested_attributes_for :category_standards, allow_destroy: true, reject_if: proc { |attributes| attributes['standard_id'].blank?}
 
-	default_scope -> { includes(:scheme).order("schemes.name, categories.description") }
-
 	def with_scheme
 		"#{scheme.name} #{description}"
 	end

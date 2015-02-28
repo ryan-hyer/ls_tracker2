@@ -1,8 +1,18 @@
-<h1><%= link_to "<span class='glyphicon glyphicon-plus'></span> Add New Client".html_safe, new_client_path, class: "btn btn-success pull-right", title: "Add New Client", data: { toggle: "modal", load_remote: new_client_path } %>
-  Active Clients</h1>
-  <%= render 'list', object: @active_clients %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+		<%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_client_path, class: "btn btn-success btn-xs pull-right", title: "Add New Client", data: { toggle: "modal", load_remote: new_client_path } %>
+		Active Clients
+	</div>
+	<div class="panel-body">
+	  <%= render 'list', object: @active_clients %>
+	</div>
+</div>
 
-<h1>Delisted Clients</h1>
-  <%= render 'list', object: @delisted_clients %>
+<div class="panel panel-primary">
+  <div class="panel-heading">Delisted Clients</div>
+	<div class="panel-body">
+	  <%= render 'list', object: @delisted_clients %>
+	</div>
+</div>
 
 <%= render 'shared/modal' %>

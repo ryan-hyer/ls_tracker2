@@ -27,13 +27,9 @@ body {
   padding-bottom: 60px;
 }
 
-h1 {
-  font-size: 1.7em;
-  letter-spacing: -1px;
-  padding: 3px;
-  margin-bottom: 5px;
-  border-bottom: 3px solid #ccc;
-  background-color: #ffe9ce;
+.panel-heading {
+  font-size: 120%;
+  font-weight: bold;
 }
 
 .center {
@@ -50,7 +46,7 @@ h1 {
 
 .list-plain {
   list-style: none;
-  margin: 10px;
+  margin: 0;
   padding: 0;
   li {
     overflow: auto;
@@ -64,7 +60,7 @@ h1 {
     color: black;
     display: block;
     background-color: #eee;
-    padding: 10px;
+    padding: 5px;
     &:hover {
       color: black;
       background-color: #ccc;
@@ -215,7 +211,7 @@ h1 {
   width: 20%;
 }
 
-#active-facilities .row, #inactive-facilities .row, #client-listings .row {
+#active-facilities .row, #inactive-facilities .row {
   background-color: #eee;
   margin: 5px 0px;
   padding: 5px 0;

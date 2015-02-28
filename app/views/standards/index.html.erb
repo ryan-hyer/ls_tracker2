@@ -1,32 +1,33 @@
-<h1>
-  <%= link_to "<span class='glyphicon glyphicon-arrow-left'></span> Back to Categories".html_safe, categories_path, class: "btn btn-info pull-right" %>
-  <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add New Standard".html_safe, new_standard_path, class: "btn btn-success pull-right", title: "Add New Standard", data: { toggle: "modal", load_remote: new_standard_path } %>
-  Listing Standards</h1>
-
-<table class="table table-striped table-condensed">
-  <thead>
-    <tr>
-      <th>Number</th>
-      <th>Revision</th>
-      <th>Title</th>
-      <th>Limitations</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @standards.each do |standard| %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <%= link_to "<span class='glyphicon glyphicon-arrow-left'></span> Back to Categories".html_safe, categories_path, class: "btn btn-info btn-xs pull-right" %>
+    <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_standard_path, class: "btn btn-success btn-xs pull-right", title: "Add New Standard", data: { toggle: "modal", load_remote: new_standard_path } %>
+    Listing Standards
+  </div>
+  <table class="table table-striped table-condensed">
+    <thead>
       <tr>
-        <td><%= standard.number %></td>
-        <td><%= standard.revision %></td>
-        <td><%= standard.title %></td>        
-        <td><%= standard.exceptions %></td>        
-        <td nowrap><%= link_to "<span class='glyphicon glyphicon-eye-open'></span> Info".html_safe, standard_path(standard), class: "btn btn-info btn-xs", title: "Info for "+standard.number, data: { toggle: "modal", load_remote: standard_path(standard) } %>
-        <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edit".html_safe, edit_standard_path(standard), class: "btn btn-warning btn-xs", title: "Edit Standard Information", data: { toggle: "modal", load_remote: edit_standard_path(standard) } %>
-        <%= link_to "<span class='glyphicon glyphicon-trash'></span> Delete".html_safe, standard, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Standard", data: { confirm: 'Are you sure you want to delete this standard?' } %></td>
+        <th>Number</th>
+        <th>Revision</th>
+        <th>Title</th>
+        <th>Limitations</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @standards.each do |standard| %>
+        <tr>
+          <td nowrap><%= standard.number %></td>
+          <td><%= standard.revision %></td>
+          <td><%= standard.title %></td>        
+          <td><%= standard.exceptions %></td>        
+          <td nowrap><%= link_to "<span class='glyphicon glyphicon-eye-open'></span>".html_safe, standard_path(standard), class: "btn btn-info btn-xs", title: "Info for "+standard.number, data: { toggle: "modal", load_remote: standard_path(standard) } %>
+          <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_standard_path(standard), class: "btn btn-warning btn-xs", title: "Edit Standard Information", data: { toggle: "modal", load_remote: edit_standard_path(standard) } %>
+          <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, standard, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Standard", data: { confirm: 'Are you sure you want to delete this standard?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= render 'shared/modal' %>

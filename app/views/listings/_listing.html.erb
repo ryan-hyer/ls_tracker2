@@ -1,0 +1,36 @@
+<div class="listing-header">
+  <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, listing, method: :delete, class: "btn btn-danger btn-xs pull-right", title: "Delete Listing", data: { confirm: 'Are you sure you want to delete this listing category?' } %>
+  <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_listing_path(listing), class: "btn btn-warning btn-xs pull-right", title: "Edit Listing Information", data: { toggle: "modal", load_remote: edit_listing_path(listing) } %>
+  <%= listing.category.with_scheme %>
+</div>
+<table class="table table-condensed">
+  <tr>
+    <td>Standards</td>
+    <td>
+      <ul class="standard-list">
+        <% listing.standards.each_with_index do |standard| %>
+          <li>
+          <%= "<strong>#{standard.number}</strong>-#{standard.revision} - <em>#{standard.title}</em>".html_safe %>
+          <%= " (#{standard.exceptions})" if standard.exceptions.present? %>
+          </li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>Product Description</td>
+    <td><%= listing.product_description %></td>
+  </tr>
+  <tr>
+    <td>Model Numbers</td>
+    <td>2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 15M, 17, 18, 19, 20, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 34, 35, 36, 38, 39, 40, 41, 43, 44, 46, 47, 48, 50, 53, 54, 56, 56A, 58, 60, 62, 64, 64M, 65, 66, 69, 73, 74, 76, 78, 79, 80, 84, 85, 86, 89, 94, 96, 100, 101, 103, 105, 106, 107 112A, 116, 117, 119, 122, 124, 125, 127, 128, 129M, 130, 131, 132, 133, 138, 139, 142, 143, 145, 146, 149M, 152, 164, 175, 186, 190, 191, 193A, 199, 200, 516, 519A, 523, 534, 537A, 544A, 548M, 549A, 550, 567M, 568M, 570, 571A, 584, 587A, 594A, 598, 599, 1001, 1007, 1008, 1010, 1011, 1012, 1014, 1020, 1026, 1028, 1029, 1033, 1034, 1039, 1044, 1047, 1048, 1068, 1081, 1089R, 1200, 1202, 1203, 1205, 1209, 1219, 1228, 1232, 1233, 1234, 1239</td>
+  </tr>
+  <tr>
+    <td>Listing Conditions</td>
+    <td><%= simple_format(listing.conditions, {}, wrapper_tag: "div") %></td>
+  </tr>
+  <tr>
+    <td>Comments</td>
+    <td><%= simple_format(listing.comments, {}, wrapper_tag: "div") %></td>
+  </tr>
+</table>

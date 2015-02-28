@@ -1,20 +1,23 @@
-<h1>
-  <%= link_to "<span class='glyphicon glyphicon-arrow-left'></span> Back to Categories".html_safe, categories_path, class: "btn btn-info pull-right" %>
-  <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add New Scheme".html_safe, new_scheme_path, class: "btn btn-success pull-right", title: "Add New Scheme", data: { toggle: "modal", load_remote: new_scheme_path } %>
-  Listing Schemes
-</h1>
-
-<ul class="list-plain">
-  <% @schemes.each do |scheme| %>
-    <li>
-      <%= scheme.name %>
-      <% if scheme.categories.empty? %>
-        <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, scheme, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Scheme", data: { confirm: 'Are you sure you want to delete this scheme?' } %>
-      <% else %>
-        <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="right" title="Scheme is still in use and cannot be deleted. Re-assign all categories to other schemes before deleting."><span class='glyphicon glyphicon-trash'></span></button>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <%= link_to "<span class='glyphicon glyphicon-arrow-left'></span> Back to Categories".html_safe, categories_path, class: "btn btn-info btn-xs pull-right" %>
+    <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_scheme_path, class: "btn btn-success btn-xs pull-right", title: "Add New Scheme", data: { toggle: "modal", load_remote: new_scheme_path } %>
+    Listing Schemes
+  </div>
+  <div class="panel-body">
+    <ul class="list-plain">
+      <% @schemes.each do |scheme| %>
+        <li>
+          <%= scheme.name %>
+          <% if scheme.categories.empty? %>
+            <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, scheme, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Scheme", data: { confirm: 'Are you sure you want to delete this scheme?' } %>
+          <% else %>
+            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="right" title="Scheme is still in use and cannot be deleted. Re-assign all categories to other schemes before deleting."><span class='glyphicon glyphicon-trash'></span></button>
+          <% end %>
+        </li>
       <% end %>
-    </li>
-  <% end %>
-</ul>
+    </ul>
+  </div>
+</div>
 
  <%= render 'shared/modal' %>

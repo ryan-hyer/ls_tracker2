@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228001124) do
+ActiveRecord::Schema.define(version: 20150228075444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,16 @@ ActiveRecord::Schema.define(version: 20150228001124) do
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
+
+  create_table "listing_standards", force: true do |t|
+    t.integer  "listing_id"
+    t.integer  "standard_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "listing_standards", ["listing_id"], name: "index_listing_standards_on_listing_id", using: :btree
+  add_index "listing_standards", ["standard_id"], name: "index_listing_standards_on_standard_id", using: :btree
 
   create_table "listings", force: true do |t|
     t.integer  "client_id"

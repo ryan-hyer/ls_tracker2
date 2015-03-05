@@ -1,57 +1,44 @@
-<%= form_for([@client, @facility]) do |f| %>
-  <% if @facility.errors.any? %>
-    <div id="error_explanation">
-      <h2>Please correct the following <%= pluralize(@client.errors.count, "error") %>:</h2>
-      <ul>
-      <% @facility.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for([@client, @facility], remote: true) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.hidden_field :client_id %>
+      <div class="field">
+        <%= f.label :name, "Facility Name" %>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :address %>
+        <%= f.text_area :address %>
+      </div>
+      <div class="field">
+        <%= f.label :phone %>
+        <%= f.telephone_field :phone %>
+      </div>
+      <div class="field">
+        <%= f.label :inactive %>
+        <%= f.check_box :inactive %>
+      </div>
     </div>
-  <% end %>
-
-<div class="row">
-<div class="col-md-6">
-  <%= f.hidden_field :client_id %>
-  <div class="field">
-    <%= f.label :name, "Facility Name" %>
-    <%= f.text_field :name %>
+    <div class="col-md-6">
+     <div class="field">
+        <%= f.label :poc_name, "POC Name" %>
+        <%= f.text_field :poc_name %>
+      </div>
+      <div class="field">
+        <%= f.label :poc_phone, "POC Phone" %>
+        <%= f.telephone_field :poc_phone %>
+      </div>
+      <div class="field">
+        <%= f.label :poc_email, "POC Email" %>
+        <%= f.email_field :poc_email %>
+      </div>
+      <div class="field">
+        <%= f.label :comments %>
+        <%= f.text_area :comments %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :address %>
-    <%= f.text_area :address %>
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
   </div>
-  <div class="field">
-    <%= f.label :phone %>
-    <%= f.telephone_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :inactive %>
-    <%= f.check_box :inactive %>
-  </div>
-</div>
-<div class="col-md-6">
- <div class="field">
-    <%= f.label :poc_name, "POC Name" %>
-    <%= f.text_field :poc_name %>
-  </div>
-  <div class="field">
-    <%= f.label :poc_phone, "POC Phone" %>
-    <%= f.telephone_field :poc_phone %>
-  </div>
-  <div class="field">
-    <%= f.label :poc_email, "POC Email" %>
-    <%= f.email_field :poc_email %>
-  </div>
-  <div class="field">
-    <%= f.label :comments %>
-    <%= f.text_area :comments %>
-  </div>
-</div>
-</div>
-
-<div class="actions">
-  <%= f.submit "Submit", class: "btn btn-primary" %>
-  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-</div>
 <% end %>

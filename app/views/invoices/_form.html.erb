@@ -1,46 +1,33 @@
-<%= form_for(@invoice) do |f| %>
-  <% if @invoice.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
-
-      <ul>
-      <% @invoice.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for(@invoice, remote: true) do |f| %>
+  <div class="col-md-6">
+    <div class="field">
+      <%= f.label :number, "Invoice Number" %>
+      <%= f.text_field :number, required: true %>
     </div>
-  <% end %>
-
-<div class="col-md-6">
-  <div class="field">
-    <%= f.label :number, "Invoice Number" %><br>
-    <%= f.text_field :number, required: true %>
+    <div class="field">
+      <%= f.label :client_id %>
+      <%= f.collection_select :client_id, Client.all.order('name'), :id, :name %>
+    </div>
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :client_id %><br>
-    <%= f.collection_select :client_id, Client.all.order('name'), :id, :name %>
+  <div class="col-md-6">
+    <div class="field">
+      <%= f.label :amount %>
+      <%= f.number_field :amount %>
+    </div>
+    <div class="field">
+      <%= f.label :date_invoiced, "Date Invoiced" %>
+      <%= f.date_field :date_invoiced, required: true %>
+    </div>
+    <div class="field">
+      <%= f.label :date_paid, "Date Paid" %>
+      <%= f.date_field :date_paid %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-</div>
-<div class="col-md-6">
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.number_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :date_invoiced, "Date Invoiced" %><br>
-    <%= f.date_field :date_invoiced, required: true %>
-  </div>
-  <div class="field">
-    <%= f.label :date_paid, "Date Paid" %><br>
-    <%= f.date_field :date_paid %>
-  </div>
-</div>
   <div class="actions">
     <%= f.submit "Submit", class: "btn btn-primary" %>
-    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
   </div>
 <% end %>

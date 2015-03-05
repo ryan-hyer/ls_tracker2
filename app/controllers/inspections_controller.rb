@@ -3,7 +3,6 @@ class InspectionsController < ApplicationController
   before_action :set_facility, only: [:new, :create]
 
   # GET /inspections
-  # GET /inspections.json
   def index
     @inspections = Inspection.all
   end
@@ -20,43 +19,39 @@ class InspectionsController < ApplicationController
   end
 
   # POST /inspections
-  # POST /inspections.json
   def create
     @inspection = @facility.inspections.new(inspection_params)
 
     respond_to do |format|
       if @inspection.save
-        format.html { redirect_to @inspection.facility.client, notice: 'Inspection was successfully created.' }
-        format.json { render :show, status: :created, location: @inspection.facility.client }
+        flash[:notice] = "Inspection was succesfully created."
+        format.html { redirect_to @inspection.facility.client }
+        format.js { render js: 'window.location.reload()' }
       else
         format.html { render :new }
-        format.json { render json: @inspection.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @inspection} }
       end
     end
   end
 
   # PATCH/PUT /inspections/1
-  # PATCH/PUT /inspections/1.json
   def update
     respond_to do |format|
       if @inspection.update(inspection_params)
-        format.html { redirect_to @inspection.facility.client, notice: 'Inspection was successfully updated.' }
-        format.json { render :show, status: :ok, location: @inspection.facility.client }
+        flash[:notice] = "Inspection was succesfully updated."
+        format.html { redirect_to @inspection.facility.client }
+        format.js { render js: 'window.location.reload()' }
       else
         format.html { render :edit }
-        format.json { render json: @inspection.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @inspection} }
       end
     end
   end
 
   # DELETE /inspections/1
-  # DELETE /inspections/1.json
   def destroy
     @inspection.destroy
-    respond_to do |format|
-      format.html { redirect_to @inspection.facility.client, notice: 'Inspection was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to @inspection.facility.client, notice: 'Inspection was successfully destroyed.'
   end
 
   private

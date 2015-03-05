@@ -2,14 +2,12 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   # GET /clients
-  # GET /clients.json
   def index
     @active_clients = Client.active
     @delisted_clients = Client.delisted
   end
 
   # GET /clients/1
-  # GET /clients/1.json
   def show
   end
 
@@ -25,43 +23,39 @@ class ClientsController < ApplicationController
   end
 
   # POST /clients
-  # POST /clients.json
   def create
     @client = Client.new(client_params)
 
     respond_to do |format|
       if @client.save
-        format.html { redirect_to @client, notice: 'Client was successfully created.' }
-        format.json { render :show, status: :created, location: @client }
+        flash[:notice] = "Client was succesfully created."
+        format.html { redirect_to @client }
+        format.js { render js: %(window.location.href='#{client_path @client}') }
       else
         format.html { render :new }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @client} }
       end
     end
   end
 
   # PATCH/PUT /clients/1
-  # PATCH/PUT /clients/1.json
   def update
     respond_to do |format|
       if @client.update(client_params)
-        format.html { redirect_to @client, notice: 'Client was successfully updated.' }
-        format.json { render :show, status: :ok, location: @client }
+        flash[:notice] = "Client was succesfully updated."
+        format.html { redirect_to @client }
+        format.js { render js: 'window.location.reload()' }
       else
         format.html { render :edit }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @client} }
       end
     end
   end
 
   # DELETE /clients/1
-  # DELETE /clients/1.json
   def destroy
     @client.destroy
-    respond_to do |format|
-      format.html { redirect_to clients_url }
-      format.json { head :no_content }
-    end
+    redirect_to clients_url, notice: 'Client was successfully destroyed.'
   end
 
   private

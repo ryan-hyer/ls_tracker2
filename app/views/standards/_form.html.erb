@@ -1,33 +1,21 @@
-<%= form_for(@standard) do |f| %>
-  <% if @standard.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@standard.errors.count, "error") %> prohibited this standard from being saved:</h2>
-      <ul>
-      <% @standard.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_for(@standard, remote: true) do |f| %>
   <div class="field">
-    <%= f.label :number, "Standard Org and Number (i.e. ASTM 1234)" %><br>
+    <%= f.label :number, "Standard Org and Number (i.e. ASTM 1234)" %>
     <%= f.text_field :number, required: true %>
   </div>
   <div class="field">
-    <%= f.label :revision, "Revision (usually a year)" %><br>
+    <%= f.label :revision, "Revision (usually a year)" %>
     <%= f.text_field :revision %>
   </div>
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
     <div class="field">
-    <%= f.label :exceptions, "Limitations (from A2LA scope)" %><br>
+    <%= f.label :exceptions, "Limitations (from A2LA scope)" %>
     <%= f.text_field :exceptions %>
   </div>
   <div class="actions">
     <%= f.submit "Submit", class: "btn btn-primary" %>
-    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
   </div>
 <% end %>

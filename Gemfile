@@ -36,6 +36,7 @@ gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'jbuilder'
 gem 'therubyracer', :platforms => :ruby
+gem 'american_date', '~> 1.1.0'
 gem 'devise'
 
 group :production do

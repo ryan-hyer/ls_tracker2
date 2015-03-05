@@ -1,7 +1,6 @@
 class SchemesController < ApplicationController
 
   # GET /schemes
-  # GET /schemes.json
   def index
     @schemes = Scheme.all
   end
@@ -13,37 +12,26 @@ class SchemesController < ApplicationController
   end
 
   # POST /schemes
-  # POST /schemes.json
   def create
     @scheme = Scheme.new(scheme_params)
 
     respond_to do |format|
       if @scheme.save
-        format.html { redirect_to schemes_path, notice: 'Scheme was successfully created.' }
-        #format.json { render :show, status: :created, location: schemes_path }
-        format.js do
-          render js: <<-endjs
-            alert("Scheme created successfully!");
-            window.location = "#{schemes_path}";
-          endjs
-        end
+        flash[:notice] = "Scheme was succesfully created."
+        format.html { redirect_to schemes_path }
+        format.js { render js: 'window.location.reload()' }
       else
         format.html { render :new }
-        #format.json { render json: @scheme.errors, status: :unprocessable_entity }
         format.js { render partial: 'shared/formerrors', locals: {object: @scheme} }
       end
     end
   end
 
   # DELETE /schemes/1
-  # DELETE /schemes/1.json
   def destroy
     @scheme = Scheme.find(params[:id])
     @scheme.destroy
-    respond_to do |format|
-      format.html { redirect_to schemes_url, notice: 'Scheme was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to schemes_url, notice: 'Scheme was successfully destroyed.'
   end
 
   private

@@ -16,48 +16,41 @@ class ListingsController < ApplicationController
   end
 
   # POST /listings
-  # POST /listings.json
   def create
     @listing = @client.listings.new(listing_params)
 
     respond_to do |format|
       if @listing.save
-        format.html { redirect_to @listing.client, notice: 'Listing was successfully created.' }
-        format.json { render :show, status: :created, location: @listing.client }
+        flash[:notice] = "Listing was succesfully created."
+        format.html { redirect_to @listing.client }
+        format.js { render js: 'window.location.reload()' }
       else
-        @combined_errors = "Error:"
-        @listing.errors.full_messages.each do |msg|
-          @combined_errors += " #{msg}."
-        end
         format.html { redirect_to @listing.client, alert: @combined_errors }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @listing} }
       end
     end
   end
 
   # PATCH/PUT /listings/1
-  # PATCH/PUT /listings/1.json
   def update
     params[:listing][:standard_ids] ||= []
+
     respond_to do |format|
       if @listing.update(listing_params)
-        format.html { redirect_to @listing.client, notice: 'Listing was successfully updated.' }
-        format.json { render :show, status: :ok, location: @listing.client }
+        flash[:notice] = "Listing was succesfully updated."
+        format.html { redirect_to @listing.client }
+        format.js { render js: 'window.location.reload()' }
       else
-        format.html { render :edit }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
+        format.html { redirect_to @listing.client, alert: @combined_errors }
+        format.js { render partial: 'shared/formerrors', locals: {object: @listing} }
       end
     end
   end
 
   # DELETE /listings/1
-  # DELETE /listings/1.json
   def destroy
     @listing.destroy
-    respond_to do |format|
-      format.html { redirect_to @listing.client, notice: 'Listing was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to @listing.client, notice: 'Listing was successfully destroyed.'
   end
 
   private

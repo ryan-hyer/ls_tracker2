@@ -2,7 +2,6 @@ class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:edit, :update, :destroy]
 
   # GET /invoices
-  # GET /invoices.json
   def index
     @invoices = Invoice.from_year(params[:year] || Time.now.year).order("date_invoiced DESC")
     @years = Invoice.pluck(:date_invoiced).map{|x| x.year}.uniq.sort_by(&:year).reverse!
@@ -22,43 +21,39 @@ class InvoicesController < ApplicationController
   end
 
   # POST /invoices
-  # POST /invoices.json
   def create
     @invoice = Invoice.new(invoice_params)
 
     respond_to do |format|
       if @invoice.save
-        format.html { redirect_to invoices_path, notice: 'Invoice was successfully created.' }
-        format.json { render :show, status: :created, location: invoices_path }
+        flash[:notice] = "Invoice was succesfully created."
+        format.html { redirect_to invoices_path }
+        format.js { render js: 'window.location.reload()' }
       else
         format.html { render :new }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @invoice} }
       end
     end
   end
 
   # PATCH/PUT /invoices/1
-  # PATCH/PUT /invoices/1.json
   def update
-    respond_to do |format|
+     respond_to do |format|
       if @invoice.update(invoice_params)
-        format.html { redirect_to invoices_path, notice: 'Invoice was successfully updated.' }
-        format.json { render :show, status: :ok, location: invoices_path }
+        flash[:notice] = "Invoice was succesfully updated."
+        format.html { redirect_to invoices_path }
+        format.js { render js: 'window.location.reload()' }
       else
         format.html { render :edit }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @invoice} }
       end
     end
-  end
+ end
 
   # DELETE /invoices/1
-  # DELETE /invoices/1.json
   def destroy
     @invoice.destroy
-    respond_to do |format|
-      format.html { redirect_to invoices_url, notice: 'Invoice was successfully deleted.' }
-      format.json { head :no_content }
-    end
+    format.html { redirect_to invoices_url, notice: 'Invoice was successfully deleted.' }
   end
 
   private

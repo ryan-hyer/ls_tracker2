@@ -54,7 +54,7 @@ $(document).ajaxSuccess(function() {
 	$('#add-std-btn').on('click',function(e) {
 	    e.preventDefault();
 	    var new_id = new Date().getTime();
-	    var regexp = new RegExp("-1", "g");
+	    var regexp = new RegExp("-999", "g");
 	    $("#standard-list").append($("#std-add-new-template").html().replace(regexp, new_id));
 	});
 

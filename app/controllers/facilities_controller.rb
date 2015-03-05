@@ -14,43 +14,39 @@ class FacilitiesController < ApplicationController
   end
 
   # POST /facilities
-  # POST /facilities.json
   def create
     @facility = @client.facilities.new(facility_params)
 
     respond_to do |format|
       if @facility.save
-        format.html { redirect_to @facility.client, notice: 'Facility was successfully created.' }
-        format.json { render :show, status: :created, location: @facility.client }
+        flash[:notice] = "Facility was succesfully created."
+        format.html { redirect_to @facility.client }
+        format.js { render js: 'window.location.reload()' }
       else
         format.html { render :new }
-        format.json { render json: @facility.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @facility} }
       end
     end
   end
 
   # PATCH/PUT /facilities/1
-  # PATCH/PUT /facilities/1.json
   def update
     respond_to do |format|
       if @facility.update(facility_params)
-        format.html { redirect_to @facility.client, notice: 'Facility was successfully updated.' }
-        format.json { render :show, status: :ok, location: @facility.client }
+        flash[:notice] = "Facility was succesfully updated."
+        format.html { redirect_to @facility.client }
+        format.js { render js: 'window.location.reload()' }
       else
         format.html { render :edit }
-        format.json { render json: @facility.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @facility} }
       end
     end
   end
 
   # DELETE /facilities/1
-  # DELETE /facilities/1.json
   def destroy
     @facility.destroy
-    respond_to do |format|
-      format.html { redirect_to @facility.client, notice: 'Facility was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to @facility.client, notice: 'Facility was successfully destroyed.'
   end
 
   private

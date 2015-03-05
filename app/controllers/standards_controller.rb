@@ -2,7 +2,6 @@ class StandardsController < ApplicationController
   before_action :set_standard, only: [:show, :edit, :update, :destroy]
 
   # GET /standards
-  # GET /standards.json
   def index
     @standards = Standard.all
   end
@@ -24,43 +23,39 @@ class StandardsController < ApplicationController
   end
 
   # POST /standards
-  # POST /standards.json
   def create
     @standard = Standard.new(standard_params)
 
     respond_to do |format|
       if @standard.save
-        format.html { redirect_to standards_path, notice: 'Standard was successfully created.' }
-        format.json { render :show, status: :created, location: standards_path }
+        flash[:notice] = "Standard was succesfully created."
+        format.html { redirect_to standards_path }
+        format.js { render js: 'window.location.reload()' }
       else
         format.html { render :new }
-        format.json { render json: @standard.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @standard} }
       end
     end
   end
 
   # PATCH/PUT /standards/1
-  # PATCH/PUT /standards/1.json
   def update
     respond_to do |format|
       if @standard.update(standard_params)
-        format.html { redirect_to standards_path, notice: 'Standard was successfully updated.' }
-        format.json { render :show, status: :ok, location: standards_path }
+        flash[:notice] = "Standard was succesfully updated."
+        format.html { redirect_to standards_path }
+        format.js { render js: 'window.location.reload()' }
       else
         format.html { render :edit }
-        format.json { render json: @standard.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @standard} }
       end
     end
   end
 
   # DELETE /standards/1
-  # DELETE /standards/1.json
   def destroy
     @standard.destroy
-    respond_to do |format|
-      format.html { redirect_to standards_url, notice: 'Standard was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to standards_url, notice: 'Standard was successfully destroyed.'
   end
 
   private

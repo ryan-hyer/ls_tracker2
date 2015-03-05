@@ -1,23 +1,11 @@
-<%= form_for(@category) do |f| %>
-  <% if @category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
-      <ul>
-      <% @category.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_for(@category, remote: true) do |f| %>
   <div class="field">
     <%= f.label :scheme_id, "Scheme" %>
     <%= f.collection_select :scheme_id, @schemes, :id, :name %>
   </div>
-
   <div class="field">
     <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.text_field :description, required: true %>
   </div>
 
   <%= label_tag nil, "Standards in this Category" %>
@@ -33,7 +21,7 @@
 
     <div class="hidden" id="std-add-new-template">
       <div class="field">
-        <%= f.fields_for :category_standards, CategoryStandard.new, child_index: "-1" do |ff| %>
+        <%= f.fields_for :category_standards, CategoryStandard.new, child_index: "-999" do |ff| %>
           <%= ff.collection_select :standard_id, @standards - @category.standards, :id, :number_with_exceptions, prompt: "Select a standard to add" %>
         <% end %>
       </div>

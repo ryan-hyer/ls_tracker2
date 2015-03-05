@@ -1,0 +1,7 @@
+<% @errors = "Error: " %>
+<% object.errors.full_messages.each do |msg| %>
+	<% @errors += msg %>
+<% end %>
+
+var errordiv = "<div class='alert alert-danger center'><%= @errors %></div>";
+$('form').prepend(errordiv);

@@ -20,10 +20,17 @@ class SchemesController < ApplicationController
     respond_to do |format|
       if @scheme.save
         format.html { redirect_to schemes_path, notice: 'Scheme was successfully created.' }
-        format.json { render :show, status: :created, location: schemes_path }
+        #format.json { render :show, status: :created, location: schemes_path }
+        format.js do
+          render js: <<-endjs
+            alert("Scheme created successfully!");
+            window.location = "#{schemes_path}";
+          endjs
+        end
       else
         format.html { render :new }
-        format.json { render json: @scheme.errors, status: :unprocessable_entity }
+        #format.json { render json: @scheme.errors, status: :unprocessable_entity }
+        format.js { render 'shared/formerrors', object: @scheme }
       end
     end
   end

@@ -1,5 +1,4 @@
 class SchemesController < ApplicationController
-  before_action :set_scheme, only: [:show, :edit, :update, :destroy]
 
   # GET /schemes
   # GET /schemes.json
@@ -7,19 +6,10 @@ class SchemesController < ApplicationController
     @schemes = Scheme.all
   end
 
-  # GET /schemes/1
-  # GET /schemes/1.json
-  def show
-  end
-
   # GET /schemes/new
   def new
     @scheme = Scheme.new
     render layout: false
-  end
-
-  # GET /schemes/1/edit
-  def edit
   end
 
   # POST /schemes
@@ -38,23 +28,10 @@ class SchemesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /schemes/1
-  # PATCH/PUT /schemes/1.json
-  def update
-    respond_to do |format|
-      if @scheme.update(scheme_params)
-        format.html { redirect_to schemes_path, notice: 'Scheme was successfully updated.' }
-        format.json { render :show, status: :ok, location: schemes_path }
-      else
-        format.html { render :edit }
-        format.json { render json: @scheme.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /schemes/1
   # DELETE /schemes/1.json
   def destroy
+    @scheme = Scheme.find(params[:id])
     @scheme.destroy
     respond_to do |format|
       format.html { redirect_to schemes_url, notice: 'Scheme was successfully destroyed.' }
@@ -63,11 +40,6 @@ class SchemesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_scheme
-      @scheme = Scheme.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def scheme_params
       params.require(:scheme).permit(:name)

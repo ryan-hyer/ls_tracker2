@@ -1,4 +1,17 @@
-<p>Once I have scopes and clients set up and connected, this modal will show all the scopes this standard belongs to, and which clients have that scope in their listing.</p>
-  <div class="actions">
-    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-  </div>
+<%= label_tag "Categories Containing This Standard" %>
+<ul class="list-plain">
+	<% @standard.categories.each do |category| %>
+		<li><%= category.with_scheme %></li>
+	<% end %>
+</ul>
+<br />
+<%= label_tag "Clients Listing to This Standard" %>
+<ul class="list-links">
+	<% @standard.listings.each do |listing| %>
+		<li><%= link_to raw("<strong>#{listing.client.name}</strong> (#{listing.client.listing_number})"), listing.client %></li>
+	<% end %>
+</ul>
+<br />
+<div class="actions">
+	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+</div>

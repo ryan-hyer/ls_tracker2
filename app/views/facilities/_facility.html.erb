@@ -1,4 +1,3 @@
-<% object.each do |facility| %>
   <div class="row">
     <div class="col-md-3">
       <%= "<strong>#{facility.name}</strong><br/>".html_safe unless facility.name.blank? %>
@@ -39,4 +38,3 @@
       </table>
     </div>
   </div>
-<% end %>

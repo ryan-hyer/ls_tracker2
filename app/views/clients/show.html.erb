@@ -75,19 +75,18 @@
   </div>
   <div class="panel-body">
     <div id="active-facilities">
-      <%= render 'facilities', object: @client.facilities.active %>
+      <%= render @client.facilities.active %>
     </div>
     <% unless @client.facilities.inactive.empty? %>
       <div class="facility-inactive-header" data-toggle="collapse" data-target="#inactive-facilities">
         <%= pluralize(@client.facilities.inactive.count, "inactive facility") + " (click to view/hide)" %>
       </div>
       <div id="inactive-facilities" class="collapse">
-        <%= render 'facilities', object: @client.facilities.inactive %>
+        <%= render @client.facilities.inactive %>
       </div>
     <% end %>
   </div>
 </div>
-
 
 <!-- Project Log -->
 <div class="panel panel-primary">

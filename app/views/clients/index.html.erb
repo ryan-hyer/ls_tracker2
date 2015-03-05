@@ -4,14 +4,18 @@
 		Active Clients
 	</div>
 	<div class="panel-body">
-	  <%= render 'list', object: @active_clients %>
+		<ul class="list-links">
+			<%= render @active_clients %>
+		</ul>
 	</div>
 </div>
 
 <div class="panel panel-primary">
   <div class="panel-heading">Delisted Clients</div>
 	<div class="panel-body">
-	  <%= render 'list', object: @delisted_clients %>
+		<ul class="list-links">
+			<%= render @delisted_clients %>
+		</ul>
 	</div>
 </div>
 

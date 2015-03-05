@@ -4,15 +4,14 @@
     <%= f.collection_select :category_id, @categories, :id, :with_scheme, prompt: "Select a listing category" %>
   </div>
   <div class="field">
-    <%= f.label nil, "Standards" %><br />
-    <% @listing.category.standards.each do |standard| %>
-    <% 
-      # This doesn't work for :new!
-      # Need to start with a blank div,
-      # then fill it dynamically based on the category selected
-    %>
-      <%= check_box_tag "listing[standard_ids][]", standard.id, f.object.standards.include?(standard) %>
-      <%= standard.number_with_exceptions %><br />
+    <%= f.label nil, "Standards" %>
+    <% @categories.each do |category| %>
+      <div id="category-<%= category.id %>" class="<%= 'hidden' unless category.id == f.object.category_id %>">
+        <% category.standards.each do |standard| %>
+          <%= check_box_tag "listing[standard_ids][]", standard.id, f.object.standards.include?(standard) %>
+          <%= standard.number_with_exceptions %><br />
+        <% end %>
+      </div>
     <% end %>
   </div>
   <div class="field">

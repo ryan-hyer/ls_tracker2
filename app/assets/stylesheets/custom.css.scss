@@ -47,10 +47,10 @@ body {
 .list-plain {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 5px;
   li {
     overflow: auto;
-    padding: 3px 0;
+    padding: 5px 0;
   }
 }
 
@@ -202,7 +202,7 @@ body {
 #client-listings .listing-header {
   font-weight: bold;
   font-size: 110%;
-  background-color: #ccc;
+  background-color: #eee;
   padding: 5px;
 }
 
@@ -233,6 +233,14 @@ body {
   border-left: 1px solid black;
 }
 
+/* Category/Standard pages */
+
+.standard-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 /* Invoice pages */
 
 #year-filter #caption {
@@ -254,10 +262,3 @@ body {
   border-bottom: 5px solid #ddd;
 }
 
-/* Category/Standard pages */
-
-.standard-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}

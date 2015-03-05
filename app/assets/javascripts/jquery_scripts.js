@@ -56,13 +56,21 @@ $(document).ajaxSuccess(function() {
 	    var new_id = new Date().getTime();
 	    var regexp = new RegExp("-1", "g");
 	    $("#standard-list").append($("#std-add-new-template").html().replace(regexp, new_id));
-	})
+	});
 
 	$('.del-std-btn').on('click',function(e) {
 	    e.preventDefault();
 	    $(this).prev("input[type=hidden]").val("true");
 	    $(this).closest(".field").hide();
-	})
+	});
+
+	// Extra functionality for the listing standard checkbox list
+	$('#listing_category_id').change(function() {
+		var category = $(this).val();
+		$("div[id|='category']").hide();
+		$('input:checkbox').removeAttr('checked');
+		$("#category-"+category).removeClass("hidden").show();
+	});
 
 	$('#myModal').modal('show');
 });

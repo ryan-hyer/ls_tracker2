@@ -12,6 +12,20 @@
     <%= f.label :comments %>
     <%= f.text_area :comments %>
   </div>
+
+  <%= label_tag nil, "Model Numbers Tagged (one per line)" %>
+  <div id="model-list">
+    <div class="hidden" id="model-add-new-template">
+      <div class="field">
+        <%= f.fields_for :tests, Test.new, child_index: "-999" do |ff| %>
+          <%= ff.text_field :model %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add Model".html_safe, "", class: "btn btn-success btn-sm", id: "add-model-btn", title: "Add another model" %>
+
   <div class="actions">
     <%= f.submit "Submit", class: "btn btn-primary" %>
   </div>

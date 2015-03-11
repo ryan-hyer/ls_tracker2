@@ -23,17 +23,7 @@
           </tr>
         </thead>
         <tbody>
-          <% facility.inspections.each do |inspection| %>
-          <tr>
-            <td><%= inspection.inspection_date %></td>
-            <td><%= inspection.number %></td>
-            <td><%= simple_format(inspection.comments, {}, wrapper_tag: "div") %></td>
-            <td nowrap>
-              <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_inspection_path(inspection), class: "btn btn-warning btn-xs", title: "Edit Inspection Information", data: { toggle: "modal", load_remote: edit_inspection_path(inspection) } %>
-              <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, inspection, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Inspection", data: { confirm: 'Are you sure you want to delete this inspection record?' } %>
-            </td>
-          </tr>
-          <% end %>
+          <%= render facility.inspections %>
         </tbody>
       </table>
     </div>

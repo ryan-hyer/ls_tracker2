@@ -1,0 +1,37 @@
+<%= form_for(@test) do |f| %>
+  <div class="field">
+    <%= f.label :number %>
+    <%= f.text_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :model %>
+    <%= f.text_field :model %>
+  </div>
+  <div class="field">
+    <%= f.label :sample_received %>
+    <%= f.date_select :sample_received %>
+  </div>
+  <div class="field">
+    <%= f.label :report_received %>
+    <%= f.date_select :report_received %>
+  </div>
+  <div class="field">
+    <%= f.label :inspection_id %>
+    <%= f.number_field :inspection_id %>
+  </div>
+  <div class="field">
+    <%= f.label :standard_id %>
+    <%= f.number_field :standard_id %>
+  </div>
+  <div class="field">
+    <%= f.label :project_id %>
+    <%= f.number_field :project_id %>
+  </div>
+  <div class="field">
+    <%= f.label :comments %>
+    <%= f.text_area :comments %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

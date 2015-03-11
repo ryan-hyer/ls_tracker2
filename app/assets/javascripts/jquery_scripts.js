@@ -72,5 +72,13 @@ $(document).ajaxSuccess(function() {
 		$("#category-"+category).removeClass("hidden").show();
 	});
 
+		// Extra functionality for the inspection tagged model list
+	$('#add-model-btn').on('click',function(e) {
+	    e.preventDefault();
+	    var new_id = new Date().getTime();
+	    var regexp = new RegExp("-999", "g");
+	    $("#model-list").append($("#model-add-new-template").html().replace(regexp, new_id));
+	});
+
 	$('#myModal').modal('show');
 });

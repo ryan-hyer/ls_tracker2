@@ -11,6 +11,7 @@ LsTracker2::Application.routes.draw do
   resources :standards
   resources :categories, except: :show
   resources :schemes, only: [:index, :new, :create, :destroy]
+  resources :tests, except: [:index, :show]
 
   devise_for :users, :path_prefix => 'my'
   resources :users

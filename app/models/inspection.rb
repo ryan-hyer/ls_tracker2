@@ -7,7 +7,7 @@ class Inspection < ActiveRecord::Base
 					   uniqueness: true
 	validates :inspection_date, presence: true
 
-	accepts_nested_attributes_for :tests, reject_if: proc { |attributes| attributes['model'].blank?}
+	accepts_nested_attributes_for :tests, allow_destroy: true, reject_if: proc { |attributes| attributes['model'].blank?}
 
 	default_scope order("inspection_date DESC, number")
 end

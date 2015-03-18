@@ -72,12 +72,18 @@ $(document).ajaxSuccess(function() {
 		$("#category-"+category).removeClass("hidden").show();
 	});
 
-		// Extra functionality for the inspection tagged model list
-	$('#add-model-btn').on('click',function(e) {
+		// Extra functionality for the inspection tagged test list
+	$('#add-test-btn').on('click',function(e) {
 	    e.preventDefault();
 	    var new_id = new Date().getTime();
 	    var regexp = new RegExp("-999", "g");
-	    $("#model-list").append($("#model-add-new-template").html().replace(regexp, new_id));
+	    $("#test-list tr:last").after("<tr>" + $("#test-add-new-template").html().replace(regexp, new_id) + "</tr>");
+	});
+
+		$('.del-test-btn').on('click',function(e) {
+	    e.preventDefault();
+	    $(this).prev("input[type=hidden]").val("true");
+	    $(this).closest("tr").hide();
 	});
 
 	$('#myModal').modal('show');

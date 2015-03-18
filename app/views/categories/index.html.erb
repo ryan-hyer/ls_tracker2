@@ -20,7 +20,7 @@
           <td><%= category.scheme.name %></td>
           <td><%= category.description %></td>
           <td>
-            <ul class="standard-list">
+            <ul class="list-unstyled">
               <% category.standards.each do |standard| %>
                 <li><%= standard.number_with_exceptions %></li>
               <% end %>

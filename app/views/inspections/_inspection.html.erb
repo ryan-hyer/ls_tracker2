@@ -1,13 +1,21 @@
 <tr>
   <td><%= inspection.inspection_date %></td>
   <td><%= inspection.number %></td>
+  <td>
+    <ul class="list-unstyled">
+      <% inspection.tests.each do |test| %>
+        <li<% if test.not_received? || test.not_tested? %> class="bg-danger" data-toggle="tooltip" data-placement="top" title=<% if test.not_received? %>"Sample not received"<% elsif test.not_tested? %>"Received, not tested"<% end %>><span class="glyphicon glyphicon-exclamation-sign"></span<% end %>>
+        <%= test.model %>
+        <%= "(Test #{test.number})" unless test.not_tested? %>
+        </li>
+      <% end %>
+    </ul>
   <td><%= simple_format(inspection.comments, {}, wrapper_tag: "div") %></td>
   <td nowrap>
     <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_inspection_path(inspection), class: "btn btn-warning btn-xs", title: "Edit Inspection Information", data: { toggle: "modal", load_remote: edit_inspection_path(inspection) } %>
     <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, inspection, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Inspection", data: { confirm: 'Are you sure you want to delete this inspection record?' } %>
   </td>
 </tr>
-<% inspection.tests.each do |test| %>
 <%
 # Fix inspection alternate-row shading, so that tests are same shade as inspection
 # Make test row red (or text red) when not completed
@@ -15,9 +23,3 @@
 # Add edit modal and delete button for tests
 # Remove test fields from Inspection modal in edit mode
 %>
-	<tr class="danger">
-		<td colspan=4>
-			<strong>Tagged: </strong><%= test.model %>, not received, not tested
-		</td>
-	</tr>
-<% end %>

@@ -5,14 +5,14 @@
     Listing Schemes
   </div>
   <div class="panel-body">
-    <ul class="list-plain">
+    <ul class="list-unstyled">
       <% @schemes.each do |scheme| %>
         <li>
           <%= scheme.name %>
           <% if scheme.categories.empty? %>
             <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, scheme, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Scheme", data: { confirm: 'Are you sure you want to delete this scheme?' } %>
           <% else %>
-            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="right" title="Scheme is still in use and cannot be deleted. Re-assign all categories to other schemes before deleting."><span class='glyphicon glyphicon-trash'></span></button>
+            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="right" title="Scheme is in use and cannot be deleted. Re-assign all categories to other schemes before deleting."><span class='glyphicon glyphicon-trash'></span></button>
           <% end %>
         </li>
       <% end %>

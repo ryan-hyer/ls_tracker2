@@ -13,18 +13,33 @@
     <%= f.text_area :comments %>
   </div>
 
-  <%= label_tag nil, "Model Numbers Tagged (one per line)" %>
-  <div id="model-list">
-    <div class="hidden" id="model-add-new-template">
-      <div class="field">
+  <%= label_tag nil, "Tagged Work:" %>
+  <table class="table table-condensed" id="test-list">
+    <thead>
+      <th>Model #</th>
+      <th>Sample Rec'd Date</th>
+      <th>Report #</th>
+    </thead>
+    <tbody>
+      <%= f.fields_for :tests do |ff| %>
+        <tr>
+          <td><%= ff.text_field :model %></td>
+          <td><%= ff.date_field :sample_received %></td>
+          <td><%= ff.text_field :number %></td>
+          <td><%= ff.hidden_field :_destroy %>
+          <%= link_to "<span class='glyphicon glyphicon-remove'></span>".html_safe, "", class: "del-test-btn", title: "Delete record" %></td>
+        </tr>
+      <% end %>
+      <tr class="hidden" id="test-add-new-template">
         <%= f.fields_for :tests, Test.new, child_index: "-999" do |ff| %>
-          <%= ff.text_field :model %>
+          <td><%= ff.text_field :model %></td>
+          <td><%= ff.date_field :sample_received %></td>
+          <td><%= ff.text_field :number %></td>
         <% end %>
-      </div>
-    </div>
-  </div>
-
-  <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add Model".html_safe, "", class: "btn btn-success btn-sm", id: "add-model-btn", title: "Add another model" %>
+      </tr>
+    </tbody>
+  </table>
+  <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add Row".html_safe, "", class: "btn btn-info btn-sm", id: "add-test-btn", title: "Add another tagged model" %>
 
   <div class="actions">
     <%= f.submit "Submit", class: "btn btn-primary" %>

@@ -2,7 +2,7 @@ LsTracker2::Application.routes.draw do
 
   resources :clients do
     resources :facilities, shallow: true, except: :show do
-      resources :inspections, shallow: true, except: :show
+      resources :inspections, only: [:new, :create]
     end
     resources :listings, shallow: true, except: [:index, :show]
   end
@@ -12,6 +12,7 @@ LsTracker2::Application.routes.draw do
   resources :categories, except: :show
   resources :schemes, only: [:index, :new, :create, :destroy]
   resources :tests, except: [:index, :show]
+  resources :inspections, except: [:new, :create]
 
   devise_for :users, :path_prefix => 'my'
   resources :users

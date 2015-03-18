@@ -1,31 +1,31 @@
-<h1>Listing inspections</h1>
+<div class="panel panel-primary">
+  <div class="panel-heading">All Inspection Locations</div>
+  <div class="panel-body" id="map-canvas">
+    Google map of the world goes here with all the facilities in the database marked.
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Number</th>
-      <th>Inspection date</th>
-      <th>Comments</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @inspections.each do |inspection| %>
-      <tr>
-        <td><%= inspection.number %></td>
-        <td><%= inspection.inspection_date %></td>
-        <td><%= inspection.comments %></td>
-        <td><%= link_to 'Show', inspection %></td>
-        <td><%= link_to 'Edit', edit_inspection_path(inspection) %></td>
-        <td><%= link_to 'Destroy', inspection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Inspection', new_inspection_path %>
+<div class="panel panel-primary">
+  <div class="panel-heading">Urgent Inspections (12+ months since last inspection)</div>
+  <table class="table table-striped">
+    <thead>
+      <th>Client</th>
+      <th>Facility</th>
+      <th>Last Inspection</th>
+    </thead>
+    <tbody>
+      <% @facilities.each do |facility| %>
+      <%
+      # Need to figure out how to order these by date.
+      # Better yet, show a list of all clients/facilities alphabetically, and whether or not they've been inspected in the last 12 months (or calendar year). Like the spreadsheet I send to A2LA.
+      # Perhaps view this list for a selected year?
+      %>
+        <tr>
+          <td><%= "#{facility.client.name} (#{facility.client.listing_number})" %></td>
+          <td><%= simple_format(facility.address, {}, wrapper_tag: "div") %></td>
+          <td><%= facility.inspections.first.inspection_date unless facility.inspections.empty? %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

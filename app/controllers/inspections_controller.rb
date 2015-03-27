@@ -4,8 +4,7 @@ class InspectionsController < ApplicationController
 
   # GET /inspections
   def index
-    #@facilities = Facility.includes(:inspection).order("inspections.inspection_date DESC")
-    @facilities = Facility.active
+    @clients = Client.active
   end
 
   # GET /inspections/new

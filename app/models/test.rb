@@ -11,4 +11,6 @@ class Test < ActiveRecord::Base
 	def not_tested?
 		number.blank?
 	end
+
+	scope :complete, -> { where("number <> ''") }
 end

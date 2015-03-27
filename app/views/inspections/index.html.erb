@@ -6,24 +6,38 @@
 </div>
 
 <div class="panel panel-primary">
-  <div class="panel-heading">Urgent Inspections (12+ months since last inspection)</div>
-  <table class="table table-striped">
+  <div class="panel-heading">Surveillance Status for <%= Time.now.year %></div>
+  <table class="table table-condensed">
     <thead>
       <th>Client</th>
       <th>Facility</th>
-      <th>Last Inspection</th>
+      <th>Status</th>
     </thead>
     <tbody>
-      <% @facilities.each do |facility| %>
-      <%
-      # Need to figure out how to order these by date.
-      # Better yet, show a list of all clients/facilities alphabetically, and whether or not they've been inspected in the last 12 months (or calendar year). Like the spreadsheet I send to A2LA.
-      # Perhaps view this list for a selected year?
-      %>
+      <% @clients.each do |client| %>
         <tr>
-          <td><%= "#{facility.client.name} (#{facility.client.listing_number})" %></td>
-          <td><%= simple_format(facility.address, {}, wrapper_tag: "div") %></td>
-          <td><%= facility.inspections.first.inspection_date unless facility.inspections.empty? %></td>
+          <td rowspan=<%=client.facilities.count%>><%= "#{client.name} (#{client.listing_number})" %></td>
+          <% client.facilities.active.each do |facility| %>
+            <td><%= facility.address %></td>
+            <% if facility.inspections.empty? %>
+              <td class="danger text-danger">Never Inspected</td>
+            <% elsif facility.inspections.first.this_year? %>
+              <% if facility.inspections.first.tests.count == facility.inspections.first.tests.complete.count %>
+                <td class="success text-success">
+                  Inspection Done <%= facility.inspections.first.inspection_date %><br />
+                  <%= facility.inspections.first.tests.complete.count %> of <%= facility.inspections.first.tests.count %> Tagged Tests Done
+                </td>
+              <% else %>
+                <td class="danger">
+                  <span class="text-success">Inspection Done <%= facility.inspections.first.inspection_date %></span><br />
+                  <span class="text-danger"><%= facility.inspections.first.tests.complete.count %> of <%= facility.inspections.first.tests.count %> Tagged Tests Done</span>
+                </td>
+              <% end %>
+            <% else %>
+              <td class="danger text-danger">Last Inspected <%= facility.inspections.first.inspection_date %></td>
+            <% end %>
+            <%= "</tr><tr>".html_safe unless facility == client.facilities.last %>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

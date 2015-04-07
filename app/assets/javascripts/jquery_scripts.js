@@ -2,21 +2,23 @@ var obj;
 
 $(document).ready(function() {
 	$('[data-load-remote]').on('click',function(e) {
-	    e.preventDefault();
-	    var $this = $(this);
-	    obj = $this;
-	    var remote = $this.data('load-remote');
-	    if(remote) {
-	        $('#myModal .modal-body').load(remote);
-	        var modal_title = $this.attr('title');
-	        var modal_class = "modal-" + modal_title.substr(0, modal_title.indexOf(" ")).toLowerCase();
-	        $('#myModal .modal-title').text(modal_title);
-	        $('#myModal .modal-content').removeClass("modal-add modal-edit modal-info");
-	        $('#myModal .modal-content').addClass(modal_class);
-	    }
+    e.preventDefault();
+    var $this = $(this);
+    obj = $this;
+    var remote = $this.data('load-remote');
+    if(remote) {
+      $('#myModal .modal-body').load(remote);
+      var modal_title = $this.attr('title');
+      var modal_class = "modal-" + modal_title.substr(0, modal_title.indexOf(" ")).toLowerCase();
+      $('#myModal .modal-title').text(modal_title);
+      $('#myModal .modal-content').removeClass("modal-add modal-edit modal-info");
+      $('#myModal .modal-content').addClass(modal_class);
+    }
 	});
 	$('[data-toggle="tooltip"]').tooltip();
+	$('[data-toggle="popover"]').popover();
 });
+
 
 $(document).ajaxSuccess(function() {
 	// Extra functionality for the Client add/edit modals
@@ -52,16 +54,16 @@ $(document).ajaxSuccess(function() {
 
 	// Extra functionality for the category standard list
 	$('#add-std-btn').on('click',function(e) {
-	    e.preventDefault();
-	    var new_id = new Date().getTime();
-	    var regexp = new RegExp("-999", "g");
-	    $("#standard-list").append($("#std-add-new-template").html().replace(regexp, new_id));
+    e.preventDefault();
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("-999", "g");
+    $("#standard-list").append($("#std-add-new-template").html().replace(regexp, new_id));
 	});
 
 	$('.del-std-btn').on('click',function(e) {
-	    e.preventDefault();
-	    $(this).prev("input[type=hidden]").val("true");
-	    $(this).closest(".field").hide();
+    e.preventDefault();
+    $(this).prev("input[type=hidden]").val("true");
+    $(this).closest(".field").hide();
 	});
 
 	// Extra functionality for the listing standard checkbox list
@@ -74,16 +76,16 @@ $(document).ajaxSuccess(function() {
 
 		// Extra functionality for the inspection tagged test list
 	$('#add-test-btn').on('click',function(e) {
-	    e.preventDefault();
-	    var new_id = new Date().getTime();
-	    var regexp = new RegExp("-999", "g");
-	    $("#test-list tr:last").after("<tr>" + $("#test-add-new-template").html().replace(regexp, new_id) + "</tr>");
+    e.preventDefault();
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("-999", "g");
+    $("#test-list tr:last").after("<tr>" + $("#test-add-new-template").html().replace(regexp, new_id) + "</tr>");
 	});
 
-		$('.del-test-btn').on('click',function(e) {
-	    e.preventDefault();
-	    $(this).prev("input[type=hidden]").val("true");
-	    $(this).closest("tr").hide();
+	$('.del-test-btn').on('click',function(e) {
+    e.preventDefault();
+    $(this).prev("input[type=hidden]").val("true");
+    $(this).closest("tr").hide();
 	});
 
 	$('#myModal').modal('show');

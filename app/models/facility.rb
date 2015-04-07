@@ -10,4 +10,22 @@ class Facility < ActiveRecord::Base
 
   scope :active, -> { where(inactive: false) }
   scope :inactive, -> { where(inactive: true) }
+
+  def inspection_status
+  	if self.inspections.empty?
+  		inspection_status = "danger"
+  	else
+  		if self.inspections.first.inspection_date < 12.months.ago
+  			inspection_status = "danger"
+  		elsif self.inspections.first.inspection_date < 10.months.ago
+  			inspection_status = "warning"
+  		else
+				if self.inspections.first.tests.complete.count == self.inspections.first.tests.count
+					inspection_status = "success"
+				else
+					inspection_status = "warning"
+				end
+  		end
+  	end
+  end
 end

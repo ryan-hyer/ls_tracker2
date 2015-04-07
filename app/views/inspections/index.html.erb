@@ -1,12 +1,8 @@
 <div class="panel panel-primary">
-  <div class="panel-heading">All Inspection Locations</div>
-  <div class="panel-body" id="map-canvas">
-    Google map of the world goes here with all the facilities in the database marked.
+  <div class="panel-heading">
+    <button type="button" class="btn btn-info btn-xs pull-right" data-toggle="tooltip" data-placement="left" title="<p>Green - All is good!</p><p>Yellow - Inspection is due within 2 months or tagged work is not yet done.</p><p>Red - Inspection is overdue (last was more than 12 months ago)</p>" data-html="true"><strong>?</strong></button>
+    Surveillance Status (last 12 months)
   </div>
-</div>
-
-<div class="panel panel-primary">
-  <div class="panel-heading">Surveillance Status for <%= Time.now.year %></div>
   <table class="table table-condensed">
     <thead>
       <th>Client</th>
@@ -16,25 +12,16 @@
     <tbody>
       <% @clients.each do |client| %>
         <tr>
-          <td rowspan=<%=client.facilities.count%>><%= "#{client.name} (#{client.listing_number})" %></td>
+          <td rowspan=<%=client.facilities.active.count%>><%= "#{client.name} (#{client.listing_number})" %></td>
           <% client.facilities.active.each do |facility| %>
             <td><%= facility.address %></td>
             <% if facility.inspections.empty? %>
-              <td class="danger text-danger">Never Inspected</td>
-            <% elsif facility.inspections.first.this_year? %>
-              <% if facility.inspections.first.tests.count == facility.inspections.first.tests.complete.count %>
-                <td class="success text-success">
-                  Inspection Done <%= facility.inspections.first.inspection_date %><br />
-                  <%= facility.inspections.first.tests.complete.count %> of <%= facility.inspections.first.tests.count %> Tagged Tests Done
-                </td>
-              <% else %>
-                <td class="danger">
-                  <span class="text-success">Inspection Done <%= facility.inspections.first.inspection_date %></span><br />
-                  <span class="text-danger"><%= facility.inspections.first.tests.complete.count %> of <%= facility.inspections.first.tests.count %> Tagged Tests Done</span>
-                </td>
-              <% end %>
+              <td class="danger">Never Inspected</td>
             <% else %>
-              <td class="danger text-danger">Last Inspected <%= facility.inspections.first.inspection_date %></td>
+              <td class="<%=facility.inspection_status%>" nowrap>
+                Last Inspected <%= facility.inspections.first.inspection_date %><br />
+                <%= facility.inspections.first.tests.complete.count %> of <%= facility.inspections.first.tests.count %> Tagged Tests Done
+              </td>
             <% end %>
             <%= "</tr><tr>".html_safe unless facility == client.facilities.last %>
           <% end %>
@@ -43,3 +30,15 @@
     </tbody>
   </table>
 </div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View Europe" data-location="Europe"><span class='glyphicon glyphicon-share-alt'></span> Europe</button>
+    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View China" data-location="China"><span class='glyphicon glyphicon-share-alt'></span> China</button>
+    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View North America" data-location="USA"><span class='glyphicon glyphicon-share-alt'></span> North America</button>
+    Inspection Map
+  </div>
+  <div class="panel-body" id="map-canvas"></div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<%= javascript_include_tag "gmaps" %>

@@ -5,6 +5,7 @@ LsTracker2::Application.routes.draw do
       resources :inspections, only: [:new, :create]
     end
     resources :listings, shallow: true, except: [:index, :show]
+    resources :amendments, shallow: true, except: [:index, :show]
   end
 
   resources :invoices, except: :show

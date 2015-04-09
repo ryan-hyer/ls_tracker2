@@ -74,7 +74,7 @@ $(document).ajaxSuccess(function() {
 		$("#category-"+category).removeClass("hidden").show();
 	});
 
-		// Extra functionality for the inspection tagged test list
+	// Extra functionality for the inspection tagged test list
 	$('#add-test-btn').on('click',function(e) {
     e.preventDefault();
     var new_id = new Date().getTime();
@@ -86,6 +86,38 @@ $(document).ajaxSuccess(function() {
     e.preventDefault();
     $(this).prev("input[type=hidden]").val("true");
     $(this).closest("tr").hide();
+	});
+
+	// Extra functionality for the Amendment add/edit modals
+	switch($('#amendment_project_type').val()) {
+		case ("Listing Addition"):
+		case ("Design Change"):
+			$('#facility-amendments').hide();
+			$('#model-amendments').show();
+			break;
+		case ("Facility Change"):
+			$('#model-amendments').hide();
+			$('#facility-amendments').show();
+			break;
+		default:
+			$('#model-amendments').hide();
+			$('#facility-amendments').hide();
+	}
+	$('#amendment_project_type').change(function() {
+		switch($(this).val()) {
+		case ("Listing Addition"):
+		case ("Design Change"):
+				$('#facility-amendments').hide();
+				$('#model-amendments').show();
+				break;
+			case ("Facility Change"):
+				$('#model-amendments').hide();
+				$('#facility-amendments').show();
+				break;
+			default:
+				$('#model-amendments').hide();
+				$('#facility-amendments').hide();
+		}
 	});
 
 	$('#myModal').modal('show');

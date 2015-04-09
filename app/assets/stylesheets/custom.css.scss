@@ -227,6 +227,10 @@ body {
   border: 2px solid red;
 }
 
+#model-amendments, #facility-amendments {
+  display: none;
+}
+
 /* Inspection pages */
 
 #map-canvas {

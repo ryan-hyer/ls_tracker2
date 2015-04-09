@@ -1,1 +1,57 @@
-<h1>Home Page</h1>
+<h1>Dashboard</h1>
+<div class="col-md-3">
+	<div class="panel panel-primary">
+	  <div class="panel-heading">Quick Links</div>
+	  <div class="panel-body">
+	  	<ul class="list-unstyled">
+	  		<li><a href="http://www.tei-test.com" target="_blank">TEi Public Site</a></li>
+	  		<li><a href="http://www.a2la.org" target="_blank">A2LA</a></li>
+	  		<li><a href="http://www.rvia.org" target="_blank">RVIA</a></li>
+	  	</ul>
+	  </div>
+	</div>
+	<div class="panel panel-primary">
+	  <div class="panel-heading">Essential Documents</div>
+	  <div class="panel-body">
+	  	<ul class="list-unstyled">
+	  		<li>TEi-LS Quality Manual</li>
+	  		<li>Listing Application</li>
+	  		<li>Amendment Application</li>
+	  		<li>Listing Agreement</li>
+	  		<li>Initial Plant Inspection</li>
+	  		<li>Follow-Up Inspection</li>
+	  	</ul>
+	  </div>
+	</div>
+	<div class="panel panel-primary">
+	  <div class="panel-heading">Database Setup</div>
+	  <div class="panel-body">
+	  	<ul class="list-unstyled">
+        <li><%= link_to "Manage Users", users_path %></li>
+        <li><%= link_to "Manage Listing Categories / Standards", categories_path %></li>
+	  	</ul>
+	  </div>
+	</div>
+</div>
+<div class="col-md-9">
+	<div class="panel panel-primary">
+	  <div class="panel-heading">Open Projects</div>
+	  <table class="table table-striped table-condensed">
+	  	<thead>
+	  		<th>Client</th>
+	  		<th>Status</th>
+	  		<th>Description</th>
+	  	</thead>
+	  	<tbody>
+	  	</tbody>
+	  </table>
+	</div>
+	<div class="panel panel-primary">
+	  <div class="panel-heading">Urgent Inspections</div>
+	  <div class="panel-body"></div>
+	</div>
+	<div class="panel panel-primary">
+	  <div class="panel-heading">Overdue Invoices</div>
+	  <div class="panel-body"></div>
+	</div>
+</div>

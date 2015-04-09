@@ -1,18 +1,20 @@
 <tr>
-	<td><%= amendment.completed %></td>
+	<td>
+		<strong><%= amendment.status %></strong>
+		<%= "<br />#{amendment.completed}".html_safe unless amendment.completed.blank? %></td>
 	<td><%= amendment.number %></td>
 	<td>
-		<%# This cell can be so much prettier. Play around with the formatting and CSS %>
-		<strong><%= amendment.project_type %></strong><br />
-		<% if amendment.project_type == "Listing Addition" || amendment.project_type == "Design Change" %>
-			<%= amendment.category.with_scheme unless amendment.category_id.blank? %><br />
-			Model Numbers <%= amendment.models %><br />
-			Test Report <%= amendment.test_reports %>
-		<% elsif amendment.project_type == "Facility Change" %>
-			<%# I KNOW there's a better way to do the below, probably some magic in the model %>
-			Old Facility: <%= Facility.find(amendment.old_facility_id).address %><br />
-			New Facility: <%= Facility.find(amendment.new_facility_id).address %>
-		<% end %>
+		<strong><%= amendment.project_type %></strong>
+		<div id="amendment-details">
+			<% if amendment.project_type == "Listing Addition" || amendment.project_type == "Design Change" %>
+				<%= "<em>#{amendment.category.with_scheme}</em>, ".html_safe unless amendment.category_id.blank? %>
+				Model Number(s) <%= amendment.models %>
+				<%= "<br />Test Report #{amendment.test_reports}".html_safe unless amendment.test_reports.blank? %>
+			<% elsif amendment.project_type == "Facility Change" %>
+				<%= "<em>Inactivated Facility:</em> #{amendment.old_facility.address}<br />".html_safe unless amendment.old_facility_id.blank? %>
+				<%= "<em>New Facility:</em> #{amendment.new_facility.address}".html_safe unless amendment.new_facility_id.blank? %>
+			<% end %>
+		</div>
 	</td>
 	<td><%= simple_format(amendment.comments, {}, wrapper_tag: "div") %></td>
 	<td>

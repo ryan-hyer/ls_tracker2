@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311190546) do
+ActiveRecord::Schema.define(version: 20150408230035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "amendments", force: true do |t|
+    t.string   "number"
+    t.date     "completed"
+    t.string   "project_type"
+    t.integer  "client_id"
+    t.integer  "category_id"
+    t.text     "models"
+    t.integer  "old_facility_id"
+    t.integer  "new_facility_id"
+    t.string   "test_reports"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "comments"
+  end
+
+  add_index "amendments", ["client_id"], name: "index_amendments_on_client_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "description"
@@ -139,10 +157,7 @@ ActiveRecord::Schema.define(version: 20150311190546) do
     t.string   "number"
     t.string   "model"
     t.date     "sample_received"
-    t.date     "report_received"
     t.integer  "inspection_id"
-    t.integer  "standard_id"
-    t.integer  "project_id"
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"

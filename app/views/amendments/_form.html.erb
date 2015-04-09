@@ -1,0 +1,64 @@
+<%= form_for([@client,@amendment], remote: true) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Common Fields -->
+      <%= f.hidden_field :client_id %>
+      <div class="field">
+        <%= f.label :number, "LS Number" %>
+        <%= f.text_field :number %>
+      </div>
+      <div class="field">
+        <%= f.label :status, "Project Status" %>
+        <%= f.select :status, options_for_select(@status_types, @amendment.status) %>
+      </div>
+      <div class="field">
+        <%= f.label :completed, "Date Closed" %>
+        <%= f.date_field :completed %>
+      </div>
+      <div class="field">
+        <%= f.label :comments, "Additional Details / Comments" %>
+        <%= f.text_area :comments %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="field">
+        <%= f.label :project_type, "Amendment Type" %>
+        <%= f.select :project_type, options_for_select(@amendment_types, @amendment.project_type) %>
+      </div>
+
+      <!-- Fields for Listing Addition / Design Change -->
+      <div id="model-amendments">
+        <div class="field">
+          <%= f.label :category_id, "Listing Category" %>
+          <%= f.collection_select :category_id, @categories, :id, :with_scheme, include_blank: "N/A" %>
+        </div>
+        <div class="field">
+          <%= f.label :models, "Model Numbers" %>
+          <%= f.text_area :models %>
+        </div>
+        <div class="field">
+          <%= f.label :test_reports, "Test Report Numbers (if any)" %>
+          <%= f.text_field :test_reports %>
+        </div>
+      </div>
+
+      <!-- Fields for Facility Change -->
+      <div id="facility-amendments">
+        <div class="field">
+          <%= f.label :old_facility_id, "Old Facility" %>
+          <%= f.collection_select :old_facility_id, @facilities, :id, :address, include_blank: "N/A" %>
+        </div>
+        <div class="field">
+          <%= f.label :new_facility_id, "New Facility" %>
+          <%= f.collection_select :new_facility_id, @facilities, :id, :address, include_blank: "N/A" %>
+        </div>
+        <em>Add the new facility first if it doesn't appear in this list. Record any inspections done during this project under the appropriate facility records.</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

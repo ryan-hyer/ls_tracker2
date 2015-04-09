@@ -227,6 +227,15 @@ body {
   border: 2px solid red;
 }
 
+#model-amendments, #facility-amendments {
+  display: none;
+}
+
+#amendment-details {
+  font-size: 85%;
+  margin-left: 10px;
+}
+
 /* Inspection pages */
 
 #map-canvas {

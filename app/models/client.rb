@@ -2,6 +2,7 @@ class Client < ActiveRecord::Base
 	has_many :invoices, dependent: :destroy
 	has_many :facilities, dependent: :destroy
 	has_many :listings, dependent: :destroy
+	has_many :amendments, dependent: :destroy
 	
 	validates :name, presence: true
 	validates :listing_number, presence: true, 

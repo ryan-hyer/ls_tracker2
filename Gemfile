@@ -18,6 +18,7 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'bullet'
   gem 'better_errors', '~> 1.1.0'
+  gem 'seed_dump'
 end
 
 group :development, :test do

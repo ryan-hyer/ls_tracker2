@@ -41,3 +41,84 @@
   <div class="panel-body" id="map-canvas"></div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script>
+var map;
+var infowindow = new google.maps.InfoWindow();
+
+function initializeMap() {
+  var facilities = [
+    <% Client.active.each do |client| %>
+      <% client.facilities.active.each do |facility| %>
+        ['<%= client.name %>', '<%= facility.address.gsub(/\r\n/, ", ") %>', '<%= facility.inspection_status %>'],
+      <% end %>
+    <% end %>
+  ];
+
+  var mapOptions = {
+    zoom: 4,
+    center: new google.maps.LatLng(39.504, -98.438),
+    mapTypeControl: false,
+    streetViewControl: false
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+  setMarkers(map, facilities);
+}
+
+function recenterMap(obj) {
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode({address: obj.getAttribute('data-location')}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.panTo(results[0].geometry.location);
+      map.setZoom(4)
+    } else {
+      alert("Geocoding error: " + status + "\r\n" + obj.getAttribute('data-location'));
+    }
+  });
+}
+
+function setMarkers(map, locations) {
+  for (var i = 0; i< locations.length; i++) {
+    var facility = locations[i];
+    setMarker(map, facility[0], facility[1], facility[2]);
+  }
+}
+
+function setMarker(map, title, address, iconType) {
+  var icons = {};
+  icons['success'] = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+  icons['warning'] = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+  icons['danger'] = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+  
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode({address: address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      var marker = new google.maps.Marker({
+        position: results[0].geometry.location,
+        map: map,
+        icon: icons[iconType],
+        title: title
+      });
+      var contentString = '<div class="gmap-popup">'+
+        '<strong>'+title+'</strong><br />'+
+        address+
+        '</div>';
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(contentString);
+        infowindow.open(map, this);
+      });
+    } else {
+      alert("Geocoding error: " + status + "\r\n" + location[1]);
+    }
+  });
+}
+
+//google.maps.event.addDomListener(window, 'load', initializeMap);
+
+var list = document.getElementsByClassName("btn-reset-map");
+for (var i = 0; i < list.length; i++) {
+  google.maps.event.addDomListener(list[i], 'click', function() {
+    recenterMap(this);
+  });
+}
+</script>

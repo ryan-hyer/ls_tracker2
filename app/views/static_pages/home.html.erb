@@ -64,6 +64,16 @@
 	  		<th>Last Inspected</th>
 	  	</thead>
 	  	<tbody>
+	  		<% @facilities.each do |facility| %>
+	  			<tr>
+	  				<td><%= facility.client_name %></td>
+	  				<td><%= facility.address %></td>
+	  				<td>
+	  					<%= facility.last_inspection %>
+	  					<%= facility.last_inspection.blank? ? "Never inspected" : " (#{time_ago_in_words(facility.last_inspection)} ago)" %>
+	  				</td>
+	  			</tr>
+	  		<% end %>
 	  	</tbody>
 	  </table>
 	</div>

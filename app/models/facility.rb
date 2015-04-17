@@ -17,7 +17,7 @@ class Facility < ActiveRecord::Base
   	else
   		if self.inspections.first.inspection_date < 12.months.ago
   			inspection_status = "danger"
-  		elsif self.inspections.first.inspection_date < 10.months.ago
+  		elsif self.inspections.first.inspection_date < 9.months.ago
   			inspection_status = "warning"
   		else
 				if self.inspections.first.tests.complete.count == self.inspections.first.tests.count

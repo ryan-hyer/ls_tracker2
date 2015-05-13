@@ -3,10 +3,10 @@ class InvoicesController < ApplicationController
 
   # GET /invoices
   def index
+    @clients = Client.all
     @invoices = Invoice.from_year(params[:year] || Time.now.year).order("date_invoiced DESC")
     @years = Invoice.pluck(:date_invoiced).map{|x| x.year}.uniq.sort_by(&:year).reverse!
-    @time = Time.new
-    @clients = Client.all
+    @months = (-1..10).to_a.map { |n| (Time.now + n.months) }
   end
 
   # GET /invoices/new

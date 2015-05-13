@@ -18,6 +18,9 @@ class Client < ActiveRecord::Base
 	scope :active, -> { where(delisted: false) }
 
 	def self.due_in(month)
-		where("invoice_month = ?", month)
+		monthname = month.gsub(/\d+/,"")
+		sqlString = "(invoice_freq = 'Annual' AND invoice_month = ?) OR (invoice_freq = 'Monthly')"
+		sqlString << " OR (invoice_freq = 'Quarterly')" if ['January','April','July','October'].include?(monthname)
+		where(sqlString, monthname)
 	end
 end

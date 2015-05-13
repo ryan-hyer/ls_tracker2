@@ -244,10 +244,6 @@ body {
 
 /* Invoice pages */
 
-#year-filter #caption {
-  margin-top: 10px;
-}
-
 #month-tabs li {
   width: 8.3%;
   text-align: center;
@@ -257,9 +253,9 @@ body {
   font-variant: small-caps;
   font-size: 120%;
   font-weight: bold;
+  outline: 0;
 }
 
-#month-content {
-  border-bottom: 5px solid #ddd;
+#month-tabs .active a {
+  background-color: #DDD;
 }
-

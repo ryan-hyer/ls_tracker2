@@ -14,6 +14,7 @@
 	  <div class="panel-heading">Essential Documents</div>
 	  <div class="panel-body">
 	  	<ul class="list-unstyled">
+	  		<li>*** These links don't work yet ***</li>
 	  		<li>TEi-LS Quality Manual</li>
 	  		<li>Listing Application</li>
 	  		<li>Amendment Application</li>
@@ -24,7 +25,7 @@
 	  </div>
 	</div>
 	<div class="panel panel-primary">
-	  <div class="panel-heading">Database Admin</div>
+	  <div class="panel-heading">Database Setup</div>
 	  <div class="panel-body">
 	  	<ul class="list-unstyled">
         <li><%= link_to "Manage Users", users_path %></li>
@@ -35,7 +36,8 @@
 </div>
 <div class="col-md-9">
 	<div class="panel panel-primary">
-	  <div class="panel-heading">Open Projects</div>
+	  <div class="panel-heading">Open Amendment Projects</div>
+<!-- Any way to include new applications? Perhaps a separate model? 3rd section under Clients index? -->
 	  <table class="table table-striped table-condensed">
 	  	<thead>
 	  		<th>Client</th>
@@ -78,7 +80,7 @@
 	  </table>
 	</div>
 	<div class="panel panel-primary">
-	  <div class="panel-heading">Overdue Invoices</div>
+	  <div class="panel-heading">Unpaid Invoices</div>
 	  <table class="table table-striped table-condensed">
 	  	<thead>
 	  		<th>Client</th>
@@ -87,6 +89,14 @@
 	  		<th>Date Invoiced</th>
 	  	</thead>
 	  	<tbody>
+	  		<% @invoices.each do |invoice| %>
+	  			<tr>
+	  				<td><%= invoice.client.name %></td>
+	  				<td><%= invoice.number %></td>
+	  				<td><%= invoice.description %></td>
+	  				<td><%= invoice.date_invoiced %></td>
+	  			</tr>
+	  		<% end %>
 	  	</tbody>
 	  </table>
 	</div>

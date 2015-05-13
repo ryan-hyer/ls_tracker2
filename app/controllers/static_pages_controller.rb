@@ -7,5 +7,6 @@ class StaticPagesController < ApplicationController
   												.having("max(inspections.inspection_date) < ? OR max(inspections.inspection_date) IS NULL", 12.months.ago)
   												.where("facilities.inactive = ? AND clients.delisted = ?", false, false)
   												.order("max(inspections.inspection_date) DESC, clients.name")
+  	@invoices = Invoice.where("date_paid IS NULL").order("date_invoiced")
   end
 end

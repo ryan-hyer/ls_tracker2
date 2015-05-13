@@ -1,21 +1,25 @@
-<div class="panel panel-primary">
-  <div class="panel-heading">
-		<%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_client_path, class: "btn btn-success btn-xs pull-right", title: "Add New Client", data: { toggle: "modal", load_remote: new_client_path } %>
-		Active Clients
-	</div>
-	<div class="panel-body">
-		<ul class="list-links">
-			<%= render @active_clients %>
-		</ul>
+<div class="col-md-6">
+	<div class="panel panel-primary">
+	  <div class="panel-heading">
+			<%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_client_path, class: "btn btn-success btn-xs pull-right", title: "Add New Client", data: { toggle: "modal", load_remote: new_client_path } %>
+			Active Clients
+		</div>
+		<div class="panel-body">
+			<ul class="list-links">
+				<%= render @active_clients %>
+			</ul>
+		</div>
 	</div>
 </div>
 
-<div class="panel panel-primary">
-  <div class="panel-heading">Delisted Clients</div>
-	<div class="panel-body">
-		<ul class="list-links">
-			<%= render @delisted_clients %>
-		</ul>
+<div class="col-md-6">
+	<div class="panel panel-primary">
+	  <div class="panel-heading">Delisted Clients</div>
+		<div class="panel-body">
+			<ul class="list-links">
+				<%= render @delisted_clients %>
+			</ul>
+		</div>
 	</div>
 </div>
 

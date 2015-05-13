@@ -1,87 +1,96 @@
-<h1>Invoicing Due in <%= Time.now.year %></h1>
-<!-- Nav tabs -->
-<ul class="nav nav-tabs" id="month-tabs">
-  <% Date::MONTHNAMES.compact.each do |m| %>
-    <li<%= " class='active'".html_safe if @time.strftime("%B") == m %>><a href="#<%= m %>" data-toggle="tab"><%= m[0,3] %></a></li>
-  <% end %>
-</ul>
+<div class="panel panel-primary">
+  <div class="panel-heading">Invoicing Schedule</div>
+  <div class="panel-body">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="month-tabs">
+      <% @months.each_with_index do |month,index| %>
+        <li<%= " class='active'".html_safe if index == 1 %>>
+          <a href="#<%= month.strftime('%b%Y') %>" data-toggle="tab">
+            <%= month.strftime("%b") %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
 
-<!-- Tab panes -->
-<div class="tab-content" id="month-content">
-  <% Date::MONTHNAMES.compact.each do |m| %>
-    <div class="tab-pane<%= " active" if @time.strftime("%B") == m %>" id="<%= m %>">
-      <table class="table table-condensed">
-        <thead>
-          <tr>
-            <th>Client</th>
-            <th>Description</th>
-            <th>Next Invoice Number</th>
-            <th>Invoice Amount</th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @clients.due_in(m).each do |client| %>
-            <tr>
-              <td class="client" ref="2"><%= "#{client.name} (#{client.listing_number})" %></td>
-              <td class="description"><%= client.invoice_freq + " Listing Fee" %></td>
-              <td class="next_number"></td>
-              <td class="amount"><%= number_to_currency(client.invoice_amt) %></td>
-              <td><%= link_to "<span class='glyphicon glyphicon-plus'></span> Add This Invoice".html_safe, new_invoice_path, class: "btn btn-success btn-xs", title: "Add New Invoice", data: { toggle: "modal", load_remote: new_invoice_path, fill_invoice: true } %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <!-- Tab panes -->
+    <div class="tab-content" id="month-content">
+      <% @months.each_with_index do |month,index| %>
+        <div class="tab-pane<%= " active" if index == 1 %>" id="<%= month.strftime('%b%Y') %>">
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Description</th>
+                <th>Invoice Amount</th>
+                <th>Invoice Number</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @clients.due_in(month.strftime('%B')).each do |client| %>
+                <% @description = "#{client.invoice_freq} Listing Fee" %>
+                <% @description << " #{month.strftime('%b')}" if client.invoice_freq == "Monthly" %>
+                <% @description << " Q#{getQuarterByMonth(month.strftime('%B'))}" if client.invoice_freq == "Quarterly" %>
+                <% @description << " #{month.strftime('%Y')}" %>
+                <% @nextnumber = "#{client.listing_number}-A" %>
+                <% @nextnumber << (client.invoices.empty? ? "1" : "#{client.invoices.order('date_invoiced DESC').first.number.split('A')[-1].to_i + 1}") %>
+                <tr>
+                  <td class="client" ref="<%= client.id %>"><%= "#{client.name} (#{client.listing_number})" %></td>
+                  <td class="description"><%= @description %></td>
+                  <td class="amount"><%= number_to_currency(client.invoice_amt) %></td>
+                  <% if index < 3 %>
+                    <% search = Invoice.where("client_id = ? AND (description = ? OR (amount = ? AND date_invoiced BETWEEN ? AND ?))", client.id, @description, client.invoice_amt, (month.beginning_of_month - 10.days), month.end_of_month).take %>
+                    <% if search.nil? %>
+                      <td class="next_number"><%= @nextnumber %></td>
+                      <td><%= link_to "<span class='glyphicon glyphicon-plus'></span> Record This Invoice".html_safe, new_invoice_path, class: "btn btn-success btn-xs", title: "Add New Invoice", data: { toggle: "modal", load_remote: new_invoice_path, fill_invoice: true } %></td>
+                    <% else %>
+                      <td><%= search.number %></td>
+                      <td><em>Invoiced <%= search.date_invoiced %></em></td>
+                    <% end %>
+                  <% else %>
+                    <td class="next_number"><%= @nextnumber %></td>
+                    <td></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
 
 <!-- Invoice log -->
-<h1>
-  <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_invoice_path, class: "btn btn-success pull-right", title: "Add New Invoice", data: { toggle: "modal", load_remote: new_invoice_path } %>
-  Invoice Log
-</h1>
-  <ul class="nav nav-pills" id="year-filter">
-    <li id="caption">Select year: </li>
-    <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= params[:year] || Time.now.year %> <span class="caret"></span></a>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_invoice_path, class: "btn btn-success btn-xs pull-right", title: "Add Blank Invoice", data: { toggle: "modal", load_remote: new_invoice_path } %>
+    Invoice Log for
+    <span class="dropdown">
+       <button type="button" class="btn btn-info btn-xs" data-toggle="dropdown"><%= params["year"] || Time.now.year %> <span class='caret'></span></button>
       <ul class="dropdown-menu">
         <% @years.each do |year| %>
-        <li><%= link_to year, controller: "invoices", year: year %></li>
+          <li><%= link_to year, controller: "invoices", year: year %></li>
         <% end %>
       </ul>
-    </li>
-  </ul>
-
-<table class="table table-striped table-condensed">
-  <thead>
-    <tr>
-      <th>Invoice Number</th>
-      <th>Invoice Date</th>
-      <th>Client</th>
-      <th>Description</th>
-      <th>Amount</th>
-      <th>Date Paid</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @invoices.each do |invoice| %>
+    </span>
+  </div>
+  <table class="table table-striped table-condensed">
+    <thead>
       <tr>
-        <td><%= invoice.number %></td>
-        <td><%= invoice.date_invoiced %></td>
-        <td><%= invoice.client.name %></td>
-        <td><%= invoice.description %></td>
-        <td><%= number_to_currency(invoice.amount) %></td>
-        <td><%= invoice.date_paid %></td>
-        <td><%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edit".html_safe, edit_invoice_path(invoice), class: "btn btn-warning btn-xs", title: "Edit Invoice Information", data: { toggle: "modal", load_remote: edit_invoice_path(invoice) } %></td>
-        <td><%= link_to "<span class='glyphicon glyphicon-trash'></span> Delete".html_safe, invoice, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Invoice", data: { confirm: 'Are you sure you want to delete this invoice?' } %></td>
+        <th>Invoice Number</th>
+        <th>Invoice Date</th>
+        <th>Client</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Date Paid</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <%= render @invoices %>
+    </tbody>
+  </table>
+</div>
 
 <%= render 'shared/modal' %>

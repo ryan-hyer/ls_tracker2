@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <button type="button" class="btn btn-info btn-xs pull-right" data-toggle="tooltip" data-placement="left" title="<p>Green - All is good!</p><p>Yellow - Inspection is due within 3 months or tagged work is not yet done.</p><p>Red - Inspection is overdue (last was more than 12 months ago)</p>" data-html="true"><strong>?</strong></button>
+    <button type="button" class="btn btn-info btn-xs pull-right" data-toggle="tooltip" data-placement="left" title="<p>Green - All is good!</p><p>Yellow - Inspection is due within 3 months.</p><p>Red - Inspection is overdue (last was more than 12 months ago)</p>" data-html="true"><strong>?</strong></button>
     Surveillance Status (last 12 months)
   </div>
   <table class="table table-condensed">
@@ -20,7 +20,9 @@
             <% else %>
               <td class="<%=facility.inspection_status%>" nowrap>
                 Last Inspected <%= facility.inspections.first.inspection_date %><br />
-                <%= facility.inspections.first.tests.complete.count %> of <%= facility.inspections.first.tests.count %> Tagged Tests Done
+                <span<%= " class='text-danger'".html_safe unless facility.inspections.first.tests.complete.count == facility.inspections.first.tests.count %>>
+                  <%= facility.inspections.first.tests.complete.count %> of <%= facility.inspections.first.tests.count %> Tagged Tests Done
+                </span>
               </td>
             <% end %>
             <%= "</tr><tr>".html_safe unless facility == client.facilities.last %>

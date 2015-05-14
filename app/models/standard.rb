@@ -3,7 +3,6 @@ class Standard < ActiveRecord::Base
 	has_many :categories, through: :category_standards
 	has_many :listing_standards, dependent: :destroy
 	has_many :listings, through: :listing_standards
-	has_many :tests
 
 	validates :number, presence: true
 

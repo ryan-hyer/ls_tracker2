@@ -1,15 +1,4 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2>Please correct the following <%= pluralize(@user.errors.count, "error") %>:</h2>
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_for(@user, remote: true) do |f| %>
   <div class="field">
     <%= f.label :email %>
     <%= f.email_field :email %>
@@ -22,9 +11,7 @@
     <%= f.label :password_confirmation, "Re-type password" %>
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
-
   <div class="actions">
     <%= f.submit "Add User", class: "btn btn-primary" %>
   </div>
-
 <% end %>

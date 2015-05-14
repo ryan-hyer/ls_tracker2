@@ -6,6 +6,11 @@ class CategoriesController < ApplicationController
     @categories = Category.all.includes(:scheme).order("schemes.name, categories.description")
   end
 
+  # GET /categories/1
+  def show
+    render layout: false
+  end
+
   # GET /categories/new
   def new
     @category = Category.new

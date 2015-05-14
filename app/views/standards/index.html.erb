@@ -23,11 +23,13 @@
           <td><%= standard.exceptions %></td>        
           <td nowrap><%= link_to "<span class='glyphicon glyphicon-eye-open'></span>".html_safe, standard_path(standard), class: "btn btn-info btn-xs", title: "Info for "+standard.number, data: { toggle: "modal", load_remote: standard_path(standard) } %>
           <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_standard_path(standard), class: "btn btn-warning btn-xs", title: "Edit Standard Information", data: { toggle: "modal", load_remote: edit_standard_path(standard) } %>
-          <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, standard, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Standard", data: { confirm: 'Are you sure you want to delete this standard?' } %></td>
+          <% if standard.listings.unscope(:order).empty? && standard.categories.empty? %>
+            <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, standard, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Standard", data: { confirm: 'Are you sure you want to delete this standard?' } %></td>
+          <% else %>
+            <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="left" title="Standard is still in use and cannot be deleted. Remove standard from all categories AND client listings before deleting."><span class='glyphicon glyphicon-trash'></span></button>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-
-<%= render 'shared/modal' %>

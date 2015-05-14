@@ -26,12 +26,13 @@
               <% end %>
             </ul>
           </td>
-          <td>
+          <td nowrap>
+            <%= link_to "<span class='glyphicon glyphicon-eye-open'></span>".html_safe, category_path(category), class: "btn btn-info btn-xs", title: "Info for "+category.with_scheme, data: { toggle: "modal", load_remote: category_path(category) } %>
             <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_category_path(category), class: "btn btn-warning btn-xs", title: "Edit Category Information", data: { toggle: "modal", load_remote: edit_category_path(category) } %>
-            <% if true %>
+            <% if category.listings.unscope(:order).empty? %>
               <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, category, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Category", data: { confirm: 'Are you sure you want to delete this category?' } %>
             <% else %>
-              <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="left" title="Category is still in use and cannot be deleted. Remove category from all clients before deleting."><span class='glyphicon glyphicon-trash'></span></button>
+              <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="left" title="Category is still in use and cannot be deleted. Remove category from all client listings before deleting."><span class='glyphicon glyphicon-trash'></span></button>
             <% end %>
           </td>
         </tr>
@@ -39,5 +40,3 @@
     </tbody>
   </table>
 </div>
-
-<%= render 'shared/modal' %>

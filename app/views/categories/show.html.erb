@@ -1,0 +1,10 @@
+<%= label_tag "Clients Having Listings With This Category" %>
+<ul class="list-links">
+	<% @category.listings.each do |listing| %>
+		<li><%= link_to raw("<strong>#{listing.client.name}</strong> (#{listing.client.listing_number})"), listing.client %></li>
+	<% end %>
+</ul>
+<br />
+<div class="actions">
+	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+</div>

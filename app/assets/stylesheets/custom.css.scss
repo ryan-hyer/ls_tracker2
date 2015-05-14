@@ -44,6 +44,10 @@ body {
   color: red;
 }
 
+.text-danger {
+  font-weight: bold;
+}
+
 .list-unstyled {
   margin-bottom: 0;
   li {
@@ -114,10 +118,16 @@ body {
   background-color: #DEFAFC;
 }
 
-/* Fix for Bootstrap modal scrollbar bug */
+/* Fix for Bootstrap modal scrollbar bug (which happens anyway, idk why) */
 
 .modal, .modal-open {
   overflow-y: auto;
+}
+
+/* Fix for Bootstrap tooltips-in-tables-don't-wrap bug */
+
+.tooltip-inner  {
+  white-space: normal;
 }
 
 /* Header */
@@ -236,13 +246,13 @@ body {
   margin-left: 10px;
 }
 
-/* Inspection pages */
+/* Inspection page */
 
 #map-canvas {
   height: 500px;
 }
 
-/* Invoice pages */
+/* Invoice page */
 
 #month-tabs li {
   width: 8.3%;

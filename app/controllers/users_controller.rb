@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: :destroy
 
   # GET /users
-  # GET /users.json
   def index
     @users = User.all
   end
@@ -14,7 +13,6 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
 
@@ -25,22 +23,23 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_path, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: users_path }
+        flash[:notice] = "User was succesfully created."
+        format.html { redirect_to users_path }
+        format.js { render js: 'window.location.reload()' }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.js { render partial: 'shared/formerrors', locals: {object: @user} }
       end
     end
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_path, notice: 'User was successfully deleted.' }
-      format.json { head :no_content }
+    if @user == current_user
+      redirect_to users_path, alert: 'Do not delete your own account!'
+    else
+      @user.destroy
+      redirect_to users_path, notice: 'User was successfully deleted.'
     end
   end
 

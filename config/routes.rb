@@ -10,8 +10,8 @@ LsTracker2::Application.routes.draw do
 
   resources :invoices, except: :show
   resources :standards
-  resources :categories, except: :show
-  resources :schemes, only: [:index, :new, :create, :destroy]
+  resources :categories
+  resources :schemes, except: :show
   resources :tests, except: [:index, :show]
   resources :inspections, except: [:new, :create]
 

@@ -21,6 +21,6 @@ class Client < ActiveRecord::Base
 		monthname = month.gsub(/\d+/,"")
 		sqlString = "(invoice_freq = 'Annual' AND invoice_month = ?) OR (invoice_freq = 'Monthly')"
 		sqlString << " OR (invoice_freq = 'Quarterly')" if ['January','April','July','October'].include?(monthname)
-		where(sqlString, monthname)
+		active.where(sqlString, monthname)
 	end
 end

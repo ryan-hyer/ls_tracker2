@@ -3,7 +3,7 @@ class StandardsController < ApplicationController
 
   # GET /standards
   def index
-    @standards = Standard.all
+    @standards = Standard.all.sort { |p1, p2| view_context.natcmp(p1.number, p2.number) }
   end
 
   # GET /standards/1

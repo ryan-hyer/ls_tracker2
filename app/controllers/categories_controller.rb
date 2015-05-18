@@ -59,7 +59,7 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   def destroy
     @category.destroy
-    format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+    redirect_to categories_url, notice: 'Category was successfully destroyed.'
   end
 
   private

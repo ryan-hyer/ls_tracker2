@@ -1,6 +1,12 @@
 class FacilitiesController < ApplicationController
-  before_action :set_facility, only: [:edit, :update, :destroy]
+  before_action :set_facility, only: [:edit, :update, :destroy, :geocache]
   before_action :set_client, only: [:new, :create]
+
+  # GET /facilities
+  def index
+    @facilities = Facility.active.joins(:client).where("clients.delisted = false")
+    render json: @facilities
+  end
 
   # GET /facilities/new
   def new
@@ -43,6 +49,12 @@ class FacilitiesController < ApplicationController
     end
   end
 
+  # PUT /facilities/1/geocache
+  def geocache
+    @facility.update(facility_params)
+    render nothing: true
+  end
+
   # DELETE /facilities/1
   def destroy
     @facility.destroy
@@ -61,6 +73,6 @@ class FacilitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def facility_params
-      params.require(:facility).permit(:client_id, :name, :address, :phone, :poc_name, :poc_phone, :poc_email, :inactive, :comments)
+      params.require(:facility).permit(:client_id, :name, :address, :phone, :poc_name, :poc_phone, :poc_email, :inactive, :comments, :latitude, :longitude, :last_geocoded)
     end
 end

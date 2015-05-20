@@ -1,13 +1,15 @@
 LsTracker2::Application.routes.draw do
 
   resources :clients do
-    resources :facilities, shallow: true, except: :show do
+    resources :facilities, shallow: true, except: [:index, :show] do
       resources :inspections, only: [:new, :create]
     end
     resources :listings, shallow: true, except: [:index, :show]
     resources :amendments, shallow: true, except: [:index, :show]
   end
 
+  resources :facilities, only: :index
+  put 'facilities/:id/geocache' => 'facilities#geocache'
   resources :invoices, except: :show
   resources :standards
   resources :categories

@@ -22,8 +22,10 @@
                 <th>Client</th>
                 <th>Description</th>
                 <th>Invoice Amount</th>
-                <th>Invoice Number</th>
-                <th></th>
+                <% if index < 3 %>
+                  <th>Invoice Number</th>
+                  <th></th>
+                <% end %>
               </tr>
             </thead>
             <tbody>
@@ -32,24 +34,21 @@
                 <% @description << " #{month.strftime('%b')}" if client.invoice_freq == "Monthly" %>
                 <% @description << " Q#{getQuarterByMonth(month.strftime('%B'))}" if client.invoice_freq == "Quarterly" %>
                 <% @description << " #{month.strftime('%Y')}" %>
-                <% @nextnumber = "#{client.listing_number}-A" %>
+                <% @nextnumber = "#{client.listing_number.at(/^([^\s]+)/)}-A" %>
                 <% @nextnumber << (client.invoices.empty? ? "1" : "#{client.invoices.order('date_invoiced DESC').first.number.split('A')[-1].to_i + 1}") %>
                 <tr>
                   <td class="client" ref="<%= client.id %>"><%= "#{client.name} (#{client.listing_number})" %></td>
                   <td class="description"><%= @description %></td>
                   <td class="amount"><%= number_to_currency(client.invoice_amt) %></td>
                   <% if index < 3 %>
-                    <% search = Invoice.where("client_id = ? AND (description = ? OR (amount = ? AND date_invoiced BETWEEN ? AND ?))", client.id, @description, client.invoice_amt, (month.beginning_of_month - 10.days), month.end_of_month).take %>
-                    <% if search.nil? %>
+                    <% @existing_invoice = Invoice.where("client_id = ? AND (description = ? OR (amount = ? AND date_invoiced BETWEEN ? AND ?))", client.id, @description, client.invoice_amt, (month.beginning_of_month - 10.days), month.end_of_month).take %>
+                    <% if @existing_invoice.nil? %>
                       <td class="next_number"><%= @nextnumber %></td>
                       <td><%= link_to "<span class='glyphicon glyphicon-plus'></span> Record This Invoice".html_safe, new_invoice_path, class: "btn btn-success btn-xs", title: "Add New Invoice", data: { toggle: "modal", load_remote: new_invoice_path, fill_invoice: true } %></td>
                     <% else %>
-                      <td><%= search.number %></td>
-                      <td><em>Invoiced <%= search.date_invoiced %></em></td>
+                      <td><%= @existing_invoice.number %></td>
+                      <td><em>Invoiced <%= @existing_invoice.date_invoiced %></em></td>
                     <% end %>
-                  <% else %>
-                    <td class="next_number"><%= @nextnumber %></td>
-                    <td></td>
                   <% end %>
                 </tr>
               <% end %>

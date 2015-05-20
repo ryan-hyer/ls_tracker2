@@ -122,7 +122,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @client.invoices.each do |invoice| %>
+      <% @client.invoices.order("date_invoiced DESC").each do |invoice| %>
         <tr>
           <td><%= invoice.number %></td>
           <td><%= invoice.date_invoiced %></td>

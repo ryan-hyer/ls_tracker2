@@ -13,10 +13,11 @@
       <% @clients.each do |client| %>
         <tr>
           <td rowspan=<%=client.facilities.active.count%>><%= "#{client.name} (#{client.listing_number})" %></td>
-          <% client.facilities.active.each do |facility| %>
+          <% client.facilities.active.each_with_index do |facility,index| %>
+            <%= "</tr><tr>".html_safe unless index == 0 %>
             <td><%= facility.address %></td>
             <% if facility.inspections.empty? %>
-              <td class="danger">Never Inspected</td>
+              <td class="danger" nowrap>Never Inspected</td>
             <% else %>
               <td class="<%=facility.inspection_status%>" nowrap>
                 Last Inspected <%= facility.inspections.first.inspection_date %><br />
@@ -25,7 +26,6 @@
                 </span>
               </td>
             <% end %>
-            <%= "</tr><tr>".html_safe unless facility == client.facilities.last %>
           <% end %>
         </tr>
       <% end %>
@@ -38,33 +38,37 @@
     <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View Europe" data-location="Europe"><span class='glyphicon glyphicon-share-alt'></span> Europe</button>
     <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View China" data-location="China"><span class='glyphicon glyphicon-share-alt'></span> China</button>
     <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View North America" data-location="USA"><span class='glyphicon glyphicon-share-alt'></span> North America</button>
+    <span class="pull-right">Jump To: </span>
     Inspection Map
   </div>
   <div class="panel-body" id="map-canvas"></div>
 </div>
+<div class="hidden">
+  <h3>Not displayed because address could not be located:</h3>
+  <em>(Try refreshing the page. If that doesn't work, try searching for the address directly in <a href="https://maps.google.com" target="_blank">Google Maps</a>, then correct the address in the client record if possible.)</em>
+  <ul id="geocode-errors" class="list-unstyled">
+  </ul>
+</div>
+
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script>
 var map;
 var infowindow = new google.maps.InfoWindow();
 
 function initializeMap() {
-  var facilities = [
-    <% Client.active.each do |client| %>
-      <% client.facilities.active.each do |facility| %>
-        ['<%= client.name %>', '<%= facility.address.gsub(/\r\n/, ", ") %>', '<%= facility.inspection_status %>'],
-      <% end %>
-    <% end %>
-  ];
-
   var mapOptions = {
     zoom: 4,
-    center: new google.maps.LatLng(39.504, -98.438),
+    center: {lat: 39.504, lng: -98.438},
     mapTypeControl: false,
     streetViewControl: false
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
-  setMarkers(map, facilities);
+  $.getJSON("/facilities/", function(data) {
+    $.each(data, function(i, facility) {
+      setMarker(map, facility);
+    });
+  });
 }
 
 function recenterMap(obj) {
@@ -79,39 +83,58 @@ function recenterMap(obj) {
   });
 }
 
-function setMarkers(map, locations) {
-  for (var i = 0; i< locations.length; i++) {
-    var facility = locations[i];
-    setMarker(map, facility[0], facility[1], facility[2]);
-  }
-}
-
-function setMarker(map, title, address, iconType) {
+function setMarker(map, facility) {
   var icons = {};
   icons['success'] = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
   icons['warning'] = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
   icons['danger'] = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
   
   var geocoder = new google.maps.Geocoder();
-  geocoder.geocode({address: address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      var marker = new google.maps.Marker({
-        position: results[0].geometry.location,
-        map: map,
-        icon: icons[iconType],
-        title: title
-      });
-      var contentString = '<div class="gmap-popup">'+
-        '<strong>'+title+'</strong><br />'+
-        address+
-        '</div>';
-      google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(contentString);
-        infowindow.open(map, this);
-      });
-    } else {
-      alert("Geocoding error: " + status + "\r\n" + location[1]);
-    }
+  var title = facility.client.name;
+  var address = facility.address;
+  var iconType = facility.inspection_status;
+  var position;
+
+  if(facility.latitude !== null && facility.longitude !== null && daysAgo(facility.last_geocoded) < getRandom(90,180)) {
+    // Use the cached position to avoid excess calls to the geocoder
+    position = new google.maps.LatLng(facility.latitude, facility.longitude);
+  } else {
+    // Call the geocoder and cache the resulting position
+    geocoder.geocode({address: address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        position = results[0].geometry.location;
+        $.ajax({
+          type: "PUT",
+          url: "/facilities/" + facility.id + "/geocache",
+          data: {
+            facility: {
+              latitude: position.lat(),
+              longitude: position.lng(),
+              last_geocoded: Date.now()
+            }
+          }
+        });
+      } else {
+        //alert("Geocoding error: " + status + "\r\n" + facility.address);
+        $("#geocode-errors").append('<li><img src="' + icons[iconType] + '" /> <strong>' + title + '</strong> - ' + address + '</li>');
+        $("#geocode-errors").parent().removeClass("hidden");
+      }
+    })
+  }
+
+  var marker = new google.maps.Marker({
+    position: position,
+    map: map,
+    icon: icons[iconType],
+    title: title
+  });
+  var contentString = '<div class="gmap-popup">'+
+    '<strong>'+title+'</strong><br />'+
+    address+
+    '</div>';
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(contentString);
+    infowindow.open(map, this);
   });
 }
 
@@ -122,5 +145,23 @@ for (var i = 0; i < list.length; i++) {
   google.maps.event.addDomListener(list[i], 'click', function() {
     recenterMap(this);
   });
+}
+
+function daysAgo(date1_ms) {
+  if(date1_ms != null && date1_ms != "") {
+    var date2_ms = Date.now();
+    // The number of milliseconds in one day
+    var ONE_DAY = 1000 * 60 * 60 * 24
+    // Calculate the difference in milliseconds
+    var difference_ms = Math.abs(+date1_ms - date2_ms)
+    // Convert back to days and return
+    return Math.round(difference_ms/ONE_DAY)
+  } else {
+    return 9999;
+  }
+}
+
+function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
 }
 </script>

@@ -1,7 +1,7 @@
 <%= form_for([@client,@listing], remote: true) do |f| %>
   <div class="field">
     <%= f.label :category_id, "Listing Category" %>
-    <%= f.collection_select :category_id, @categories, :id, :with_scheme, prompt: "Select a listing category" %>
+    <%= f.collection_select :category_id, @categories.includes(:scheme).order("schemes.name, categories.description"), :id, :with_scheme, prompt: "Select a listing category" %>
   </div>
   <div class="field">
     <%= f.label nil, "Standards" %>

@@ -5,7 +5,7 @@ class Listing < ActiveRecord::Base
 	has_many :standards, through: :listing_standards
 
 	validates :client, presence: true
-	validates :category, presence: true
+#	validates :category, presence: true
 
 	accepts_nested_attributes_for :listing_standards, allow_destroy: true, reject_if: proc { |attributes| attributes['standard_id'].blank?}
 

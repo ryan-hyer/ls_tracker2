@@ -48,7 +48,7 @@ $(document).ajaxSuccess(function() {
 		var yyyy = today.getFullYear();
 		if (dd<10) {dd='0'+dd};
 		if (mm<10) {mm='0'+mm};
-		today = yyyy+'-'+mm+'-'+dd;
+		today = mm+'/'+dd+'/'+yyyy
 		$('#invoice_date_invoiced').val(today);
 	}
 

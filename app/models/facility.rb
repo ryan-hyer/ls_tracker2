@@ -24,4 +24,9 @@ class Facility < ActiveRecord::Base
   		end
   	end
   end
+
+  def as_json(options={})
+    super(only: [:id, :address, :latitude, :longitude, :last_geocoded],
+          include: { client: { only: :name } }).merge({inspection_status: inspection_status})
+  end
 end

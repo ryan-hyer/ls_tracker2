@@ -6,7 +6,7 @@ class AmendmentsController < ApplicationController
   # GET client/1/amendments/new
   def new
     @amendment = @client.amendments.new
-    @categories = Category.all
+    @categories = @client.categories.includes(:scheme).order("schemes.name, categories.description") + (Category.all.includes(:scheme).order("schemes.name, categories.description") - @client.categories)
     @facilities = @client.facilities
     render layout: false
   end

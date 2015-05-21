@@ -20,10 +20,12 @@
               <td class="danger" nowrap>Never Inspected</td>
             <% else %>
               <td class="<%=facility.inspection_status%>" nowrap>
-                Last Inspected <%= facility.inspections.first.inspection_date %><br />
-                <span<%= " class='text-danger'".html_safe unless facility.inspections.first.tests.complete.count == facility.inspections.first.tests.count %>>
-                  <%= facility.inspections.first.tests.complete.count %> of <%= facility.inspections.first.tests.count %> Tagged Tests Done
-                </span>
+                Last Inspected <%= facility.inspections.first.inspection_date %>
+                <% unless facility.inspection_status == "danger" %>
+                  <br /><span<%= " class='text-danger'".html_safe unless facility.inspections.first.tests.complete.count == facility.inspections.first.tests.count %>>
+                    <%= facility.inspections.first.tests.complete.count %> of <%= facility.inspections.first.tests.count %> Tagged Tests Done
+                  </span>
+                <% end %>
               </td>
             <% end %>
           <% end %>

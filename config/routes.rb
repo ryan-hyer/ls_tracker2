@@ -11,6 +11,7 @@ LsTracker2::Application.routes.draw do
   resources :facilities, only: :index
   put 'facilities/:id/geocache' => 'facilities#geocache'
   resources :invoices, except: :show
+  get 'invoices/:id/quickpay' => 'invoices#quickpay', as: :quickpay
   resources :standards
   resources :categories
   resources :schemes, except: :show

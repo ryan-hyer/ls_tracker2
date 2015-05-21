@@ -62,7 +62,7 @@
     <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_client_facility_path(@client), class: "btn btn-success btn-xs pull-right", title: "Add New Facility", data: { toggle: "modal", load_remote: new_client_facility_path(@client) } %>
     Manufacturing Facilities
   </div>
-  <div class="panel-body">
+  <div class="panel-body" id="facility-info">
     <div id="active-facilities">
       <%= render @client.facilities.active %>
     </div>
@@ -99,7 +99,6 @@
       <th>Status</th>
       <th>LS #</th>
       <th>Description</th>
-      <th>Comments</th>
       <th></th>
     </thead>
     <tbody>

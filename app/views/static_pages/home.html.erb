@@ -50,7 +50,9 @@
 	  		<th>Client</th>
 	  		<th>Invoice #</th>
 	  		<th>Description</th>
+	  		<th>Amount</th>
 	  		<th>Date Invoiced</th>
+	  		<th>
 	  	</thead>
 	  	<tbody>
 	  		<% @invoices.each do |invoice| %>
@@ -58,7 +60,11 @@
 	  				<td><%= invoice.client.name %></td>
 	  				<td><%= invoice.number %></td>
 	  				<td><%= invoice.description %></td>
+	  				<td><%= number_to_currency(invoice.amount) %></td>
 	  				<td><%= invoice.date_invoiced %></td>
+	  				<td>
+    					<%= link_to "<span class='glyphicon glyphicon-ok'> Enter Pmt</span>".html_safe, quickpay_path(invoice), class: "btn btn-warning btn-xs", title: "Edit Invoice Payment", data: { toggle: "modal", load_remote: quickpay_path(invoice) } %>
+    				</td>
 	  			</tr>
 	  		<% end %>
 	  	</tbody>

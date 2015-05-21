@@ -1,17 +1,17 @@
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
       <%= "<strong>#{facility.name}</strong><br/>".html_safe unless facility.name.blank? %>
       <%= simple_format(facility.address, {}, wrapper_tag: "div") %>
       Tel: <%= facility.phone %><br />
       <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edit".html_safe, edit_facility_path(facility), class: "btn btn-xs btn-warning", title: "Edit Facility Information", data: { toggle: "modal", load_remote: edit_facility_path(facility) } %>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <strong>Point of Contact</strong><br />
       <%= facility.poc_name %><%= ", #{facility.poc_phone}".html_safe unless facility.poc_phone.blank? %><%= ", #{mail_to(facility.poc_email)}".html_safe unless facility.poc_email.blank? %><br/><br/>
       <strong>Comments</strong><br />
       <%= simple_format(facility.comments, {}, wrapper_tag: "div") %><br />
     </div>
-    <div class="col-md-6 inspections">
+    <div class="col-md-8 inspections">
       <strong>Inspection History</strong>
       <table class="table table-condensed">
         <thead>

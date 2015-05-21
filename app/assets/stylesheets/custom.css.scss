@@ -219,10 +219,22 @@ body {
   width: 20%;
 }
 
-#active-facilities .row, #inactive-facilities .row {
-  background-color: #eee;
-  margin: 5px 0px;
-  padding: 5px 0;
+#facility-info {
+  .row {
+    //background-color: #eee;
+    margin: 10px 0px;
+    padding: 5px 0px;
+    &:not(:first-child) {
+      border-top: 1px solid #ddd;
+    }
+  }
+  .inspections td {
+    font-size: 90%;
+  }
+}
+
+#inactive-facilities .row {
+  border: 2px solid red;
 }
 
 .facility-inactive-header {
@@ -231,10 +243,6 @@ body {
   font-weight: bold;
   text-align: center;
   cursor: pointer;
-}
-
-#inactive-facilities .row {
-  border: 2px solid red;
 }
 
 #model-amendments, #facility-amendments {

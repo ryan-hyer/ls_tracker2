@@ -1,0 +1,20 @@
+<%= form_for(@invoice, remote: true) do |f| %>
+  <%= label_tag nil, "Confirm Payment Info for #{@invoice.number}" %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <%= f.label :amount %>
+        <%= f.number_field :amount %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="field">
+        <%= f.label :date_paid, "Date Paid" %>
+        <%= f.date_field :date_paid, value: Date.today %>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

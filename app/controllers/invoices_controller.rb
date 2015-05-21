@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_action :set_invoice, only: [:edit, :update, :destroy]
+  before_action :set_invoice, only: [:edit, :update, :quickpay, :destroy]
 
   # GET /invoices
   def index
@@ -17,6 +17,11 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/1/edit
   def edit
+    render layout: false
+  end
+
+  # GET /invoices/1/quickpay
+  def quickpay
     render layout: false
   end
 
@@ -53,7 +58,7 @@ class InvoicesController < ApplicationController
   # DELETE /invoices/1
   def destroy
     @invoice.destroy
-    format.html { redirect_to invoices_url, notice: 'Invoice was successfully deleted.' }
+    redirect_to invoices_url, notice: 'Invoice was successfully deleted.'
   end
 
   private

@@ -1,5 +1,5 @@
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
       <%= "<strong>#{facility.name}</strong><br/>".html_safe unless facility.name.blank? %>
       <%= simple_format(facility.address, {}, wrapper_tag: "div") %>
       Tel: <%= facility.phone %><br />
@@ -11,7 +11,7 @@
       <strong>Comments</strong><br />
       <%= simple_format(facility.comments, {}, wrapper_tag: "div") %><br />
     </div>
-    <div class="col-md-8 inspections">
+    <div class="col-md-7 inspections">
       <strong>Inspection History</strong>
       <table class="table table-condensed">
         <thead>

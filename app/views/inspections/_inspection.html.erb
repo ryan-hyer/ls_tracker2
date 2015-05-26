@@ -11,7 +11,7 @@
       <% end %>
     </ul>
   <td><%= simple_format(inspection.comments, {}, wrapper_tag: "div") %></td>
-  <td nowrap>
+  <td class="nowrap">
     <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_inspection_path(inspection), class: "btn btn-warning btn-xs", title: "Edit Inspection Information", data: { toggle: "modal", load_remote: edit_inspection_path(inspection) } %>
     <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, inspection, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Inspection", data: { confirm: 'Are you sure you want to delete this inspection record?' } %>
   </td>

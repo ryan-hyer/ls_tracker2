@@ -55,14 +55,12 @@
         <%= f.label :effective, "Effective Date" %>
         <%= f.date_field :effective %>
       </div>
+<!--
       <div class="field">
-        <%= f.label :updated, "Last Updated" %>
-        <%= f.date_field :updated %>
+        <%#= f.label :updated, "Last Updated" %>
+        <%#= f.date_field :updated %>
       </div>
-      <div class="field">
-        <%= f.label :expires, "Expires" %>
-        <%= f.date_field :expires %>
-      </div>
+-->
       <div class="field">
         <%= f.label :suspended %>
         <%= f.check_box :suspended %>
@@ -70,6 +68,10 @@
       <div class="field">
         <%= f.label :delisted %>
         <%= f.check_box :delisted %>
+      </div>
+      <div class="field">
+        <%= f.label :expires, "Date Delisted" %>
+        <%= f.date_field :expires %>
       </div>
       <div class="field">
         <%= f.label :comments %>

@@ -27,6 +27,10 @@ body {
   //padding-bottom: 60px;
 }
 
+a {
+  outline: 0;
+}
+
 .panel-heading {
   font-size: 120%;
   font-weight: bold;
@@ -48,11 +52,15 @@ body {
   font-weight: bold;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .list-unstyled {
   margin-bottom: 0;
   li {
     overflow: auto;
-    padding: 3px 0;
+    padding: 2px 0;
   }
 }
 
@@ -221,20 +229,23 @@ body {
 
 #facility-info {
   .row {
-    //background-color: #eee;
-    margin: 10px 0px;
-    padding: 5px 0px;
-    &:not(:first-child) {
-      border-top: 1px solid #ddd;
-    }
+    padding-top: 5px;
   }
-  .inspections td {
-    font-size: 90%;
-  }
+}
+
+#active-facilities .row:not(:first-child) {
+  border-top: 1px solid #ddd;
 }
 
 #inactive-facilities .row {
   border: 2px solid red;
+  margin: 5px 0;
+}
+
+.inspections {
+  td {
+    font-size: 90%;
+  }
 }
 
 .facility-inactive-header {
@@ -249,9 +260,15 @@ body {
   display: none;
 }
 
-#amendment-details {
+.amendment-details {
   font-size: 85%;
   margin-left: 10px;
+  p {
+    margin: 0;
+  }
+  .model-list {
+    display: inline;
+  }
 }
 
 /* Inspection page */

@@ -34,7 +34,7 @@
 	  			<tr>
 	  				<td><%= facility.client_name %></td>
 	  				<td><%= facility.address %></td>
-	  				<td>
+	  				<td class="nowrap">
 	  					<%= facility.last_inspection %>
 	  					<%= facility.last_inspection.blank? ? "Never inspected" : " (#{time_ago_in_words(facility.last_inspection)} ago)" %>
 	  				</td>

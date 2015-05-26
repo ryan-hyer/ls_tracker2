@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <button type="button" class="btn btn-info btn-xs pull-right" data-toggle="tooltip" data-placement="left" title="<p>Green - All is good!</p><p>Yellow - Inspection is due within 3 months.</p><p>Red - Inspection is overdue (last was more than 12 months ago)</p>" data-html="true"><strong>?</strong></button>
-    Surveillance Status (last 12 months)
+    <button type="button" class="btn btn-info btn-xs pull-right" data-toggle="tooltip" data-placement="left" title="<p>Green - All is good!</p><p>Yellow - Inspection is due within 3 months.</p><p>Red - Inspection is overdue (last was more than 12 months ago)</p>" data-html="true"><strong>Legend</strong></button>
+    Surveillance Status
   </div>
   <table class="table table-condensed">
     <thead>
@@ -15,15 +15,22 @@
           <td rowspan=<%=client.facilities.active.count%>><%= "#{client.name} (#{client.listing_number})" %></td>
           <% client.facilities.active.each_with_index do |facility,index| %>
             <%= "</tr><tr>".html_safe unless index == 0 %>
-            <td><%= facility.address %></td>
+            <td>
+              <% if facility.latitude.blank? %>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="right" title="Cannot jump to address at this time. Try again later."><span class='glyphicon glyphicon-share-alt'></span></button>
+              <% else %>
+                <button type="button" class="btn btn-info btn-xs btn-reset-map" title="View Address on Map" data-location="<%= facility.latitude %>,<%= facility.longitude %>" data-zoom="15"><span class='glyphicon glyphicon-share-alt'></span></button>
+              <% end %>
+              <%= facility.address %>
+            </td>
             <% if facility.inspections.empty? %>
               <td class="danger" nowrap>Never Inspected</td>
             <% else %>
               <td class="<%=facility.inspection_status%>" nowrap>
-                Last Inspected <%= facility.inspections.first.inspection_date %>
+                Last Inspected <%= facility.inspections.last.inspection_date %>
                 <% unless facility.inspection_status == "danger" %>
-                  <br /><span<%= " class='text-danger'".html_safe unless facility.inspections.first.tests.complete.count == facility.inspections.first.tests.count %>>
-                    <%= facility.inspections.first.tests.complete.count %> of <%= facility.inspections.first.tests.count %> Tagged Tests Done
+                  <br /><span<%= " class='text-danger'".html_safe unless facility.inspections.last.tests.complete.count == facility.inspections.last.tests.count %>>
+                    <%= facility.inspections.last.tests.complete.count %> of <%= facility.inspections.last.tests.count %> Tagged Tests Done
                   </span>
                 <% end %>
               </td>
@@ -35,12 +42,12 @@
   </table>
 </div>
 
-<div class="panel panel-primary">
+<div class="panel panel-primary" id="inspection-map">
   <div class="panel-heading">
-    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View Europe" data-location="Europe"><span class='glyphicon glyphicon-share-alt'></span> Europe</button>
-    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View China" data-location="China"><span class='glyphicon glyphicon-share-alt'></span> China</button>
-    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View North America" data-location="USA"><span class='glyphicon glyphicon-share-alt'></span> North America</button>
-    <span class="pull-right">Jump To: </span>
+    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View Europe" data-location="50.0,10.0" data-zoom="4"><span class='glyphicon glyphicon-share-alt'></span> Europe</button>
+    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View China" data-location="35.0,105.0" data-zoom="4"><span class='glyphicon glyphicon-share-alt'></span> China</button>
+    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View North America" data-location="39.504,-98.438" data-zoom="4"><span class='glyphicon glyphicon-share-alt'></span> North America</button>
+    <span class="pull-right">Zoom To: </span>
     Inspection Map
   </div>
   <div class="panel-body" id="map-canvas"></div>
@@ -56,6 +63,10 @@
 <script>
 var map;
 var infowindow = new google.maps.InfoWindow();
+var icons = {};
+icons['success'] = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+icons['warning'] = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+icons['danger'] = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
 
 function initializeMap() {
   var mapOptions = {
@@ -66,6 +77,7 @@ function initializeMap() {
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
+  // Retrieve facility JSON data and set markers
   $.getJSON("/facilities/", function(data) {
     $.each(data, function(i, facility) {
       setMarker(map, facility);
@@ -74,31 +86,26 @@ function initializeMap() {
 }
 
 function recenterMap(obj) {
-  var geocoder = new google.maps.Geocoder();
-  geocoder.geocode({address: obj.getAttribute('data-location')}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      map.panTo(results[0].geometry.location);
-      map.setZoom(4)
-    } else {
-      alert("Geocoding error: " + status + "\r\n" + obj.getAttribute('data-location'));
-    }
-  });
+  var coords = new Array();
+  coords = obj.getAttribute('data-location').split(",");
+  var mapCenter = new google.maps.LatLng(coords[0],coords[1]);
+  var zoomLevel = parseInt(obj.getAttribute('data-zoom'),10);
+  $('html, body').animate({scrollTop: $("#inspection-map").offset().top - 100}, 2000);
+  map.panTo(mapCenter);
+  map.setZoom(zoomLevel);
 }
 
 function setMarker(map, facility) {
-  var icons = {};
-  icons['success'] = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-  icons['warning'] = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
-  icons['danger'] = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
-  
   var geocoder = new google.maps.Geocoder();
   var title = facility.client.name;
   var address = facility.address;
   var iconType = facility.inspection_status;
   var position;
 
-  if(facility.latitude !== null && facility.longitude !== null && daysAgo(facility.last_geocoded) < getRandom(90,180)) {
+  if(facility.latitude !== null && facility.longitude !== null && daysAgo(facility.last_geocoded) < getRandom(90,120)) {
     // Use the cached position to avoid excess calls to the geocoder
+    // Re-geocode every 90-120 days to keep data accurate
+    // 90-120 day interval is randomized to avoid geocoding all of them at once
     position = new google.maps.LatLng(facility.latitude, facility.longitude);
   } else {
     // Call the geocoder and cache the resulting position
@@ -164,6 +171,6 @@ function daysAgo(date1_ms) {
 }
 
 function getRandom(min, max) {
-    return Math.random() * (max - min) + min;
+  return Math.random() * (max - min) + min;
 }
 </script>

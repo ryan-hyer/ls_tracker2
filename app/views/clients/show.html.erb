@@ -22,8 +22,8 @@
           <div class="col-md-8">
             <strong><%= @client.listing_number %></strong><br />
             Effective Date: <%= @client.effective %><br />
-            Last Updated: <%= @client.updated %><br />
-            <%= "Expires: #{@client.expires}" if @client.expires %>
+            <!-- Last Updated: <%#= @client.updated %><br /> -->
+            <%= "Date Delisted: #{@client.expires}" if @client.expires %>
           </div>
         </div>
       </div>

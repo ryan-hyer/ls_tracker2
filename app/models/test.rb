@@ -8,8 +8,8 @@ class Test < ActiveRecord::Base
 	end
 
 	def not_tested?
-		number.blank?
+		report_received.blank?
 	end
 
-	scope :complete, -> { where("number <> ''") }
+	scope :complete, -> { where("report_received <> ''") }
 end

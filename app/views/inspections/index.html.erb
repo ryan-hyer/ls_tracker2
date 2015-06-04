@@ -12,7 +12,7 @@
     <tbody>
       <% @clients.each do |client| %>
         <tr>
-          <td rowspan=<%=client.facilities.active.count%>><%= "#{client.name} (#{client.listing_number})" %></td>
+          <td rowspan=<%=client.facilities.active.count%>><%= client.name %></td>
           <% client.facilities.active.each_with_index do |facility,index| %>
             <%= "</tr><tr>".html_safe unless index == 0 %>
             <td>

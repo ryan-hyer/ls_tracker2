@@ -2,7 +2,7 @@
   <%= f.hidden_field :facility_id %>
   <div class="field">
     <%= f.label :number, "IS Number" %>
-    <%= f.text_field :number, required: true %>
+    <%= f.text_field :number %>
   </div>
   <div class="field">
     <%= f.label :inspection_date %>
@@ -18,23 +18,26 @@
     <thead>
       <th>Model #</th>
       <th>Sample Rec'd Date</th>
-      <th>Report #</th>
+      <th>Job #</th>
+      <th>Test Rpt Date</th>
     </thead>
     <tbody>
       <%= f.fields_for :tests do |ff| %>
         <tr>
-          <td><%= ff.text_field :model %></td>
+          <td><%= ff.text_field :model, required: true %></td>
           <td><%= ff.date_field :sample_received %></td>
           <td><%= ff.text_field :number %></td>
+          <td><%= ff.date_field :report_received %></td>
           <td><%= ff.hidden_field :_destroy %>
           <%= link_to "<span class='glyphicon glyphicon-remove'></span>".html_safe, "", class: "del-test-btn", title: "Delete record" %></td>
         </tr>
       <% end %>
       <tr class="hidden" id="test-add-new-template">
         <%= f.fields_for :tests, Test.new, child_index: "-999" do |ff| %>
-          <td><%= ff.text_field :model %></td>
+          <td><%= ff.text_field :model, required: true %></td>
           <td><%= ff.date_field :sample_received %></td>
           <td><%= ff.text_field :number %></td>
+          <td><%= ff.date_field :report_received %></td>
         <% end %>
       </tr>
     </tbody>

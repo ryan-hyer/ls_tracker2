@@ -13,7 +13,7 @@ class AmendmentsController < ApplicationController
 
   # GET /amendments/1/edit
   def edit
-    @categories = Category.all
+    @categories = @amendment.client.categories.includes(:scheme).order("schemes.name, categories.description") + (Category.all.includes(:scheme).order("schemes.name, categories.description") - @amendment.client.categories)
     @facilities = @amendment.client.facilities
     render layout: false
   end

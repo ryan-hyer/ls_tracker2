@@ -102,7 +102,7 @@
       <th></th>
     </thead>
     <tbody>
-      <%= render @client.amendments %>
+      <%= render @client.amendments.order("completed, number") %>
     </tbody>
   </table>
 </div>

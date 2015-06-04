@@ -8,8 +8,6 @@ class Amendment < ActiveRecord::Base
 	validates :completed, presence: { if: Proc.new { |amendment| ["Complete","Canceled Before Completion"].include?(amendment.status) },
 							  message: "date can't be blank if Project Status is Complete or Canceled" }
 
-	default_scope -> { order("completed, number") }
-
 	def old_facility
 		Facility.find(self.old_facility_id)
 	end

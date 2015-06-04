@@ -13,7 +13,20 @@
 	  		<% @projects.each do |project| %>
 	  			<tr>
 	  				<td><%= project.client.name %></td>
-	  				<td><%= project.project_type %></td>
+						<td>
+							<strong><%= project.project_type %></strong>
+							<div class="amendment-details">
+								<% if project.project_type == "Listing Addition" || project.project_type == "Design Change" %>
+									<%= "<em>#{project.category.with_scheme}</em>".html_safe unless project.category_id.blank? %><%= ": " unless (project.category_id.blank? || project.models.blank?) %>
+									<%= simple_format(project.models, class: "model-list", wrapper_tag: "div") unless project.models.blank? %>
+									<%= "<p><em>Test Report(s)</em> #{project.test_reports}</p>".html_safe unless project.test_reports.blank? %>
+								<% elsif project.project_type == "Facility Change" %>
+									<%= "<p><em>Inactivated Facility:</em> #{project.old_facility.address}</p>".html_safe unless project.old_facility_id.blank? %>
+									<%= "<p><em>New Facility:</em> #{project.new_facility.address}</p>".html_safe unless project.new_facility_id.blank? %>
+								<% end %>
+								<%= simple_format(project.comments, {}, wrapper_tag: "div") unless project.comments.blank? %>
+							</div>
+						</td>
 	  				<td><%= project.number %></td>
 	  				<td><%= project.status %></td>
 	  			</tr>

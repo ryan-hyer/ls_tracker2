@@ -4,9 +4,9 @@
   <td>
     <ul class="list-unstyled">
       <% inspection.tests.each do |test| %>
-        <li<% if test.not_received? || test.not_tested? %> class="bg-danger" data-toggle="tooltip" data-placement="top" title=<% if test.not_received? %>"Sample not received"<% elsif test.not_tested? %>"Received, not tested"<% end %>><span class="glyphicon glyphicon-exclamation-sign"></span<% end %>>
+        <li<% if test.not_received? || test.not_tested? %> class="bg-danger" data-toggle="tooltip" data-placement="top" title=<% if test.not_received? %>"Sample not received"<% elsif test.not_tested? %>"Received <%= test.sample_received %>, not tested"<% end %>><span class="glyphicon glyphicon-exclamation-sign"></span<% end %>>
         <%= test.model %>
-        <%= "(Test #{test.number})" unless test.not_tested? %>
+        <%= "(Job #{test.number})" unless test.number.blank? %>
         </li>
       <% end %>
     </ul>

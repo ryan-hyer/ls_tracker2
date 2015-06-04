@@ -2,11 +2,6 @@ class InspectionsController < ApplicationController
   before_action :set_inspection, only: [:edit, :update, :destroy]
   before_action :set_facility, only: [:new, :create]
   
-  def update_tests
-    Test.where("sample_received IS NOT NULL").update_all("report_received = sample_received")
-    render plain: "Success!", layout: false
-  end
-
   # GET /inspections
   def index
     @clients = Client.active

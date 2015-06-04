@@ -3,16 +3,16 @@ development:
   encoding: unicode
   database: development
   pool: 5
-  username: railsuser
-  password: railsuser
+  username: ubuntu
+  password: 
 
 test:
   adapter: postgresql
   encoding: unicode
   database: test
   pool: 5
-  username: railsuser
-  password: railsuser
+  username: ubuntu
+  password: 
 
 production:
   adapter: postgresql

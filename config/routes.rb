@@ -16,6 +16,7 @@ LsTracker2::Application.routes.draw do
   resources :categories
   resources :schemes, except: :show
   resources :tests, except: [:index, :show]
+  get 'inspections/update_tests' => 'inspections#update_tests'
   resources :inspections, except: [:new, :create]
 
   devise_for :users, :path_prefix => 'my'

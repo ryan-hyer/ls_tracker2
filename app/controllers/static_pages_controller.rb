@@ -9,6 +9,9 @@ class StaticPagesController < ApplicationController
   												.having("max(inspections.inspection_date) < ? OR max(inspections.inspection_date) IS NULL", 12.months.ago)
   												.where("facilities.inactive = ? AND clients.delisted = ?", false, false)
   												.order("max(inspections.inspection_date) NULLS FIRST, clients.name")
+  	@tests = Test.joins("INNER JOIN inspections on inspections.id = tests.inspection_id INNER JOIN facilities on facilities.id = inspections.facility_id INNER JOIN clients on clients.id = facilities.client_id")
+  	             .where("tests.report_received IS NULL AND clients.delisted = ? AND facilities.inactive = ? AND inspections.inspection_date > ?", false, false, 12.months.ago)
+  	             .order("inspections.inspection_date, clients.name, tests.model")
   	@invoices = Invoice.where("date_paid IS NULL").order("date_invoiced")
   end
 end

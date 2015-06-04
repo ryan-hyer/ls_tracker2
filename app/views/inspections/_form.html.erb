@@ -24,7 +24,7 @@
     <tbody>
       <%= f.fields_for :tests do |ff| %>
         <tr>
-          <td><%= ff.text_field :model, required: true %></td>
+          <td><%= ff.text_field :model %></td>
           <td><%= ff.date_field :sample_received %></td>
           <td><%= ff.text_field :number %></td>
           <td><%= ff.date_field :report_received %></td>
@@ -34,7 +34,7 @@
       <% end %>
       <tr class="hidden" id="test-add-new-template">
         <%= f.fields_for :tests, Test.new, child_index: "-999" do |ff| %>
-          <td><%= ff.text_field :model, required: true %></td>
+          <td><%= ff.text_field :model %></td>
           <td><%= ff.date_field :sample_received %></td>
           <td><%= ff.text_field :number %></td>
           <td><%= ff.date_field :report_received %></td>

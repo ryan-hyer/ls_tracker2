@@ -11,5 +11,5 @@ class Test < ActiveRecord::Base
 		report_received.blank?
 	end
 
-	scope :complete, -> { where("report_received <> ''") }
+	scope :complete, -> { where("report_received IS NOT NULL") }
 end

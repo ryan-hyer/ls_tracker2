@@ -18,7 +18,7 @@
         <%= "C" if listing.has_canada %>
         <%= image_tag(listing.category.scheme.name + ".png") %>
         <%= "US" if listing.has_canada %>
-        <br /><%= listing.client.listing_number %>
+        <br /><%= listing.client.listing_number.at(/^([^\s]+)/) %>
       </div>
     </td>
   </tr>

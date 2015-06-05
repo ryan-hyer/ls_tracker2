@@ -13,6 +13,14 @@
         <% end %>
       </ul>
     </td>
+    <td rowspan=4 class="cert-mark">
+      <div>
+        <%= "C" if listing.has_canada %>
+        <%= image_tag(listing.category.scheme.name + ".png") %>
+        <%= "US" if listing.has_canada %>
+        <br /><%= listing.client.listing_number %>
+      </div>
+    </td>
   </tr>
   <tr>
     <td>Product Description</td>

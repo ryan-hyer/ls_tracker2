@@ -127,13 +127,11 @@ a {
 }
 
 /* Fix for Bootstrap modal scrollbar bug (which happens anyway, idk why) */
-
 .modal, .modal-open {
   overflow-y: auto;
 }
 
 /* Fix for Bootstrap tooltips-in-tables-don't-wrap bug */
-
 .tooltip-inner  {
   white-space: normal;
 }
@@ -225,6 +223,18 @@ a {
 #client-listings td:first-child {
   font-weight: bold;
   width: 20%;
+}
+
+.cert-mark {
+  width: 150px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 120%;
+  color: blue;
+  img {
+    vertical-align: bottom;
+    width: 90px;
+  }
 }
 
 #facility-info {

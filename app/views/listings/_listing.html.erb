@@ -1,7 +1,7 @@
 <div class="listing-header">
   <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, listing, method: :delete, class: "btn btn-danger btn-xs pull-right", title: "Delete Listing", data: { confirm: 'Are you sure you want to delete this listing category?' } %>
   <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_listing_path(listing), class: "btn btn-warning btn-xs pull-right", title: "Edit Listing Information", data: { toggle: "modal", load_remote: edit_listing_path(listing) } %>
-  <%#= listing.category.with_scheme %>
+  <%= listing.category_id.blank? ? "<span class='text-warning'>&lt;&lt;No Category Assigned&gt;&gt;</span>".html_safe : listing.category.with_scheme %>
 </div>
 <table class="table table-condensed">
   <tr>
@@ -13,14 +13,16 @@
         <% end %>
       </ul>
     </td>
+    <% unless listing.category_id.blank? %>
     <td rowspan=4 class="cert-mark">
       <div>
         <%= "C" if listing.has_canada %>
-        <%#= image_tag(listing.category.scheme.name + ".png") %>
+        <%= image_tag(listing.category.scheme.name + ".png") %>
         <%= "US" if listing.has_canada %>
         <br /><%= listing.client.listing_number.at(/^([^\s]+)/) %>
       </div>
     </td>
+    <% end %>
   </tr>
   <tr>
     <td>Product Description</td>

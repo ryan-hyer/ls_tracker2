@@ -27,7 +27,7 @@ group :development, :test do
   gem 'pry'
 end
 
-gem 'bootstrap-sass', '>= 3.2.0'
+gem 'bootstrap-sass', '~> 3.2.0'
 gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'sass-rails', '~> 4.0.0'
@@ -40,6 +40,7 @@ gem 'jbuilder'
 gem 'therubyracer', :platforms => :ruby
 gem 'american_date', '~> 1.1.0'
 gem 'devise'
+gem "font-awesome-rails"
 
 group :production do
   gem 'rails_12factor'

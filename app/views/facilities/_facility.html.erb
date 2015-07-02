@@ -3,7 +3,7 @@
       <%= "<strong>#{facility.name}</strong><br/>".html_safe unless facility.name.blank? %>
       <%= simple_format(facility.address, {}, wrapper_tag: "div") %>
       Tel: <%= facility.phone %><br />
-      <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edit".html_safe, edit_facility_path(facility), class: "btn btn-xs btn-warning", title: "Edit Facility Information", data: { toggle: "modal", load_remote: edit_facility_path(facility) } %>
+      <%= link_to "<span class='fa fa-edit'></span> Edit".html_safe, edit_facility_path(facility), class: "btn btn-xs btn-warning", title: "Edit Facility Information", data: { toggle: "modal", load_remote: edit_facility_path(facility) } %>
     </div>
     <div class="col-md-2">
       <strong>Point of Contact</strong><br />
@@ -20,7 +20,7 @@
             <th>IS #</th>
             <th>Tagged</th>
             <th>Comments</th>
-            <th><%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_facility_inspection_path(facility), class: "btn btn-success btn-xs", title: "Add Inspection to Facility", data: { toggle: "modal", load_remote: new_facility_inspection_path(facility) } %></th>
+            <th><%= link_to "<span class='fa fa-plus'></span> New".html_safe, new_facility_inspection_path(facility), class: "btn btn-success btn-xs", title: "Add Inspection to Facility", data: { toggle: "modal", load_remote: new_facility_inspection_path(facility) } %></th>
           </tr>
         </thead>
         <tbody>

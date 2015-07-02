@@ -15,7 +15,7 @@
         <%= ff.object.standard.number_with_exceptions %>
         <%= ff.hidden_field :standard_id %>
         <%= ff.hidden_field :_destroy %>
-        <%= link_to "<span class='glyphicon glyphicon-remove'></span>".html_safe, "", class: "del-std-btn", title: "Remove standard from category" %>
+        <%= link_to "<span class='fa fa-remove'></span>".html_safe, "", class: "del-std-btn", title: "Remove standard from category" %>
       </div>
     <% end %>
 
@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <%= link_to "<span class='glyphicon glyphicon-plus'></span> Add Another".html_safe, "", class: "btn btn-success btn-sm", id: "add-std-btn", title: "Add standard to category" %>
+  <%= link_to "<span class='fa fa-plus'></span> Add Another".html_safe, "", class: "btn btn-success btn-sm", id: "add-std-btn", title: "Add standard to category" %>
 
   <div class="actions">
     <%= f.submit "Submit", class: "btn btn-primary" %>

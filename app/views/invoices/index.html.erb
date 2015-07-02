@@ -44,7 +44,7 @@
                     <% @existing_invoice = Invoice.where("client_id = ? AND (description = ? OR (amount = ? AND date_invoiced BETWEEN ? AND ?))", client.id, @description, client.invoice_amt, (month.beginning_of_month - 10.days), month.end_of_month).take %>
                     <% if @existing_invoice.nil? %>
                       <td class="next_number"><%= @nextnumber %></td>
-                      <td><%= link_to "<span class='glyphicon glyphicon-plus'></span> Record This Invoice".html_safe, new_invoice_path, class: "btn btn-success btn-xs", title: "Add New Invoice", data: { toggle: "modal", load_remote: new_invoice_path, fill_invoice: true } %></td>
+                      <td><%= link_to "<span class='fa fa-plus'></span> Record This Invoice".html_safe, new_invoice_path, class: "btn btn-success btn-xs", title: "Add New Invoice", data: { toggle: "modal", load_remote: new_invoice_path, fill_invoice: true } %></td>
                     <% else %>
                       <td><%= @existing_invoice.number %></td>
                       <td><em>Invoiced <%= @existing_invoice.date_invoiced %></em></td>
@@ -63,7 +63,7 @@
 <!-- Invoice log -->
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_invoice_path, class: "btn btn-success btn-xs pull-right", title: "Add Blank Invoice", data: { toggle: "modal", load_remote: new_invoice_path } %>
+    <%= link_to "<span class='fa fa-plus'></span> New".html_safe, new_invoice_path, class: "btn btn-success btn-xs pull-right", title: "Add Blank Invoice", data: { toggle: "modal", load_remote: new_invoice_path } %>
     Invoice Log for
     <span class="dropdown">
        <button type="button" class="btn btn-info btn-xs" data-toggle="dropdown"><%= params["year"] || Time.now.year %> <span class='caret'></span></button>

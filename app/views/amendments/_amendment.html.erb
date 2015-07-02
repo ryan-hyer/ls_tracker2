@@ -18,7 +18,7 @@
 		</div>
 	</td>
 	<td class="nowrap">
-		<%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_amendment_path(amendment), class: "btn btn-warning btn-xs", title: "Edit Amendment Information", data: { toggle: "modal", load_remote: edit_amendment_path(amendment) } %>
-  	<%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, amendment, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Amendment", data: { confirm: 'Are you sure you want to delete this amendment?' } %>
+		<%= link_to "<span class='fa fa-edit'></span>".html_safe, edit_amendment_path(amendment), class: "btn btn-warning btn-xs", title: "Edit Amendment Information", data: { toggle: "modal", load_remote: edit_amendment_path(amendment) } %>
+  	<%= link_to "<span class='fa fa-trash-o'></span>".html_safe, amendment, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Amendment", data: { confirm: 'Are you sure you want to delete this amendment?' } %>
 	</td>
 </tr>

@@ -17,9 +17,9 @@
             <%= "</tr><tr>".html_safe unless index == 0 %>
             <td>
               <% if facility.latitude.blank? %>
-                <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="right" title="Cannot jump to address at this time. Try again later."><span class='glyphicon glyphicon-share-alt'></span></button>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="right" title="Cannot jump to address at this time. Try again later."><span class='fa fa-location-arrow'></span></button>
               <% else %>
-                <button type="button" class="btn btn-info btn-xs btn-reset-map" title="View Address on Map" data-location="<%= facility.latitude %>,<%= facility.longitude %>" data-zoom="15"><span class='glyphicon glyphicon-share-alt'></span></button>
+                <button type="button" class="btn btn-info btn-xs btn-reset-map" title="View Address on Map" data-location="<%= facility.latitude %>,<%= facility.longitude %>" data-zoom="15"><span class='fa fa-location-arrow'></span></button>
               <% end %>
               <%= facility.address %>
             </td>
@@ -44,9 +44,9 @@
 
 <div class="panel panel-primary" id="inspection-map">
   <div class="panel-heading">
-    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View Europe" data-location="50.0,10.0" data-zoom="4"><span class='glyphicon glyphicon-share-alt'></span> Europe</button>
-    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View China" data-location="35.0,105.0" data-zoom="4"><span class='glyphicon glyphicon-share-alt'></span> China</button>
-    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View North America" data-location="39.504,-98.438" data-zoom="4"><span class='glyphicon glyphicon-share-alt'></span> North America</button>
+    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View Europe" data-location="50.0,10.0" data-zoom="4"><span class='fa fa-location-arrow'></span> Europe</button>
+    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View China" data-location="35.0,105.0" data-zoom="4"><span class='fa fa-location-arrow'></span> China</button>
+    <button type="button" class="btn btn-info btn-xs pull-right btn-reset-map" title="View North America" data-location="39.504,-98.438" data-zoom="4"><span class='fa fa-location-arrow'></span> North America</button>
     <span class="pull-right">Zoom To: </span>
     Inspection Map
   </div>

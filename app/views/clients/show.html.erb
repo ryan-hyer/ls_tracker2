@@ -2,7 +2,7 @@
 <%= "<div class='delisted'>Suspended</div>".html_safe if @client.suspended %>
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edit".html_safe, edit_client_path(@client), class: "btn btn-warning btn-xs pull-right", title: "Edit Client Information", data: { toggle: "modal", load_remote: edit_client_path(@client) } %>
+    <%= link_to "<span class='fa fa-edit'></span> Edit".html_safe, edit_client_path(@client), class: "btn btn-warning btn-xs pull-right", title: "Edit Client Information", data: { toggle: "modal", load_remote: edit_client_path(@client) } %>
     Client Information
   </div>
   <div class="panel-body" id="client-info">
@@ -59,7 +59,7 @@
 <!-- Manufacturing Facilities -->
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_client_facility_path(@client), class: "btn btn-success btn-xs pull-right", title: "Add New Facility", data: { toggle: "modal", load_remote: new_client_facility_path(@client) } %>
+    <%= link_to "<span class='fa fa-plus'></span> New".html_safe, new_client_facility_path(@client), class: "btn btn-success btn-xs pull-right", title: "Add New Facility", data: { toggle: "modal", load_remote: new_client_facility_path(@client) } %>
     Manufacturing Facilities
   </div>
   <div class="panel-body" id="facility-info">
@@ -80,7 +80,7 @@
 <!-- Listings -->
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_client_listing_path(@client), class: "btn btn-success btn-xs pull-right", title: "Add New Category", data: { toggle: "modal", load_remote: new_client_listing_path(@client) } %>
+    <%= link_to "<span class='fa fa-plus'></span> New".html_safe, new_client_listing_path(@client), class: "btn btn-success btn-xs pull-right", title: "Add New Category", data: { toggle: "modal", load_remote: new_client_listing_path(@client) } %>
     Listings
   </div>
   <div class="panel-body" id="client-listings">
@@ -91,7 +91,7 @@
 <!-- Amendment Log -->
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_client_amendment_path(@client), class: "btn btn-success btn-xs pull-right", title: "Add New Amendment", data: { toggle: "modal", load_remote: new_client_amendment_path(@client) } %>
+    <%= link_to "<span class='fa fa-plus'></span> New".html_safe, new_client_amendment_path(@client), class: "btn btn-success btn-xs pull-right", title: "Add New Amendment", data: { toggle: "modal", load_remote: new_client_amendment_path(@client) } %>
     Amendment Log
   </div>
   <table class="table table-striped table-condensed">

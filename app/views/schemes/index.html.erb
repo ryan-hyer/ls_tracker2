@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <%= link_to "<span class='glyphicon glyphicon-arrow-left'></span> Back to Categories".html_safe, categories_path, class: "btn btn-info btn-xs pull-right" %>
-    <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_scheme_path, class: "btn btn-success btn-xs pull-right", title: "Add New Scheme", data: { toggle: "modal", load_remote: new_scheme_path } %>
+    <%= link_to "<span class='fa fa-chevron-left'></span> Back to Categories".html_safe, categories_path, class: "btn btn-info btn-xs pull-right" %>
+    <%= link_to "<span class='fa fa-plus'></span> New".html_safe, new_scheme_path, class: "btn btn-success btn-xs pull-right", title: "Add New Scheme", data: { toggle: "modal", load_remote: new_scheme_path } %>
     Listing Schemes
   </div>
   <table class="table table-condensed table-striped">
@@ -9,11 +9,11 @@
       <tr>
         <td>
           <% if scheme.categories.empty? %>
-            <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, scheme, method: :delete, class: "btn btn-danger btn-xs pull-right", title: "Delete Scheme", data: { confirm: 'Are you sure you want to delete this scheme?' } %>
+            <%= link_to "<span class='fa fa-trash-o'></span>".html_safe, scheme, method: :delete, class: "btn btn-danger btn-xs pull-right", title: "Delete Scheme", data: { confirm: 'Are you sure you want to delete this scheme?' } %>
           <% else %>
-            <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="tooltip" data-placement="left" title="Scheme is in use and cannot be deleted. Re-assign all categories to other schemes before deleting."><span class='glyphicon glyphicon-trash'></span></button>
+            <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="tooltip" data-placement="left" title="Scheme is in use and cannot be deleted. Re-assign all categories to other schemes before deleting."><span class='fa fa-trash-o'></span></button>
           <% end %>
-          <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_scheme_path(scheme), class: "btn btn-warning btn-xs pull-right", title: "Edit Scheme Name", data: { toggle: "modal", load_remote: edit_scheme_path(scheme) } %>
+          <%= link_to "<span class='fa fa-edit'></span>".html_safe, edit_scheme_path(scheme), class: "btn btn-warning btn-xs pull-right", title: "Edit Scheme Name", data: { toggle: "modal", load_remote: edit_scheme_path(scheme) } %>
           <%= scheme.name %>
         </td>
       </tr>

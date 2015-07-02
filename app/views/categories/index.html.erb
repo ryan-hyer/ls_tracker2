@@ -1,8 +1,8 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <%= link_to "<span class='glyphicon glyphicon-list'></span> Manage Scheme Master List".html_safe, schemes_path, class: "btn btn-warning btn-xs pull-right" %>
-    <%= link_to "<span class='glyphicon glyphicon-list'></span> Manage Standard Master List".html_safe, standards_path, class: "btn btn-warning btn-xs pull-right" %>
-    <%= link_to "<span class='glyphicon glyphicon-plus'></span> New".html_safe, new_category_path, class: "btn btn-success btn-xs pull-right", title: "Add New Category", data: { toggle: "modal", load_remote: new_category_path } %>
+    <%= link_to "<span class='fa fa-bars'></span> Manage Scheme Master List".html_safe, schemes_path, class: "btn btn-warning btn-xs pull-right" %>
+    <%= link_to "<span class='fa fa-bars'></span> Manage Standard Master List".html_safe, standards_path, class: "btn btn-warning btn-xs pull-right" %>
+    <%= link_to "<span class='fa fa-plus'></span> New".html_safe, new_category_path, class: "btn btn-success btn-xs pull-right", title: "Add New Category", data: { toggle: "modal", load_remote: new_category_path } %>
     Listing Categories
   </div>
   <table class="table table-striped table-condensed">
@@ -27,12 +27,12 @@
             </ul>
           </td>
           <td nowrap>
-            <%= link_to "<span class='glyphicon glyphicon-eye-open'></span>".html_safe, category_path(category), class: "btn btn-info btn-xs", title: "Info for "+category.with_scheme, data: { toggle: "modal", load_remote: category_path(category) } %>
-            <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_category_path(category), class: "btn btn-warning btn-xs", title: "Edit Category Information", data: { toggle: "modal", load_remote: edit_category_path(category) } %>
+            <%= link_to "<span class='fa fa-eye'></span>".html_safe, category_path(category), class: "btn btn-info btn-xs", title: "Info for "+category.with_scheme, data: { toggle: "modal", load_remote: category_path(category) } %>
+            <%= link_to "<span class='fa fa-edit'></span>".html_safe, edit_category_path(category), class: "btn btn-warning btn-xs", title: "Edit Category Information", data: { toggle: "modal", load_remote: edit_category_path(category) } %>
             <% if category.listings.unscope(:order).empty? %>
-              <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, category, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Category", data: { confirm: 'Are you sure you want to delete this category?' } %>
+              <%= link_to "<span class='fa fa-trash-o'></span>".html_safe, category, method: :delete, class: "btn btn-danger btn-xs", title: "Delete Category", data: { confirm: 'Are you sure you want to delete this category?' } %>
             <% else %>
-              <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="left" title="Category is still in use and cannot be deleted. Remove category from all client listings before deleting."><span class='glyphicon glyphicon-trash'></span></button>
+              <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="left" title="Category is still in use and cannot be deleted. Remove category from all client listings before deleting."><span class='fa fa-trash-o'></span></button>
             <% end %>
           </td>
         </tr>

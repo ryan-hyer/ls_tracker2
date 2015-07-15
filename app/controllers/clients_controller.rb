@@ -1,20 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
-  # GET /clients/restatus
-  def restatus
-    Client.all.each do |client|
-      if client.delisted
-        client.update(status: "Delisted")
-      elsif client.suspended
-        client.update(status: "Suspended")
-      else
-        client.update(status: "Active")
-      end
-    end
-    render text: "Success"
-  end
-  
   # GET /clients
   def index
     @active_clients = Client.active

@@ -15,8 +15,9 @@ class Client < ActiveRecord::Base
 							  message: "can't be blank if invoice frequency is 'Annual'" }
 
 	default_scope { order("name") }
-	scope :delisted, -> { where(delisted: true) }
-	scope :active, -> { where(delisted: false) }
+	scope :delisted, -> { where(status: "Delisted") }
+	scope :active, -> { where(status: ["Active","Suspended"]) }
+	scope :newapp, -> { where(status: "NewApp") }
 
 	def self.due_in(month)
 		monthname = month.gsub(/\d+/,"")

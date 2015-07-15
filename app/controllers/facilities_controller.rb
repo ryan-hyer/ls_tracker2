@@ -4,7 +4,7 @@ class FacilitiesController < ApplicationController
 
   # GET /facilities
   def index
-    @facilities = Facility.active.joins(:client).where("clients.delisted = false")
+    @facilities = Facility.active.joins(:client).where("clients.status = ?", "Active")
     render json: @facilities
   end
 

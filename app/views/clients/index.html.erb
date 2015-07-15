@@ -1,14 +1,4 @@
-<div class="col-md-6">
-<!--
-	<div class="panel panel-primary">
-	  <div class="panel-heading">
-			New Listing Applicants
-		</div>
-		<div class="panel-body">
-			Coming Soon
-		</div>
-	</div>
--->
+<div class="col-md-4">
 	<div class="panel panel-primary">
 	  <div class="panel-heading">
 			<%= link_to "<span class='fa fa-plus'></span> New".html_safe, new_client_path, class: "btn btn-success btn-xs pull-right", title: "Add New Client", data: { toggle: "modal", load_remote: new_client_path } %>
@@ -22,12 +12,23 @@
 	</div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-4">
 	<div class="panel panel-primary">
 	  <div class="panel-heading">Delisted Clients</div>
 		<div class="panel-body">
 			<ul class="list-links">
 				<%= render @delisted_clients %>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-4">
+	<div class="panel panel-primary">
+	  <div class="panel-heading">New Listing Applicants</div>
+		<div class="panel-body">
+			<ul class="list-links">
+				<%= render @new_applications %>
 			</ul>
 		</div>
 	</div>

@@ -65,7 +65,7 @@ class AmendmentsController < ApplicationController
     end
 
     def set_select_arrays
-      @amendment_types = ["Listing Addition", "Design Change", "Facility Change", "Other"]
+      @amendment_types = ["Listing Addition", "Design Change", "Facility Change", "New Listing Application", "Other"]
       @status_types = ["Waiting for Client Info",
                        "Waiting for Test",
                        "Waiting for Inspection",

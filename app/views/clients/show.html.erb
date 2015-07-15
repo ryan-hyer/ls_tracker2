@@ -1,5 +1,6 @@
-<%= "<div class='delisted'>De-Listed</div>".html_safe if @client.delisted %>
-<%= "<div class='delisted'>Suspended</div>".html_safe if @client.suspended %>
+<%= "<div class='delisted'>De-Listed as of #{@client.expires}</div>".html_safe if @client.status == "Delisted"%>
+<%= "<div class='delisted'>Suspended as of #{@client.expires}</div>".html_safe if @client.status == "Suspended" %>
+<%= "<div class='delisted'>New Application - Not Yet Active</div>".html_safe if @client.status == "NewApp" %>
 <div class="panel panel-primary">
   <div class="panel-heading">
     <%= link_to "<span class='fa fa-edit'></span> Edit".html_safe, edit_client_path(@client), class: "btn btn-warning btn-xs pull-right", title: "Edit Client Information", data: { toggle: "modal", load_remote: edit_client_path(@client) } %>
@@ -23,7 +24,6 @@
             <strong><%= @client.listing_number %></strong><br />
             Effective Date: <%= @client.effective %><br />
             <!-- Last Updated: <%#= @client.updated %><br /> -->
-            <%= "Date Delisted: #{@client.expires}" if @client.expires %>
           </div>
         </div>
       </div>

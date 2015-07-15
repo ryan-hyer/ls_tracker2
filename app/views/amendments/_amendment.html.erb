@@ -6,7 +6,7 @@
 	<td>
 		<strong><%= amendment.project_type %></strong>
 		<div class="amendment-details">
-			<% if amendment.project_type == "Listing Addition" || amendment.project_type == "Design Change" %>
+			<% if amendment.project_type == "Listing Addition" || amendment.project_type == "Design Change" || amendment.project_type == "New Listing Application" %>
 				<%= "<em>#{amendment.category.with_scheme}</em>".html_safe unless amendment.category_id.blank? %><%= ": " unless (amendment.category_id.blank? || amendment.models.blank?) %>
 				<%= simple_format(amendment.models, class: "model-list", wrapper_tag: "div") unless amendment.models.blank? %>
 				<%= "<p><em>Test Report(s)</em> #{amendment.test_reports}</p>".html_safe unless amendment.test_reports.blank? %>

@@ -1,5 +1,5 @@
 <%= label_tag "Categories Containing This Standard" %>
-<ul class="list-plain">
+<ul class="list-unstyled">
 	<% @standard.categories.each do |category| %>
 		<li><%= category.with_scheme %></li>
 	<% end %>

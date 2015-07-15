@@ -1,10 +1,25 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
+  # GET /clients/restatus
+  def restatus
+    Client.all.each do |client|
+      if client.delisted
+        client.update(status: "Delisted")
+      elsif client.suspended
+        client.update(status: "Suspended")
+      else
+        client.update(status: "Active")
+      end
+    end
+    render text: "Success"
+  end
+  
   # GET /clients
   def index
     @active_clients = Client.active
     @delisted_clients = Client.delisted
+    @new_applications = Client.newapp
   end
 
   # GET /clients/1
@@ -66,6 +81,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:name, :address, :phone, :website, :poc_name, :poc_title, :poc_phone, :poc_email, :invoice_amt, :invoice_freq, :invoice_month, :listing_number, :effective, :updated, :expires, :suspended, :delisted, :comments)
+      params.require(:client).permit(:name, :address, :phone, :website, :poc_name, :poc_title, :poc_phone, :poc_email, :invoice_amt, :invoice_freq, :invoice_month, :listing_number, :effective, :updated, :expires, :status, :comments)
     end
 end

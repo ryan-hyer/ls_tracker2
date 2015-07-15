@@ -2,7 +2,7 @@
 <div class="col-md-9">
 	<div class="panel-container" id="open-projects">
 		<div class="panel panel-primary">
-		  <div class="panel-heading">Open Amendment Projects</div>
+		  <div class="panel-heading">Open Projects</div>
 		  <table class="table table-striped table-condensed">
 		  	<thead>
 		  		<th>Client</th>
@@ -17,7 +17,7 @@
 							<td>
 								<strong><%= project.project_type %></strong>
 								<div class="amendment-details">
-									<% if project.project_type == "Listing Addition" || project.project_type == "Design Change" %>
+									<% if project.project_type == "Listing Addition" || project.project_type == "Design Change" || project.project_type == "New Listing Application" %>
 										<%= "<em>#{project.category.with_scheme}</em>".html_safe unless project.category_id.blank? %><%= ": " unless (project.category_id.blank? || project.models.blank?) %>
 										<%= simple_format(project.models, class: "model-list", wrapper_tag: "div") unless project.models.blank? %>
 										<%= "<p><em>Test Report(s)</em> #{project.test_reports}</p>".html_safe unless project.test_reports.blank? %>
@@ -126,7 +126,7 @@
 	<nav class="dashboard-sidebar" role="navigation">
 		<ul class="nav hidden-sm hidden-print">
 			<li>Quick Scroll:</li>
-			<li><a href="#open-projects">Open Amendment Projects</a></li>
+			<li><a href="#open-projects">Open Projects</a></li>
 			<li><a href="#overdue-inspections">Overdue Inspections</a></li>
 			<li><a href="#uncompleted-tagged-work">Uncompleted Tagged Work</a></li>
 			<li><a href="#unpaid-invoices">Unpaid Invoices</a></li>

@@ -32,6 +32,16 @@ $(document).ajaxSuccess(function() {
 			$("#inv_month").css("visibility", "visible");
 		}
 	});
+	if ($("#client_status").val() == "Active" || $("#client_status").val() == "NewApp") {
+		$("#delist_date").css("visibility", "hidden");
+	}
+	$("#client_status").change(function() {
+		if ($("#client_status").val() == "Active" || $("#client_status").val() == "NewApp") {
+			$("#delist_date").css("visibility", "hidden");
+		} else {
+			$("#delist_date").css("visibility", "visible");
+		}
+	});
 
 	// Extra functionality for the Invoice add modal (auto-fill)
 	if(obj.data('fill-invoice')) {
@@ -92,6 +102,7 @@ $(document).ajaxSuccess(function() {
 	switch($('#amendment_project_type').val()) {
 		case ("Listing Addition"):
 		case ("Design Change"):
+		case ("New Listing Application"):
 			$('#facility-amendments').hide();
 			$('#model-amendments').show();
 			break;
@@ -105,20 +116,32 @@ $(document).ajaxSuccess(function() {
 	}
 	$('#amendment_project_type').change(function() {
 		switch($(this).val()) {
-		case ("Listing Addition"):
-		case ("Design Change"):
-				$('#facility-amendments').hide();
-				$('#model-amendments').show();
-				break;
-			case ("Facility Change"):
-				$('#model-amendments').hide();
-				$('#facility-amendments').show();
-				break;
-			default:
-				$('#model-amendments').hide();
-				$('#facility-amendments').hide();
+			case ("Listing Addition"):
+			case ("Design Change"):
+			case ("New Listing Application"):
+					$('#facility-amendments').hide();
+					$('#model-amendments').show();
+					break;
+				case ("Facility Change"):
+					$('#model-amendments').hide();
+					$('#facility-amendments').show();
+					break;
+				default:
+					$('#model-amendments').hide();
+					$('#facility-amendments').hide();
 		}
 	});
+	if ($("#amendment_status").val() != "Canceled Before Completion" && $("#amendment_status").val() != "Complete") {
+		$("#date_closed").css("visibility", "hidden");
+	}
+	$("#amendment_status").change(function() {
+		if ($("#amendment_status").val() != "Canceled Before Completion" && $("#amendment_status").val() != "Complete") {
+			$("#date_closed").css("visibility", "hidden");
+		} else {
+			$("#date_closed").css("visibility", "visible");
+		}
+	});
+
 
 	$('#myModal').modal('show');
 });

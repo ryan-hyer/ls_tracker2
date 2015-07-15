@@ -1,5 +1,6 @@
 LsTracker2::Application.routes.draw do
 
+  get 'clients/restatus' => 'clients#restatus'
   resources :clients do
     resources :facilities, shallow: true, except: [:index, :show] do
       resources :inspections, only: [:new, :create]

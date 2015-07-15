@@ -62,15 +62,11 @@
       </div>
 -->
       <div class="field">
-        <%= f.label :suspended %>
-        <%= f.check_box :suspended %>
+        <%= f.label :status %>
+        <%= f.select :status, options_for_select(%w[Active NewApp Suspended Delisted], @client.status) %>
       </div>
-      <div class="field">
-        <%= f.label :delisted %>
-        <%= f.check_box :delisted %>
-      </div>
-      <div class="field">
-        <%= f.label :expires, "Date Delisted" %>
+      <div class="field" id="delist_date">
+        <%= f.label :expires, "Date Suspended/Delisted" %>
         <%= f.date_field :expires %>
       </div>
       <div class="field">

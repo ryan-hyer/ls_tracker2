@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
-gem 'rails', '4.0.4'
+ruby '2.7.4'
+gem 'rails'
 gem 'pg'
 
 group :test do
@@ -13,7 +13,6 @@ group :test do
 end
 
 group :development do
-  gem 'quiet_assets'
   gem 'rails_best_practices'
   gem 'rack-mini-profiler'
   gem 'bullet'
@@ -27,20 +26,21 @@ group :development, :test do
   gem 'pry'
 end
 
-gem 'bootstrap-sass', '~> 3.2.0'
-gem 'sprockets', '2.11.0'
-gem 'bcrypt-ruby', '3.1.2'
-gem 'sass-rails', '~> 4.0.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'bootstrap-sass'
+gem 'sprockets'
+gem 'bcrypt'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'jbuilder'
-gem 'therubyracer', :platforms => :ruby
-gem 'american_date', '~> 1.1.0'
+gem 'therubyrhino'
+gem 'american_date'
 gem 'devise'
 gem "font-awesome-rails"
+gem 'tzinfo-data'
 
 group :production do
   gem 'rails_12factor'

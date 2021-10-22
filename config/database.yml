@@ -1,10 +1,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: development
+  database: lstrackerdb
   pool: 5
-  username: ubuntu
-  password: 
+  username: postgres
+  password: postgres
 
 test:
   adapter: postgresql
@@ -12,7 +12,7 @@ test:
   database: test
   pool: 5
   username: ubuntu
-  password: 
+  password:
 
 production:
   adapter: postgresql
